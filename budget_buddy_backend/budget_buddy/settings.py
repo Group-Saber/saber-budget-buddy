@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'budget_buddy_app',
 
     'rest_framework',
-    
+    'corsheaders',
 ]
 
 SITE_ID = 1
@@ -55,6 +55,10 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
 }
 
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -63,6 +67,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'budget_buddy.urls'
