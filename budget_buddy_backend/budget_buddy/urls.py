@@ -22,7 +22,7 @@ router.register('groups', views.GroupViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('budget_buddy_app/', include('budget_buddy_app.urls')),
+    path('app/', include('budget_buddy_app.urls')),
     path('', include(router.urls)),
     path('api/', include('rest_framework.urls', namespace='rest_framework'))
 ]

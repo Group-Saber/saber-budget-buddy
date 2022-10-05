@@ -3,7 +3,11 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
 from budget_buddy_app.serializers import UserSerializer, GroupSerializer
+from .models import Budget
+from .serializers import BudgetSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -22,6 +26,12 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+@api_view(['GET'])
+def get_budgets(request):
+    budgets = Budget.objects.all()
+    serializer = BudgetSerializer(budgets, many=True)
+    return Response(serializer.data)
 
 # Create your views here.
 def say_hello(request):
