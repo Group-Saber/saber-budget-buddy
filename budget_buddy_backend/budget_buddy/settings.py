@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'budget_buddy_app',
 
     'rest_framework',
-
+    
 ]
 
 SITE_ID = 1
