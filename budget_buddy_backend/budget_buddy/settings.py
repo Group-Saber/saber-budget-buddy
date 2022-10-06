@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.sessions',
     'budget_buddy_app',
-
+    'django_extensions'
     'rest_framework',
     
 ]
