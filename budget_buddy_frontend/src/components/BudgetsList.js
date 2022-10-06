@@ -16,10 +16,12 @@ const BudgetsList = () => {
     return (
         <div>
             <div className="budgets-list">
-                Budget
-                {budgets.map((budget, index) => (
-                    <h3 key={index}>${budget.amount.toFixed(2)}</h3>
-                ))}
+                <h3>Budget</h3>
+                <ul>
+                    {budgets.map((budget, index) => (
+                        <li key={index}>${budget.amount.toFixed(2)}</li>
+                    ))}
+                </ul>
             </div>
         </div>
     )
