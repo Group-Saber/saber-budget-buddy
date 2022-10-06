@@ -5,3 +5,4 @@ python-decouple==3.6
 sqlparse==0.4.3
 tzdata==2022.4
 django-extensions==3.2.1
+django-allauth==0.51.0
