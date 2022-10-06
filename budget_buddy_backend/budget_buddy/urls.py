@@ -3,6 +3,8 @@ from django.urls import path, include
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
 from budget_buddy_app import views
+from django.views.generic import TemplateView
+
 
 # Serializers define the API representation.
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -26,4 +28,6 @@ urlpatterns = [
     path('', include(router.urls)),
     path('api/', include('rest_framework.urls', namespace='rest_framework')),
     path('accounts/', include('allauth.urls')),
+    path('auth/', TemplateView.as_view(template_name="index.html")),
 ]
+
