@@ -1,40 +1,26 @@
 import './App.css';
-import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
-import Panel from './components/Panel';
-import LoginPage from './pages/LoginPage';
-import SignupPage from './pages/SignupPage';
-import VerifyPage from './pages/VerifyPage';
+import BudgetsList from './components/BudgetsList'
+import React, {useState} from 'react'                                     
 
 function App() {
-  let [uid, setUID] = useState('')
-
-  let updateUID = (newUID) => {
-    window.localStorage.setItem('uid', JSON.stringify(newUID));
-    setUID(newUID)
+  const[data,setData] = useState(null)                                        //sets the value to nothing initially of data
+  const[print,setPrint]=useState(false);                                      //prints out the data given
+  
+  function getData(val)
+  {
+    setData(val.target.value)
+    console.warn(val.target.value)
   }
-
-  useEffect(() => {
-    const data = window.localStorage.getItem('uid');
-
-    if(data !== null) {
-      setUID(JSON.parse(data));
-    }
-  }, [uid])
-
   return (
-    <Router>
-      <div>
-        <Routes>
-          <Route path='/' element={<Navigate to='/login'></Navigate>}></Route>
-          <Route path='/main' element={<Navigate to='/main/dashboard'></Navigate>}></Route>
-          <Route path='/login' element={<LoginPage uid={updateUID} />}></Route>
-          <Route path='/signup' element={<SignupPage />}></Route>
-          <Route path='/verify' element={<VerifyPage />}></Route>
-          <Route path='/main/*' element={<Panel uid={uid} />}></Route>
-        </Routes>
-      </div>
-    </Router>
+    <div className="App">
+      <header className="App-header">
+        <h1>Budget Buddy</h1>
+        <input type="number" onChange= {getData}/>                               {/*identifies the type of value ex: text or number*/}
+        <button on Click={()=>setPrint(true)} >Print Value</button>             {/*button that prints value*/}
+        <h1>{data}</h1>                                                         {/*prints out the data given on the site is here to show that it works in storing the value*/}
+        <BudgetsList />
+      </header>
+    </div>
   );
 }
 
