@@ -33,6 +33,15 @@ def get_budgets(request):
     serializer = BudgetSerializer(budgets, many=True)
     return Response(serializer.data)
 
+@api_view(['POST'])
+def input_budget(request):
+    data = request.data
+    budget = Budget.objects.create(
+        amount=data
+    )
+    serializer = BudgetSerializer(budget, many=False)
+    return Response(serializer.data)
+
 # Create your views here.
 def say_hello(request):
     return HttpResponse('Hello World')
