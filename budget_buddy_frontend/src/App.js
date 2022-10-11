@@ -4,6 +4,14 @@ import InputBudget from './components/InputBudget'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 function App() {
+  const[data,setData] = useState(null)                                        //sets the value to nothing initially of data
+  const[print,setPrint]=useState(false);                                      //prints out the data given
+  
+  function getData(val)
+  {
+    setData(val.target.value)
+    console.warn(val.target.value)
+  }
   return (
     <Router>
       <div className="App">
