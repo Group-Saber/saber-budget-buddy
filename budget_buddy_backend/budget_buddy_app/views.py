@@ -8,7 +8,26 @@ from rest_framework.decorators import api_view
 from budget_buddy_app.serializers import UserSerializer, GroupSerializer
 from .models import Budget
 from .serializers import BudgetSerializer
+import pyrebase
 
+config={
+    "apiKey": "AIzaSyA3R68DtVZapYJYO1ZNtnmYvPfs65lMLMk",
+    "authDomain": "budgetbuddy-dbcce.firebaseapp.com",
+    "databaseURL": "https://budgetbuddy-dbcce-default-rtdb.firebaseio.com",
+    "projectId": "budgetbuddy-dbcce",
+    "storageBucket": "budgetbuddy-dbcce.appspot.com",
+    "messagingSenderId": "731027921205",
+    "appId": "1:731027921205:web:97f729e036aa8813afd47c",
+    "measurementId": "G-4GKVCSQRN3"
+}
+firebase=pyrebase.initialize_app(config)
+authe = firebase.auth()
+database=firebase.database()
+
+def fire_budgets(request):
+    budget = database.child('Budgets').child('budget1').child('amount').get().val() # write to database
+    database.child('Budgets').child('budget4').child('amount').set(100) # read from database
+    return HttpResponse(budget)
 
 class UserViewSet(viewsets.ModelViewSet):
     """
