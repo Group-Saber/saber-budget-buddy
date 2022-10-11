@@ -4,13 +4,8 @@ from . import views
 # URLConf
 urlpatterns = [
     path('hello/', views.say_hello),
+    path('andrew/', views.andrew_info),
     path('budgets/', views.get_budgets),
-    path('budget/input/', views.input_budget),
-    path('user/<str:uid>', views.get_user),
-    path('debts/input/<str:uid>', views.input_debt),
-    path('paid/input/<str:uid>', views.input_paid),
-    path('paid/unpaid/<str:uid>', views.unpaid),
-    path('login/', views.login),
-    path('signup/', views.signup),
-    path('verify/', views.verify),
+    path('budgets/input', views.input_budget),
+    path('firebase/', views.fire_budgets),
 ]
