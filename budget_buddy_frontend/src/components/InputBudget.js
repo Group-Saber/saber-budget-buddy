@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 
 const InputBudget = () => {
-
     let [budget, setBudget] = useState(null)
 
     let inputBudget = async () => {
