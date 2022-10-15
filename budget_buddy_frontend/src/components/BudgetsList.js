@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, {useEffect, useState} from 'react'
 
 const BudgetsList = () => {
     let [budgets, setBudgets] = useState([])
     let [budget, setBudget] = useState({})
+    let [update, setUpdate] = useState(0)
 
     useEffect(() => {
         getBudgets()
-    }, [])
+    }, [update])
 
     let inputBudget = async () => {
         fetch('http://127.0.0.1:8000/app/budget/input/', {
@@ -17,6 +18,7 @@ const BudgetsList = () => {
             body: JSON.stringify(budget)
         })
 
+        setUpdate(update + 1)
         document.getElementById('budget').value = ''
     }
 
@@ -35,9 +37,9 @@ const BudgetsList = () => {
 
     return (
         <div className="tab-body">
-            <input id="budget" onChange={handleChange} type="number" min="0"></input>
-            <button onClick={budget.amount >= 0 ? inputBudget : null}>Enter</button>
             <div className="budgets-list">
+                <input id="budget" onChange={handleChange} type="number" min="0"></input>
+                <button id="budget" onClick={budget.amount >= 0 ? inputBudget : null}>Enter</button>
                 <ul>
                     {budgets.map((budget, index) => (
                         <li key={index}>$ {budget.amount.toFixed(2)}</li>
