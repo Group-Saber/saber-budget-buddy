@@ -24,10 +24,23 @@ firebase=pyrebase.initialize_app(config)
 authe = firebase.auth()
 database=firebase.database()
 
-def fire_budgets(request):
-    budget = database.child('Budgets').child('budget1').child('amount').get().val() # write to database
-    database.child('Budgets').child('budget4').child('amount').set(100) # read from database
-    return HttpResponse(budget)
+# how to read and write to firebase
+# def fire_budgets(request):
+#     budget = database.child('Budgets').child('budget').child('amount').get().val() # read from database
+#     database.child('Budgets').child('budget').child('amount').set(100) # write to database
+#     return HttpResponse(budget)
+
+@api_view(['POST'])
+def input_budget(request):
+    data = request.data
+    database.child('Budgets').child(data['date']).child('amount').set(float(data['amount']))
+    return Response(data)
+
+@api_view(['GET'])
+def get_budgets(request):
+    budgets = database.child('Budgets').get().val()
+    budgets = [budgets.get(i) for i in budgets]
+    return Response(budgets)
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -46,20 +59,22 @@ class GroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-@api_view(['GET'])
-def get_budgets(request):
-    budgets = Budget.objects.all()
-    serializer = BudgetSerializer(budgets, many=True)
-    return Response(serializer.data)
+# get and input from django builtind database
+# @api_view(['GET'])
+# def get_budgets(request):
+#     budgets = Budget.objects.all()
+#     print(budgets)
+#     serializer = BudgetSerializer(budgets, many=True)
+#     return Response(serializer.data)
 
-@api_view(['POST'])
-def input_budget(request):
-    data = request.data
-    budget = Budget.objects.create(
-        amount=data
-    )
-    serializer = BudgetSerializer(budget, many=False)
-    return Response(serializer.data)
+# @api_view(['POST'])
+# def input_budget(request):
+#     data = request.data
+#     budget = Budget.objects.create(
+#         amount=data
+#     )
+#     serializer = BudgetSerializer(budget, many=False)
+#     return Response(serializer.data)
 
 # Create your views here.
 def say_hello(request):
