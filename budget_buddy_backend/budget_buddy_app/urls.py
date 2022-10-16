@@ -7,4 +7,5 @@ urlpatterns = [
     path('andrew/', views.andrew_info),
     path('budgets/', views.get_budgets),
     path('budget/input/', views.input_budget),
+    path('name/<str:uid>', views.get_name),
 ]
