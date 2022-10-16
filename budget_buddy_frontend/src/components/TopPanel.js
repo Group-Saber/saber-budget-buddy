@@ -5,6 +5,7 @@ const TopPanel = ({uid}) => {
 
     useEffect(() => {
         getName()
+    // eslint-disable-next-line 
     }, [])
 
     let getName = async () => {

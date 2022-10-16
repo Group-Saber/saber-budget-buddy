@@ -5,6 +5,7 @@ const DebtPage = ({uid}) => {
 
     useEffect(() => {
         getDebts()
+    // eslint-disable-next-line
     }, [])
 
     let inputDebt = () => {
@@ -37,18 +38,18 @@ const DebtPage = ({uid}) => {
     return (
         <div className="tab-body">
             <div className="debt-input">
-                <p>Amount</p>
+                <label>Amount</label>
                 <input id="amount" type="number"></input>
             </div>
             <div className="debt-input">
-                <p>Name</p>
+                <label>Name</label>
                 <input id="name" type="text"></input>
             </div>
             <div className="debt-input">
-                <p>Note (optional)</p>
-                <textarea id="note" type="text"></textarea>
+                <label>Note (optional)</label>
+                <textarea id="note" type="text" rows="3" cols="25"></textarea>
             </div>
-            <button onClick={inputDebt}>Enter</button>
+            <button className="debt-button" onClick={inputDebt}>Enter</button>
             <div className="budgets-list">
                 <ul>
                     {debts.map((debt, index) => (
