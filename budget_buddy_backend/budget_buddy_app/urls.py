@@ -8,4 +8,6 @@ urlpatterns = [
     path('budgets/', views.get_budgets),
     path('budget/input/', views.input_budget),
     path('name/<str:uid>', views.get_name),
+    path('debts/<str:uid>', views.get_debts),
+    path('debts/input/<str:uid>', views.input_debt),
 ]

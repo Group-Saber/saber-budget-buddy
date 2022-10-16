@@ -43,6 +43,19 @@ def get_budgets(request):
     return Response(budgets)
 
 @api_view(['GET'])
+def get_debts(request, uid):
+    debts = database.child('users').child(uid).child('debts').get().val()
+    debts = [debts.get(i) for i in debts]
+    return Response(debts)
+
+@api_view(['POST'])
+def input_debt(request, uid):
+    data = request.data
+    print(data)
+    database.child('users').child(uid).child('debts').child(data['date']).set(data) #.set({'amount': float(data['amount']), 'date': data['date'], 'name': data['name'], 'note': data['note']})
+    return Response(data)
+
+@api_view(['GET'])
 def get_name(request, uid):
     first = database.child('users').child(uid).child('first').get().val()
     last = database.child('users').child(uid).child('last').get().val()

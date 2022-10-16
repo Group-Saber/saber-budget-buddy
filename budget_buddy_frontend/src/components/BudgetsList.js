@@ -1,13 +1,12 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 
 const BudgetsList = () => {
     let [budgets, setBudgets] = useState([])
     let [budget, setBudget] = useState({})
-    let [update, setUpdate] = useState(0)
 
     useEffect(() => {
         getBudgets()
-    }, [update])
+    }, [])
 
     let inputBudget = async () => {
         fetch('http://127.0.0.1:8000/app/budget/input/', {
@@ -18,7 +17,6 @@ const BudgetsList = () => {
             body: JSON.stringify(budget)
         })
 
-        setUpdate(update + 1)
         document.getElementById('budget').value = ''
     }
 
