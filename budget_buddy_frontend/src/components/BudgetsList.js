@@ -39,7 +39,7 @@ const BudgetsList = () => {
         <div className="tab-body">
             <div className="budgets-list">
                 <input id="budget" onChange={handleChange} type="number" min="0"></input>
-                <button id="budget" onClick={budget.amount >= 0 ? inputBudget : null}>Enter</button>
+                <button onClick={budget.amount >= 0 ? inputBudget : null}>Enter</button>
                 <ul>
                     {budgets.map((budget, index) => (
                         <li key={index}>$ {budget.amount.toFixed(2)}</li>

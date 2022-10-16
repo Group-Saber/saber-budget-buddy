@@ -1,4 +1,9 @@
+import React from 'react'
+import { Link, useLocation } from "react-router-dom";
+
 function SidePanel() {
+    let locate = useLocation()
+
     return (
         <div className="side-panel">
             <div className="side-header">
@@ -6,9 +11,10 @@ function SidePanel() {
                 <hr></hr>
             </div>
             <div className="links">
-                <a href="/">Dashboard</a>
-                <a href="/budgets">Budgets</a>
-                <a href="/debts">Debts</a>
+                <Link to="/" className={locate.pathname === '/' ? 'current' : ''}>Dashboard</Link>
+                <Link to="/budget" className={locate.pathname === '/budget' ? 'current' : ''}>Budget</Link>
+                <Link to="/debt" className={locate.pathname === '/debt' ? 'current' : ''}>Debt</Link>
+                <Link to="/user" className={locate.pathname === '/user' ? 'current' : ''}>User</Link>
             </div>
         </div>
     )
