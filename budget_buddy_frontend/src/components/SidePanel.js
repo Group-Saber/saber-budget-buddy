@@ -10,11 +10,11 @@ function SidePanel() {
                 <h2>Budget Buddy</h2>
                 <hr></hr>
             </div>
-            <div className="links">
-                <Link to="/" className={locate.pathname === '/' ? 'current' : ''}>Dashboard</Link>
-                <Link to="/budget" className={locate.pathname === '/budget' ? 'current' : ''}>Budget</Link>
-                <Link to="/debt" className={locate.pathname === '/debt' ? 'current' : ''}>Debt</Link>
-                <Link to="/user" className={locate.pathname === '/user' ? 'current' : ''}>User</Link>
+            <div className="links">                    
+                <Link to="/" className={locate.pathname === '/' ? 'current' : ''}><i className="material-icons">space_dashboard</i> Dashboard</Link>
+                <Link to="/budget" className={locate.pathname === '/budget' ? 'current' : ''}><i className="material-icons">savings</i> Budget</Link>
+                <Link to="/debt" className={locate.pathname === '/debt' ? 'current' : ''}><i className="material-icons">payments</i> Debt</Link>
+                <Link to="/user" className={locate.pathname === '/user' ? 'current' : ''}><i className="material-icons">person</i> User</Link>
             </div>
         </div>
     )
