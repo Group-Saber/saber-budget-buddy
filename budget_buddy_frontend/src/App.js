@@ -15,7 +15,7 @@ function App() {
           <SidePanel />
           <Routes>
             <Route path='/budget' element={<BudgetsList />}></Route>
-            <Route path='/debt' element={<DebtPage />}></Route>
+            <Route path='/debt' element={<DebtPage uid={uid} />}></Route>
           </Routes>
         </header>
       </div>
