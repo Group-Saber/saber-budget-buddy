@@ -42,6 +42,12 @@ def get_budgets(request):
     budgets = [budgets.get(i) for i in budgets]
     return Response(budgets)
 
+@api_view(['GET'])
+def get_name(request, uid):
+    first = database.child('users').child(uid).child('first').get().val()
+    last = database.child('users').child(uid).child('last').get().val()
+    return Response({'first': first, 'last':last})
+
 class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
