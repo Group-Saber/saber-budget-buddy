@@ -1,25 +1,21 @@
 import './App.css';
 import BudgetsList from './components/BudgetsList'
-import InputBudget from './components/InputBudget'
+import SidePanel from './components/SidePanel';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import DebtPage from './pages/DebtPage';
+import TopPanel from './components/TopPanel';
 
 function App() {
-  const[data,setData] = useState(null)                                        //sets the value to nothing initially of data
-  const[print,setPrint]=useState(false);                                      //prints out the data given
-  
-  function getData(val)
-  {
-    setData(val.target.value)
-    console.warn(val.target.value)
-  }
+  let uid = 'YkzaPKHIUpaBvejgxISy8DIav243'
   return (
     <Router>
-      <div className="App">
-        <header className="App-header">
-          <h1>Budget Buddy</h1>
+      <div>
+        <header>
+          <TopPanel uid={uid} />
+          <SidePanel />
           <Routes>
-            <Route path='/budgets' element={<BudgetsList />}></Route>
-            <Route path='/input' element={<InputBudget />}></Route>
+            <Route path='/budget' element={<BudgetsList />}></Route>
+            <Route path='/debt' element={<DebtPage uid={uid} />}></Route>
           </Routes>
         </header>
       </div>
