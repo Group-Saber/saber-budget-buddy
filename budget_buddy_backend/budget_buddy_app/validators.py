@@ -7,3 +7,10 @@ def validate_positive(value):
             _('%(value)s is not positive'),
             params={'value': value},
         )
+
+def validate_negative(value):
+    if value > 0:
+        raise ValidationError(
+            _('%(value)s is positive'),
+            params={'value': value},
+        )
