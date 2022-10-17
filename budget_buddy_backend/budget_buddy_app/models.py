@@ -2,7 +2,6 @@ from django.db import models
 from .validators import validate_positive
 from .validators import validate_negative
 
-
 # Create your models here.
 
 class Budget(models.Model):
