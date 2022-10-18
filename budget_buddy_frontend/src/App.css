@@ -9,8 +9,8 @@ body {
 }
 
 .top-panel {
-  width: 90vw;
-  height: 5vh;
+  width: 85vw;
+  height: 8vh;
   position: fixed;
   right: 0;
   background-color: var(--black);
@@ -22,17 +22,14 @@ body {
   position: absolute;
   right: 50px;
   bottom: 0;
-  font-weight: bold;
-  font-size: 18px;
 }
 
 .side-panel {
-  width: 10vw;
+  width: 15vw;
   height: 100vh;
   position: fixed;
   background-color: var(--black);
   color: var(--white);
-  font-size: 18px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
 }
 
@@ -52,8 +49,8 @@ body {
 
 .tab-body {
   position: fixed;
-  left: 10vw;
-  top: 5vh;
+  left: 15vw;
+  top: 8vh;
   padding: 25px;
 }
 
@@ -86,7 +83,6 @@ body {
 
 .debt-input label {
   font-weight: bold;
-  font-size: 18px;
   color: var(--blue);
   margin-bottom: 5px;
 }
@@ -112,7 +108,6 @@ body {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
   border-radius: 4px;
   transition-duration: 0.4s;
 }

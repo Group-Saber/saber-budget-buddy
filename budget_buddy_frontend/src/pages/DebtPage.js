@@ -10,18 +10,22 @@ const DebtPage = ({uid}) => {
 
     let inputDebt = () => {
         if(document.getElementById('amount').value !== '' && document.getElementById('name').value !== '') {
+            const newDebt = {
+                'amount': parseFloat(document.getElementById('amount').value),
+                'name': document.getElementById('name').value,
+                'note': document.getElementById('note').value,
+                'date': Date.now()
+            }
+
             fetch(`http://127.0.0.1:8000/app/debts/input/${uid}`, {
                 method: "POST",
                 headers: {
                     'Content-type': 'application/json'
                 },
-                body: JSON.stringify({
-                    'amount': Number(document.getElementById('amount').value),
-                    'name': document.getElementById('name').value,
-                    'note': document.getElementById('note').value,
-                    'date': Date.now()
-                })
+                body: JSON.stringify(newDebt)
             })
+
+            setDebts(debts => [newDebt, ...debts])
 
             document.getElementById('amount').value = ''
             document.getElementById('name').value = ''
@@ -32,7 +36,7 @@ const DebtPage = ({uid}) => {
     let getDebts = async () => {
         let response = await fetch(`http://127.0.0.1:8000/app/debts/${uid}`)
         let data = await response.json()
-        setDebts(data)
+        setDebts(data.reverse())
     }
 
     return (
