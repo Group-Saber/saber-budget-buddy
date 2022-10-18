@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 const TopPanel = ({uid}) => {
-    let [name, setName] = useState('null')
+    let [name, setName] = useState('You')
 
     useEffect(() => {
         getName()
