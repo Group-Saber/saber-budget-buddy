@@ -9,8 +9,8 @@ body {
 }
 
 .top-panel {
-  width: 85vw;
-  height: 8vh;
+  width: 90vw;
+  height: 5vh;
   position: fixed;
   right: 0;
   background-color: var(--black);
@@ -25,7 +25,7 @@ body {
 }
 
 .side-panel {
-  width: 15vw;
+  width: 10vw;
   height: 100vh;
   position: fixed;
   background-color: var(--black);
@@ -49,8 +49,8 @@ body {
 
 .tab-body {
   position: fixed;
-  left: 15vw;
-  top: 8vh;
+  left: 10vw;
+  top: 5vh;
   padding: 25px;
 }
 
@@ -116,4 +116,36 @@ body {
   border: 2px solid var(--blue);
   background-color: var(--white);
   color: var(--blue);
+}
+
+/* mobile */
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+  
+}
+
+/* tablets */
+@media only screen and (min-width: 481px) and (max-width: 768px)  {
+  
+}
+
+/* laptops */
+@media only screen and (min-width: 769px) and (max-width: 1600px)  {
+  .top-panel {
+    width: 85vw;
+    height: 8vh;
+  }
+
+  .side-panel {
+    width: 15vw;
+  }
+
+  .tab-body {
+    left: 15vw;
+    top: 8vh;
+  }
+}
+
+/* desktop */
+@media only screen and (min-width: 1601px)  {
+  
 }
