@@ -48,9 +48,11 @@ body {
 }
 
 .tab-body {
-  position: fixed;
+  position: absolute;
   left: 10vw;
   top: 5vh;
+  right: 0;
+  bottom: 0;
   padding: 25px;
 }
 
@@ -73,6 +75,18 @@ body {
   margin-right: 25px;
   border-radius: 5px;
   box-shadow: 0 3px 10px rgba(7, 141, 250, 0.2);
+}
+
+.totals {
+  position: relative;
+  width: 15%;
+  border: 2px solid #024775;
+}
+
+.create-debt {
+  position: relative;
+  width: 15%;
+  border: 2px solid #024775;
 }
 
 .debt-input {
@@ -110,6 +124,7 @@ body {
   display: inline-block;
   border-radius: 4px;
   transition-duration: 0.4s;
+  margin-right: 15px;
 }
 
 .debt-button:hover {
@@ -118,9 +133,18 @@ body {
   color: var(--blue);
 }
 
+.debts-list {
+  /* background-color: var(--blue); */
+  margin-top: 10px;  
+}
+
+.debt-header {
+  text-align: left;
+}
+
 /* mobile */
 @media only screen and (min-width: 320px) and (max-width: 480px) {
-  
+
 }
 
 /* tablets */
@@ -142,6 +166,8 @@ body {
   .tab-body {
     left: 15vw;
     top: 8vh;
+    right: 0;
+    bottom: 0;
   }
 }
 
