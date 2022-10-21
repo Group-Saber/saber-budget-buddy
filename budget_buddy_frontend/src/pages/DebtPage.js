@@ -79,49 +79,55 @@ const DebtPage = ({uid}) => {
 
     return (
         <div className='tab-body'>
-            <div className='create-debt'>
-                <div className='debt-input'>
-                    <label>Amount:</label>
-                    <input id="amount" type="number"></input>
+            <div className='debt-top'>
+                <div className='total'>
+                    <div className='total-inner positive'>
+                        <h2>Owed</h2>
+                        <p>{positive}</p>
+                    </div>
                 </div>
-                <div className='debt-input'>
-                    <label>Name:</label>
-                    <input id="name" type="text"></input>
+                <div className='total'>
+                    <div className='total-inner negative'>
+                        <h2>Debt</h2>
+                        <p>{negative}</p>
+                    </div>
                 </div>
-                <div className='debt-input'>
-                    <label>Note(optional):</label>
-                    <textarea id="note" type="text" rows="3" cols="25"></textarea>
-                </div>
-                <div>
-                    <button className='debt-button' onClick={clear}>Clear</button>
-                    <button className='debt-button' onClick={inputDebt}>Enter</button>
+                <div className='create-debt'>
+                    <div className='debt-input'>
+                        <label>Amount:</label>
+                        <input id="amount" type="number"></input>
+                    </div>
+                    <div className='debt-input'>
+                        <label>Name:</label>
+                        <input id="name" type="text"></input>
+                    </div>
+                    <div className='debt-input'>
+                        <label>Note(optional):</label>
+                        <textarea id="note" type="text" rows="3" cols="25"></textarea>
+                    </div>
+                    <div>
+                        <button className='debt-button' onClick={clear}>Clear</button>
+                        <button className='debt-button' onClick={inputDebt}>Enter</button>
+                    </div>
                 </div>
             </div>
-            <div className='totals'>
-                <p>{positive}</p>
-                <p>{negative}</p>
-            </div>
-            <div className='debts-list'>
-                <table className='debt-table'>
-                    <thead className='debt-table-header'>
-                        <tr className='debt-header'>
-                            <th>Name</th>
-                            <th>Amount</th>
-                            <th>Note</th>
-                            <th>Date</th>
-                        </tr>
-                    </thead>
-                    <tbody className='debt-table-body'>
-                        {debts.map((debt, index) => (
-                            <tr key={index} className='debt-body'>
-                                <td>{debt.name}</td>
-                                <td>{debt.amount.toFixed(2)}</td>
-                                <td>{debt.note}</td>
-                                <td>{formatDate(new Date(debt.date))}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+            <div className='debts-container'>
+                <ul className='debts-table'>
+                    <li className='debts-header'>
+                        <div className="col col-1">Name</div>
+                        <div className="col col-2">Amount</div>
+                        <div className="col col-3">Note</div>
+                        <div className="col col-4">Date</div>
+                    </li>
+                    {debts.map((debt, index) => (
+                        <li className='debts-row' key={index}>
+                            <div className="col col-1" data-label="Name">{debt.name}</div>
+                            <div className="col col-2" data-label="Amount">{debt.amount.toFixed(2)}</div>
+                            <div className="col col-3" data-label="Note">{debt.note.length > 150 ? debt.note.substring(0, 150) + '...' : debt.note}</div>
+                            <div className="col col-4" data-label="Date">{formatDate(new Date(debt.date))}</div>
+                        </li>
+                    ))}
+                </ul>
             </div>
         </div>
     )
