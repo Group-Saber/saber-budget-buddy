@@ -51,8 +51,7 @@ def get_debts(request, uid):
 @api_view(['POST'])
 def input_debt(request, uid):
     data = request.data
-    print(data)
-    database.child('users').child(uid).child('debts').child(data['date']).set(data) #.set({'amount': float(data['amount']), 'date': data['date'], 'name': data['name'], 'note': data['note']})
+    database.child('users').child(uid).child('debts').child(data['date']).set(data)
     return Response(data)
 
 @api_view(['GET'])
