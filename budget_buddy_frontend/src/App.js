@@ -7,17 +7,16 @@ import TopPanel from './components/TopPanel';
 
 function App() {
   let uid = 'YkzaPKHIUpaBvejgxISy8DIav243'
+
   return (
     <Router>
       <div>
-        <header>
-          <TopPanel uid={uid} />
-          <SidePanel />
-          <Routes>
-            <Route path='/budget' element={<BudgetsList />}></Route>
-            <Route path='/debt' element={<DebtPage uid={uid} />}></Route>
-          </Routes>
-        </header>
+        <TopPanel uid={uid} />
+        <SidePanel />
+        <Routes>
+          <Route path='/budget' element={<BudgetsList />}></Route>
+          <Route path='/debt' element={<DebtPage uid={uid} />}></Route>
+        </Routes>
       </div>
     </Router>
   );
