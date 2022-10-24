@@ -55,6 +55,11 @@ def input_debt(request, uid):
     return Response(data)
 
 @api_view(['GET'])
+def get_user(request, uid):
+    user = database.child('users').child(uid).get().val()
+    return Response({'first': user['first'], 'last': user['last'], 'email': user['email']})
+
+@api_view(['GET'])
 def get_name(request, uid):
     first = database.child('users').child(uid).child('first').get().val()
     last = database.child('users').child(uid).child('last').get().val()

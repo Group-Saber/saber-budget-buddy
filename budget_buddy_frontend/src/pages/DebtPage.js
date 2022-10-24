@@ -6,9 +6,15 @@ const DebtPage = ({uid}) => {
     let [negative, setNegative] = useState(0)
 
     useEffect(() => {
+        let getDebts = async () => {
+            let response = await fetch(`http://127.0.0.1:8000/app/debts/${uid}`)
+            let data = await response.json()
+            setDebts(data.reverse())
+            getTotals(data)
+        }
+
         getDebts()
-    // eslint-disable-next-line
-    }, [])
+    }, [uid])
 
     let inputDebt = () => {
         if(document.getElementById('amount').value !== '' && document.getElementById('name').value !== '') {
@@ -42,13 +48,6 @@ const DebtPage = ({uid}) => {
         document.getElementById('amount').value = ''
         document.getElementById('name').value = ''
         document.getElementById('note').value = ''
-    }
-
-    let getDebts = async () => {
-        let response = await fetch(`http://127.0.0.1:8000/app/debts/${uid}`)
-        let data = await response.json()
-        setDebts(data.reverse())
-        getTotals(data)
     }
 
     let getTotals = (data) => {
