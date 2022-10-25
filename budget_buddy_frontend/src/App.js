@@ -1,23 +1,21 @@
 import './App.css';
-import BudgetsList from './components/BudgetsList'
-import SidePanel from './components/SidePanel';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import DebtPage from './pages/DebtPage';
-import TopPanel from './components/TopPanel';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import Panel from './components/Panel';
+import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
 
 function App() {
   let uid = 'YkzaPKHIUpaBvejgxISy8DIav243'
+
   return (
     <Router>
       <div>
-        <header>
-          <TopPanel uid={uid} />
-          <SidePanel />
-          <Routes>
-            <Route path='/budget' element={<BudgetsList />}></Route>
-            <Route path='/debt' element={<DebtPage uid={uid} />}></Route>
-          </Routes>
-        </header>
+        <Routes>
+          <Route path='/' element={<Navigate to='/login'></Navigate>}></Route>
+          <Route path='/login' element={<LoginPage />}></Route>
+          <Route path='/signup' element={<SignupPage />}></Route>
+          <Route path='/main/*' element={<Panel uid={uid} />}></Route>
+        </Routes>
       </div>
     </Router>
   );

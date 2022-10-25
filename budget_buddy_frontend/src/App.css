@@ -1,13 +1,99 @@
 :root {
   --black: #222222;
+  --gray: #333333;
   --white: white;
-  --blue: #024775;
+  --blue: #25537b;
+  --orange: #d24e0c;
+  --red: #d40900;
+  --debt-red: #ec0a00;
+  --debt-green: #599656;
 }
 
 body {
   font-family: 'Ubuntu', sans-serif;
 }
 
+/* LoginPage */
+.login-body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--blue);
+}
+
+.login-info {
+  padding: 50px;
+  border-radius: 8px;
+  background-color: var(--white);
+  box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.8);
+}
+
+.login-title {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 36px;
+  font-weight: bold;
+  color: var(--blue);
+}
+
+.login-sub {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--blue);
+}
+
+.login-input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.login-input label {
+  font-weight: bold;
+  color: var(--black);
+  margin-bottom: 5px;
+}
+
+.login-input input {
+  border: 2px solid var(--black);
+  border-radius: 4px;
+  padding: 12px 20px;
+}
+
+.login-button {
+  background-color: var(--blue);
+  border: 2px solid var(--white);
+  color: var(--white);
+  padding: 10px 28px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 4px;
+  transition-duration: 0.4s;
+  margin-right: 15px;
+}
+
+.login-button:last-of-type {
+  margin-right: 0;
+}
+
+.login-button:hover {
+  border: 2px solid var(--blue);
+  background-color: var(--white);
+  color: var(--blue);
+}
+
+.login-link {
+  text-decoration: inherit;
+  color: inherit;
+}
+
+/** TopPanel
+  Panel size and name
+*/
 .top-panel {
   width: 90vw;
   height: 5vh;
@@ -15,6 +101,7 @@ body {
   right: 0;
   background-color: var(--black);
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
+  z-index: 1;
 }
 
 .panel-name {
@@ -22,18 +109,26 @@ body {
   position: absolute;
   right: 50px;
   bottom: 0;
-  font-weight: bold;
-  font-size: 18px;
 }
 
+.avatar {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+/** SidePanel 
+  Panel size and links
+*/
 .side-panel {
   width: 10vw;
   height: 100vh;
   position: fixed;
   background-color: var(--black);
   color: var(--white);
-  font-size: 18px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
+  z-index: 2;
 }
 
 .side-header {
@@ -46,15 +141,8 @@ body {
 }
 
 .side-header hr {
-  border: 0.5px solid gray;
+  border: 0.5px solid var(--gray);
   opacity: 0.3;
-}
-
-.tab-body {
-  position: fixed;
-  left: 10vw;
-  top: 5vh;
-  padding: 25px;
 }
 
 .links {
@@ -78,6 +166,69 @@ body {
   box-shadow: 0 3px 10px rgba(7, 141, 250, 0.2);
 }
 
+/** Body for each tab on pages */
+.tab-body {
+  position: absolute;
+  left: 10vw;
+  top: 5vh;
+  right: 0;
+  bottom: 0;
+  padding: 25px;
+  /* background-color: var(--gray); */
+}
+
+/** DebtPage */
+.debt-top {
+  position: relative;
+  display: flex;
+}
+
+/** DebtPage
+  Total owed and total debt
+*/
+.total {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10%;
+  margin: 0 5px;
+  border-radius: 4px;
+  box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.2);
+}
+
+.total h2 {
+  font-size: 36px;
+}
+
+.total p {
+  font-size: 28px;
+}
+
+.total-inner {
+  text-align: center;
+  /* padding: 25px; */
+}
+
+.positive h2 {
+  color: var(--debt-green);
+}
+
+.negative h2 {
+  color: var(--debt-red);
+}
+
+/** DebtPage
+  Debt inputs and buttons
+*/
+.create-debt {
+  width: 15%;
+  padding: 25px;
+  border-radius: 4px;
+  margin-left: 20px;
+  box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.2);
+}
+
 .debt-input {
   display: flex;
   flex-direction: column;
@@ -86,39 +237,130 @@ body {
 
 .debt-input label {
   font-weight: bold;
-  font-size: 18px;
-  color: var(--blue);
+  color: var(--red);
   margin-bottom: 5px;
 }
 
 .debt-input input {
-  border: 2px solid var(--blue);
+  border: 2px solid var(--black);
   border-radius: 4px;
   padding: 12px 20px;
+  text-transform: capitalize;
 }
 
 .debt-input textarea {
   resize: none;
-  border: 2px solid var(--blue);
+  border: 2px solid var(--black);
   border-radius: 4px;
   padding: 12px 20px;
 }
 
 .debt-button {
-  background-color: var(--blue);
-  border: none;
-  color: white;
+  background-color: var(--red);
+  border: 2px solid var(--white);
+  color: var(--white);
   padding: 10px 28px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
   border-radius: 4px;
   transition-duration: 0.4s;
+  margin-right: 15px;
 }
 
 .debt-button:hover {
-  border: 2px solid var(--blue);
+  border: 2px solid var(--red);
   background-color: var(--white);
-  color: var(--blue);
+  color: var(--red);
+}
+
+/** DebtPage 
+  Debts table 
+*/
+.debts-container {
+  position: relative;
+  padding-right: 50px;
+}
+
+.debts-table li {
+  border-radius: 4px;
+  padding: 25px 30px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.debts-header {
+  background-color: var(--red);
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.debts-row {
+  background-color: var(--white);
+  box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.2);
+}
+
+.col-1 {
+  flex-basis: 15%;
+}
+
+.col-2 {
+  flex-basis: 15%;
+}
+
+.col-3 {
+  flex-basis: 55%;
+}
+
+.col-4 {
+  flex-basis: 15%;
+}
+
+.row-click {
+  text-decoration: none;
+  color: black;
+}
+
+/* mobile */
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+
+}
+
+/* tablets */
+@media only screen and (min-width: 481px) and (max-width: 768px)  {
+  
+}
+
+/* laptops */
+@media only screen and (min-width: 769px) and (max-width: 1600px)  {
+  .top-panel {
+    width: 85vw;
+    height: 8vh;
+  }
+
+  .side-panel {
+    width: 15vw;
+  }
+
+  .tab-body {
+    left: 15vw;
+    top: 8vh;
+    /* right: 0;
+    bottom: 0; */
+  }
+
+  .create-debt {
+    width: 20%;
+  }
+
+  .total {
+    width: 15%
+  }
+}
+
+/* desktop */
+@media only screen and (min-width: 1601px)  {
+  
 }
