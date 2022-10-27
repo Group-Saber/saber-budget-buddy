@@ -12,4 +12,5 @@ urlpatterns = [
     path('debts/<str:uid>', views.get_debts),
     path('debts/input/<str:uid>', views.input_debt),
     path('login/', views.login),
+    path('signup/', views.signup),
 ]

@@ -76,6 +76,12 @@ def login(request):
     uid = ''
     return Response(uid)
 
+@api_view(['POST'])
+def signup(request):
+    data = request.data
+    print(data)
+    return Response(data)
+
 class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
