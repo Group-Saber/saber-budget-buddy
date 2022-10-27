@@ -71,9 +71,40 @@ def login(request):
     email = data['email']
     password = data['password']
 
-    print(email)
-    print(password)
-    uid = ''
+    try:
+        # if there is no error then signin the user with given email and password
+        user = authe.sign_in_with_email_and_password(email,password)
+    except:
+        message = "Invalid Credentials!!Please ChecK your Data"
+        print(message)
+        return Response('')
+    session_id = user['idToken']
+    request.session['uid'] = str(session_id)
+
+    uid = user["localId"]
+
+    return Response(uid)
+
+@api_view(['POST'])
+def signup(request):
+    data = request.data
+    email = data['email']
+    password = data['password']
+    first_name = data['first']
+    last_name = data['last']
+
+    try:
+        # creating a user with the given email and password
+        user=authe.create_user_with_email_and_password(email,password)
+        uid = user['localId']
+        store = {'email': email, 'first': first_name, 'last': last_name, 'uid': uid}
+
+        database.child('users').child(uid).set(store)
+    except:
+        message = "Something went wrong during creation of new user"
+        print(message)
+        return Response('')
+
     return Response(uid)
 
 class UserViewSet(viewsets.ModelViewSet):

@@ -86,9 +86,9 @@ body {
   color: var(--blue);
 }
 
-.login-link {
-  text-decoration: inherit;
-  color: inherit;
+.login-error {
+  color: var(--debt-red);
+  margin-bottom: 10px;
 }
 
 /** TopPanel
