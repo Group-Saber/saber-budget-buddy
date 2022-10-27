@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const SignupPage = () => {
     let [email, setEmail] =  useState('')
@@ -7,9 +7,11 @@ const SignupPage = () => {
     let [repass, setRepass] =  useState('')
     let [first, setFirst] =  useState('')
     let [last, setLast] =  useState('')
+    let [error, setError] = useState('')
+    const navigate = useNavigate()
 
-    let signup = () => {
-        if(email !== '' && password !== '' && repass !== '' && first !== '' && last !== '') {
+    let signup = async () => {
+        if(email !== '' && password !== '' && repass !== '' && first !== '' && last !== '' && password === repass) {
             const creds = {
                 'email': document.getElementById('email').value,
                 'password': document.getElementById('password').value,
@@ -17,13 +19,24 @@ const SignupPage = () => {
                 'last': document.getElementById('last').value,
             }
 
-            fetch(`http://127.0.0.1:8000/app/signup/`, {
+            let response = await fetch(`http://127.0.0.1:8000/app/signup/`, {
                     method: "POST",
                     headers: {
                         'Content-type': 'application/json'
                     },
                     body: JSON.stringify(creds)
             })
+            let data = response.json()
+
+            if(data !== '') {
+                navigate('/login')
+            }
+        } else {
+            if(password !== repass) {
+                setError('Passwords do not match.')
+            } else {
+                setError('Missing fields.')
+            }
         }
     }
 
@@ -46,6 +59,8 @@ const SignupPage = () => {
                 break
             case 'repass':
                 setRepass(value)
+                break
+            default:
                 break
         }
     }
@@ -75,8 +90,9 @@ const SignupPage = () => {
                     <label>Retype Password:</label>
                     <input id="repass" type="password" onChange={handleChange}></input>
                 </div>
+                {error !== '' ? <div className='login-error'>{error}</div> : null}
                 <div>
-                    <button className='login-button'><Link to='/' className='login-link'>Login</Link></button>
+                    <button className='login-button' onClick={()=>navigate('/login')}>Login</button>
                     <button className='login-button' onClick={signup}>Signup</button>
                 </div>
             </div>
