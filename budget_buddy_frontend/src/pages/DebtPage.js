@@ -16,7 +16,7 @@ const DebtPage = ({uid}) => {
         getDebts()
     }, [uid])
 
-    let inputDebt = () => {
+    let inputDebt = async () => {
         if(document.getElementById('amount').value !== '' && document.getElementById('name').value !== '') {
             const newDebt = {
                 'amount': parseFloat(document.getElementById('amount').value),
@@ -25,13 +25,16 @@ const DebtPage = ({uid}) => {
                 'date': Date.now()
             }
 
-            fetch(`http://127.0.0.1:8000/app/debts/input/${uid}`, {
+            let response = await fetch(`http://127.0.0.1:8000/app/debts/input/${uid}`, {
                 method: "POST",
                 headers: {
                     'Content-type': 'application/json'
                 },
                 body: JSON.stringify(newDebt)
             })
+            let data = await response.json()
+
+            console.log(data)
 
             if(newDebt.amount >= 0) {
                 setPositive(positive + newDebt.amount)

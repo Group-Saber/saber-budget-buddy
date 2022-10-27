@@ -65,6 +65,17 @@ def get_name(request, uid):
     last = database.child('users').child(uid).child('last').get().val()
     return Response({'first': first, 'last':last})
 
+@api_view(['POST'])
+def login(request):
+    data = request.data
+    email = data['email']
+    password = data['password']
+
+    print(email)
+    print(password)
+    uid = ''
+    return Response(uid)
+
 class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
