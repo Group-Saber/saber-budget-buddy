@@ -7,17 +7,19 @@ import BudgetsList from './BudgetsList'
 
 const Panel = ({uid}) => {
     let locate = useLocation()
+    let [user, setUser] = useState({})
     let [name, setName] = useState('You')
 
 
     useEffect(() => {
-        let getName = async () => {
-            let response = await fetch(`http://127.0.0.1:8000/app/name/${uid}`)
+        let getUser = async () => {
+            let response = await fetch(`http://127.0.0.1:8000/app/user/${uid}`)
             let data = await response.json()
+            setUser(data)
             setName(`${data.first} ${data.last}`)
         }
 
-        getName()
+        getUser()
     }, [uid])
 
     let isCurrent = (path) => {
@@ -47,7 +49,7 @@ const Panel = ({uid}) => {
             <Routes>
                 <Route path='budget' element={<BudgetsList />}></Route>
                 <Route path='debt' element={<DebtPage uid={uid} />}></Route>
-                <Route path='user' element={<UserPage uid={uid} />}></Route>
+                <Route path='user' element={<UserPage user={user} />}></Route>
             </Routes>
         </div>
     )

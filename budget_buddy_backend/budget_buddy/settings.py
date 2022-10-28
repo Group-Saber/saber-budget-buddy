@@ -26,7 +26,7 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ec2-18-144-27-81.us-west-1.compute.amazonaws.com', '127.0.0.1']
 
 
 # Application definition
@@ -61,6 +61,7 @@ REST_FRAMEWORK = {
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
+    'http://ec2-18-144-27-81.us-west-1.compute.amazonaws.com:8080',
 ]
 
 MIDDLEWARE = [

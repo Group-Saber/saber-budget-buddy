@@ -63,6 +63,14 @@ body {
   padding: 12px 20px;
 }
 
+.error label {
+  color: var(--red);
+}
+
+.error input {
+  border: 2px solid var(--red);
+}
+
 .login-button {
   background-color: var(--blue);
   border: 2px solid var(--white);
@@ -87,8 +95,9 @@ body {
 }
 
 .login-error {
-  color: var(--debt-red);
+  color: var(--red);
   margin-bottom: 10px;
+  font-size: 14px;
 }
 
 /** TopPanel
