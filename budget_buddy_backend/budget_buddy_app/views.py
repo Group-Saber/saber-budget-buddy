@@ -6,8 +6,6 @@ from rest_framework import permissions
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from budget_buddy_app.serializers import UserSerializer, GroupSerializer
-from .models import Budget
-from .serializers import BudgetSerializer
 import pyrebase
 
 config={
@@ -28,7 +26,7 @@ database=firebase.database()
 # def fire_budgets(request):
 #     budget = database.child('Budgets').child('budget').child('amount').get().val() # read from database
 #     database.child('Budgets').child('budget').child('amount').set(100) # write to database
-#     return HttpResponse(budget)
+#     return Response(budget)
 
 @api_view(['POST'])
 def input_budget(request):
@@ -58,12 +56,6 @@ def input_debt(request, uid):
 def get_user(request, uid):
     user = database.child('users').child(uid).get().val()
     return Response({'first': user['first'], 'last': user['last'], 'email': user['email']})
-
-@api_view(['GET'])
-def get_name(request, uid):
-    first = database.child('users').child(uid).child('first').get().val()
-    last = database.child('users').child(uid).child('last').get().val()
-    return Response({'first': first, 'last':last})
 
 @api_view(['POST'])
 def login(request):
@@ -124,27 +116,6 @@ class GroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-# get and input from django builtind database
-# @api_view(['GET'])
-# def get_budgets(request):
-#     budgets = Budget.objects.all()
-#     print(budgets)
-#     serializer = BudgetSerializer(budgets, many=True)
-#     return Response(serializer.data)
-
-# @api_view(['POST'])
-# def input_budget(request):
-#     data = request.data
-#     budget = Budget.objects.create(
-#         amount=data
-#     )
-#     serializer = BudgetSerializer(budget, many=False)
-#     return Response(serializer.data)
-
 # Create your views here.
 def say_hello(request):
     return HttpResponse('Hello World')
-
-def andrew_info(request):
-    return HttpResponse('Andrew Arteaga - Back End')
-
