@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import Panel from './components/Panel';
 import LoginPage from './pages/LoginPage';
@@ -9,8 +9,17 @@ function App() {
   let [uid, setUID] = useState('')
 
   let updateUID = (newUID) => {
+    window.localStorage.setItem('uid', JSON.stringify(newUID));
     setUID(newUID)
   }
+
+  useEffect(() => {
+    const data = window.localStorage.getItem('uid');
+
+    if(data !== null) {
+      setUID(JSON.parse(data));
+    }
+  }, [uid])
 
   return (
     <Router>
