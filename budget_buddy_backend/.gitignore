@@ -3,3 +3,5 @@
 
 # pycache in all directories
 **/__pycache__/
+
+db.sqlite3
