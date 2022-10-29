@@ -82,23 +82,19 @@ const DebtPage = ({uid}) => {
     return (
         <div className='tab-body'>
             <div className='debt-top'>
-                <div className='total'>
-                    <div className='total-inner positive'>
-                        <h2>Owed</h2>
+                <div className='total-stacked'>
+                    <div className='split top'>
+                        <i className="material-icons">arrow_upward</i> 
                         <p>${positive.toFixed(2)}</p>
                     </div>
-                </div>
-                <div className='total'>
-                    <div className='total-inner negative'>
-                        <h2>Debt</h2>
+                    <div className='split bottom'>
+                    <i className="material-icons">arrow_downward</i>
                         <p>${negative.toFixed(2)}</p>
                     </div>
                 </div>
                 <div className='total'>
-                    <div className='total-inner'>
-                        <h2>Total</h2>
-                        <p>${(positive + negative).toFixed(2)}</p>
-                    </div>
+                    <h2>Total</h2>
+                    <p>${(positive + negative).toFixed(2)}</p>
                 </div>
                 <div className='create-debt'>
                     <div className='debt-input'>
