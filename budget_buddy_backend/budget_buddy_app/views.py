@@ -46,10 +46,23 @@ def get_debts(request, uid):
     debts = [debts.get(i) for i in debts]
     return Response(debts)
 
+@api_view(['GET'])
+def get_paid(request, uid):
+    debts = database.child('users').child(uid).child('paid').get().val()
+    debts = [debts.get(i) for i in debts]
+    return Response(debts)
+
 @api_view(['POST'])
 def input_debt(request, uid):
     data = request.data
     database.child('users').child(uid).child('debts').child(data['date']).set(data)
+    return Response(data)
+
+@api_view(['POST'])
+def input_paid(request, uid):
+    data = request.data
+    database.child('users').child(uid).child('debts').child(data['date']).remove()
+    database.child('users').child(uid).child('paid').child(data['date']).set(data)
     return Response(data)
 
 @api_view(['GET'])

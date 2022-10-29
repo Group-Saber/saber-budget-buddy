@@ -9,6 +9,8 @@ urlpatterns = [
     path('user/<str:uid>', views.get_user),
     path('debts/<str:uid>', views.get_debts),
     path('debts/input/<str:uid>', views.input_debt),
+    path('paid/<str:uid>', views.get_paid),
+    path('paid/input/<str:uid>', views.input_paid),
     path('login/', views.login),
     path('signup/', views.signup),
 ]
