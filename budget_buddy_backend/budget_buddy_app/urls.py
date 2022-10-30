@@ -11,6 +11,7 @@ urlpatterns = [
     path('debts/input/<str:uid>', views.input_debt),
     path('paid/<str:uid>', views.get_paid),
     path('paid/input/<str:uid>', views.input_paid),
+    path('paid/unpaid/<str:uid>', views.unpaid),
     path('login/', views.login),
     path('signup/', views.signup),
 ]
