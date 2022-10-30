@@ -62,8 +62,15 @@ def input_debt(request, uid):
 def input_paid(request, uid):
     data = request.data
     database.child('users').child(uid).child('debts').child(data['date']).remove()
-    database.child('users').child(uid).child('paid').child(data['date']).set(data)
+    database.child('users').child(uid).child('paid').child(data['paid']).set(data)
     return Response(data)
+
+@api_view(['POST'])
+def unpaid(request, uid):
+    data = request.data
+    database.child('users').child(uid).child('paid').child(data['paid']).remove()
+    database.child('users').child(uid).child('debts').child(data['date']).set({'amount': data['amount'], 'name': data['name'], 'date': data['date'], 'note': data['note']})
+    return Response()
 
 @api_view(['GET'])
 def get_user(request, uid):

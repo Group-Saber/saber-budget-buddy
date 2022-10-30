@@ -80,6 +80,9 @@ const DebtPage = ({uid}) => {
     let debtPaid = async (e) => {
         const index = e.target.id
 
+        debts[index] = Object.assign(debts[index], {'paid': Date.now()})
+        console.log(debts.index)
+
         await fetch(`http://127.0.0.1:8000/app/paid/input/${uid}`, {
                 method: "POST",
                 headers: {
@@ -88,14 +91,43 @@ const DebtPage = ({uid}) => {
                 body: JSON.stringify(debts[index])
         })
 
+        if(debts[index].amount >= 0) {
+            setPositive(positive - debts[index].amount)
+        } else {
+            setNegative(negative - debts[index].amount)
+        }
+
         setPaid(paid => [debts[index], ...paid])
 
         setDebts(debts => [
             ...debts.slice(0, index),
             ...debts.slice(index + 1, debts.length)
         ]);
+    }
 
-        console.log(e.target.id)
+    let debtUnpaid = async (e) => {
+        const index = e.target.id
+
+        await fetch(`http://127.0.0.1:8000/app/paid/unpaid/${uid}`, {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify(paid[index])
+        })
+
+        if(paid[index].amount >= 0) {
+            setPositive(positive + paid[index].amount)
+        } else {
+            setNegative(negative + paid[index].amount)
+        }
+
+        setDebts(debts => [paid[index], ...debts])
+
+        setPaid(paid => [
+            ...paid.slice(0, index),
+            ...paid.slice(index + 1, paid.length)
+        ]);
     }
 
     let formatDate = (date) => {
@@ -174,12 +206,14 @@ const DebtPage = ({uid}) => {
                             <div className="col col-4">Date</div>
                         </li>
                         {paid.map((pay, index) => (
-                            <li className='debts-row'>
-                                <div className="col col-1" data-label="Name">{pay.name}</div>
-                                <div className="col col-2" data-label="Amount">{pay.amount.toFixed(2)}</div>
-                                <div className="col col-3" data-label="Note">{pay.note.length > 50 ? pay.note.substring(0, 50) + '...' : pay.note}</div>
-                                <div className="col col-4" data-label="Date">{formatDate(new Date(pay.date))}</div>
-                            </li>
+                            <div onClick={debtUnpaid} className='row-click' key={index} id={index}>
+                                <li className='debts-row' id={index}>
+                                    <div className="col col-1" data-label="Name" id={index}>{pay.name}</div>
+                                    <div className="col col-2" data-label="Amount" id={index}>{pay.amount.toFixed(2)}</div>
+                                    <div className="col col-3" data-label="Note" id={index}>{pay.note.length > 50 ? pay.note.substring(0, 50) + '...' : pay.note}</div>
+                                    <div className="col col-4" data-label="Date" id={index}>{formatDate(new Date(pay.paid))}</div>
+                                </li>
+                            </div>
                         ))}
                     </ul>
                 </div>

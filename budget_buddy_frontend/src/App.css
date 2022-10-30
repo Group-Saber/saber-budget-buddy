@@ -1,6 +1,6 @@
 :root {
   --black: #222222;
-  --gray: #333333;
+  --gray: #444444;
   --white: white;
   --blue: #25537b;
   --orange: #d24e0c;
@@ -321,8 +321,8 @@ body {
   position: relative;
   padding-right: 50px;
   width: 50%;
-  /* border: 2px solid black; */
   border-radius: 4px;
+  /* background-color: #eeeeee; */
   box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.2);
   overflow: scroll;
   scroll-behavior: smooth;
@@ -340,7 +340,6 @@ body {
   padding: 25px 30px;
   display: flex;
   justify-content: space-between;
-  /* margin-bottom: 10px; */
 }
 
 .debts-header {
@@ -356,9 +355,7 @@ body {
 }
 
 .debts-row {
-  background-color: var(--white);
   border-bottom: 1px solid var(--gray);
-  /* box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.2); */
 }
 
 .col-1 {
@@ -379,8 +376,6 @@ body {
 
 .row-click {
   cursor: pointer;
-  /* text-decoration: none;
-  color: black; */
 }
 
 /* mobile */
@@ -407,8 +402,6 @@ body {
   .tab-body {
     left: 15vw;
     top: 8vh;
-    /* right: 0;
-    bottom: 0; */
   }
 
   .create-debt {
