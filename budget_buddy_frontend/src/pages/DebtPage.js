@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import DebtLineChart from '../components/DebtLineChart'
 
 const DebtPage = ({uid}) => {
     let [debts, setDebts] = useState([])
@@ -156,6 +157,12 @@ const DebtPage = ({uid}) => {
                 <div className='total'>
                     <h2>Total</h2>
                     <p>${(positive + negative).toFixed(2)}</p>
+                </div>
+                <div className='chart'>
+                    <DebtLineChart debts={debts.map((debt) => debt.amount >= 0 ? (debt) : (0))} />
+                </div>
+                <div className='chart'>
+                    <DebtLineChart debts={debts.map((debt) => debt.amount < 0 ? (debt) : (0))} />
                 </div>
                 <div className='create-debt'>
                     <div className='debt-input'>
