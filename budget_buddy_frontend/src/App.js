@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import Panel from './components/Panel';
 import LoginPage from './pages/LoginPage';
@@ -9,14 +9,24 @@ function App() {
   let [uid, setUID] = useState('')
 
   let updateUID = (newUID) => {
+    window.localStorage.setItem('uid', JSON.stringify(newUID));
     setUID(newUID)
   }
+
+  useEffect(() => {
+    const data = window.localStorage.getItem('uid');
+
+    if(data !== null) {
+      setUID(JSON.parse(data));
+    }
+  }, [uid])
 
   return (
     <Router>
       <div>
         <Routes>
           <Route path='/' element={<Navigate to='/login'></Navigate>}></Route>
+          <Route path='/main' element={<Navigate to='/main/dashboard'></Navigate>}></Route>
           <Route path='/login' element={<LoginPage uid={updateUID} />}></Route>
           <Route path='/signup' element={<SignupPage />}></Route>
           <Route path='/main/*' element={<Panel uid={uid} />}></Route>

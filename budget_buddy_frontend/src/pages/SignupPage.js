@@ -70,23 +70,23 @@ const SignupPage = () => {
             <div className='login-info'>
                 <div className='login-title'>Budget Buddy</div>
                 <div className='login-sub'>Sign up</div>
-                <div className='login-input'>
+                <div className={error === '' || first !== '' ? 'login-input' : 'login-input error'}>
                     <label>First Name:</label>
                     <input id="first" type="text" onChange={handleChange}></input>
                 </div>
-                <div className='login-input'>
+                <div className={error === '' || last !== '' ? 'login-input' : 'login-input error'}>
                     <label>Last Name:</label>
                     <input id="last" type="text" onChange={handleChange}></input>
                 </div>
-                <div className='login-input'>
+                <div className={error === '' || email !== '' ? 'login-input' : 'login-input error'}>
                     <label>Email:</label>
                     <input id="email" type="email" onChange={handleChange}></input>
                 </div>
-                <div className='login-input'>
+                <div className={error === '' || password !== '' ? 'login-input' : 'login-input error'}>
                     <label>Password:</label>
                     <input id="password" type="password" onChange={handleChange}></input>
                 </div>
-                <div className='login-input'>
+                <div className={error === '' || repass !== '' ? 'login-input' : 'login-input error'}>
                     <label>Retype Password:</label>
                     <input id="repass" type="password" onChange={handleChange}></input>
                 </div>

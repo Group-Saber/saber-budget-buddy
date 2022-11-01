@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import DebtLineChart from '../components/DebtLineChart'
 
 const DebtPage = ({uid}) => {
     let [debts, setDebts] = useState([])
+    let [paid, setPaid] = useState([])
     let [positive, setPositive] = useState(0)
     let [negative, setNegative] = useState(0)
 
@@ -13,7 +15,14 @@ const DebtPage = ({uid}) => {
             getTotals(data)
         }
 
+        let getPaid = async () => {
+            let response = await fetch(`http://127.0.0.1:8000/app/paid/${uid}`)
+            let data = await response.json()
+            setPaid(data.reverse())
+        }
+
         getDebts()
+        getPaid()
     }, [uid])
 
     let inputDebt = async () => {
@@ -69,6 +78,59 @@ const DebtPage = ({uid}) => {
         setNegative(n)
     }
 
+    let debtPaid = async (e) => {
+        const index = e.target.id
+
+        debts[index] = Object.assign(debts[index], {'paid': Date.now()})
+        console.log(debts.index)
+
+        await fetch(`http://127.0.0.1:8000/app/paid/input/${uid}`, {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify(debts[index])
+        })
+
+        if(debts[index].amount >= 0) {
+            setPositive(positive - debts[index].amount)
+        } else {
+            setNegative(negative - debts[index].amount)
+        }
+
+        setPaid(paid => [debts[index], ...paid])
+
+        setDebts(debts => [
+            ...debts.slice(0, index),
+            ...debts.slice(index + 1, debts.length)
+        ]);
+    }
+
+    let debtUnpaid = async (e) => {
+        const index = e.target.id
+
+        await fetch(`http://127.0.0.1:8000/app/paid/unpaid/${uid}`, {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify(paid[index])
+        })
+
+        if(paid[index].amount >= 0) {
+            setPositive(positive + paid[index].amount)
+        } else {
+            setNegative(negative + paid[index].amount)
+        }
+
+        setDebts(debts => [paid[index], ...debts])
+
+        setPaid(paid => [
+            ...paid.slice(0, index),
+            ...paid.slice(index + 1, paid.length)
+        ]);
+    }
+
     let formatDate = (date) => {
         let newDate = `${date.getMonth() + 1}/${date.getDate()}`
 
@@ -82,23 +144,25 @@ const DebtPage = ({uid}) => {
     return (
         <div className='tab-body'>
             <div className='debt-top'>
-                <div className='total'>
-                    <div className='total-inner positive'>
-                        <h2>Owed</h2>
+                <div className='total-stacked'>
+                    <div className='split top'>
+                        <i className="material-icons">arrow_upward</i> 
                         <p>${positive.toFixed(2)}</p>
                     </div>
-                </div>
-                <div className='total'>
-                    <div className='total-inner negative'>
-                        <h2>Debt</h2>
+                    <div className='split bottom'>
+                    <i className="material-icons">arrow_downward</i>
                         <p>${negative.toFixed(2)}</p>
                     </div>
                 </div>
                 <div className='total'>
-                    <div className='total-inner'>
-                        <h2>Total</h2>
-                        <p>${(positive + negative).toFixed(2)}</p>
-                    </div>
+                    <h2>Total</h2>
+                    <p>${(positive + negative).toFixed(2)}</p>
+                </div>
+                <div className='chart'>
+                    <DebtLineChart debts={debts.map((debt) => debt.amount >= 0 ? (debt) : (0))} />
+                </div>
+                <div className='chart'>
+                    <DebtLineChart debts={debts.map((debt) => debt.amount < 0 ? (debt) : (0))} />
                 </div>
                 <div className='create-debt'>
                     <div className='debt-input'>
@@ -119,23 +183,47 @@ const DebtPage = ({uid}) => {
                     </div>
                 </div>
             </div>
-            <div className='debts-container'>
-                <ul className='debts-table'>
-                    <li className='debts-header'>
-                        <div className="col col-1">Name</div>
-                        <div className="col col-2">Amount</div>
-                        <div className="col col-3">Note</div>
-                        <div className="col col-4">Date</div>
-                    </li>
-                    {debts.map((debt, index) => (
-                        <li className='debts-row' key={index}>
-                            <div className="col col-1" data-label="Name">{debt.name}</div>
-                            <div className="col col-2" data-label="Amount">{debt.amount.toFixed(2)}</div>
-                            <div className="col col-3" data-label="Note">{debt.note.length > 150 ? debt.note.substring(0, 150) + '...' : debt.note}</div>
-                            <div className="col col-4" data-label="Date">{formatDate(new Date(debt.date))}</div>
+            <div className='debt-bottom'>
+                <div className='debts-container'>
+                    <ul className='debts-table'>
+                        <li className='debts-header'>
+                            <div className="col col-1">Name</div>
+                            <div className="col col-2">Amount</div>
+                            <div className="col col-3">Note</div>
+                            <div className="col col-4">Date</div>
                         </li>
-                    ))}
-                </ul>
+                        {debts.map((debt, index) => (
+                            <div onClick={debtPaid} className='row-click' key={index} id={index}>
+                                <li className='debts-row' id={index}>
+                                    <div className="col col-1" data-label="Name" id={index}>{debt.name}</div>
+                                    <div className="col col-2" data-label="Amount" id={index}>{debt.amount.toFixed(2)}</div>
+                                    <div className="col col-3" data-label="Note" id={index}>{debt.note.length > 50 ? debt.note.substring(0, 50) + '...' : debt.note}</div>
+                                    <div className="col col-4" data-label="Date" id={index}>{formatDate(new Date(debt.date))}</div>
+                                </li>
+                            </div>
+                        ))}
+                    </ul>
+                </div>
+                <div className='debts-container'>
+                    <ul className='debts-table'>
+                        <li className='debts-header paid'>
+                            <div className="col col-1">Name</div>
+                            <div className="col col-2">Amount</div>
+                            <div className="col col-3">Note</div>
+                            <div className="col col-4">Date</div>
+                        </li>
+                        {paid.map((pay, index) => (
+                            <div onClick={debtUnpaid} className='row-click' key={index} id={index}>
+                                <li className='debts-row' id={index}>
+                                    <div className="col col-1" data-label="Name" id={index}>{pay.name}</div>
+                                    <div className="col col-2" data-label="Amount" id={index}>{pay.amount.toFixed(2)}</div>
+                                    <div className="col col-3" data-label="Note" id={index}>{pay.note.length > 50 ? pay.note.substring(0, 50) + '...' : pay.note}</div>
+                                    <div className="col col-4" data-label="Date" id={index}>{formatDate(new Date(pay.paid))}</div>
+                                </li>
+                            </div>
+                        ))}
+                    </ul>
+                </div>
             </div>
         </div>
     )
