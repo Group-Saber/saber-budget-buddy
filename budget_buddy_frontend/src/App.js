@@ -26,6 +26,7 @@ function App() {
       <div>
         <Routes>
           <Route path='/' element={<Navigate to='/login'></Navigate>}></Route>
+          <Route path='/main' element={<Navigate to='/main/dashboard'></Navigate>}></Route>
           <Route path='/login' element={<LoginPage uid={updateUID} />}></Route>
           <Route path='/signup' element={<SignupPage />}></Route>
           <Route path='/main/*' element={<Panel uid={uid} />}></Route>
