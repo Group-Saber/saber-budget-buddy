@@ -25,7 +25,7 @@ const LoginPage = ({uid}) => {
 
             if(data !== '') {
                 uid(data)
-                navigate('/main/dashboard')
+                navigate('/main')
             } else {
                 setError('Invalid email or password.')
             }
