@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import DebtLineChart from '../components/DebtLineChart'
 
-const DebtPage = ({uid}) => {
+const DebtPage = ({uid, user}) => {
     let [debts, setDebts] = useState([])
     let [paid, setPaid] = useState([])
     let [positive, setPositive] = useState(0)
@@ -9,21 +9,19 @@ const DebtPage = ({uid}) => {
 
     useEffect(() => {
         let getDebts = async () => {
-            let response = await fetch(`http://127.0.0.1:8000/app/debts/${uid}`)
-            let data = await response.json()
+            let data = Object.values(user.debts)
             setDebts(data.reverse())
             getTotals(data)
         }
 
         let getPaid = async () => {
-            let response = await fetch(`http://127.0.0.1:8000/app/paid/${uid}`)
-            let data = await response.json()
+            let data = Object.values(user.paid)
             setPaid(data.reverse())
         }
 
         getDebts()
         getPaid()
-    }, [uid])
+    }, [uid, user])
 
     let inputDebt = async () => {
         if(document.getElementById('amount').value !== '' && document.getElementById('name').value !== '') {
@@ -144,19 +142,21 @@ const DebtPage = ({uid}) => {
     return (
         <div className='tab-body'>
             <div className='debt-top'>
-                <div className='total-stacked'>
-                    <div className='split top'>
-                        <i className="material-icons">arrow_upward</i> 
-                        <p>${positive.toFixed(2)}</p>
+                <div className='totals'>
+                    <div className='total-stacked'>
+                        <div className='split top'>
+                            <i className="material-icons">arrow_upward</i> 
+                            <p>${positive.toFixed(2)}</p>
+                        </div>
+                        <div className='split bottom'>
+                        <i className="material-icons">arrow_downward</i>
+                            <p>${negative.toFixed(2)}</p>
+                        </div>
                     </div>
-                    <div className='split bottom'>
-                    <i className="material-icons">arrow_downward</i>
-                        <p>${negative.toFixed(2)}</p>
+                    <div className='total'>
+                        <h2>Total</h2>
+                        <p>${(positive + negative).toFixed(2)}</p>
                     </div>
-                </div>
-                <div className='total'>
-                    <h2>Total</h2>
-                    <p>${(positive + negative).toFixed(2)}</p>
                 </div>
                 <div className='chart'>
                     <DebtLineChart debts={debts.map((debt) => debt.amount >= 0 ? (debt) : (0))} />

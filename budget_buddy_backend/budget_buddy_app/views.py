@@ -40,18 +40,6 @@ def get_budgets(request):
     budgets = [budgets.get(i) for i in budgets]
     return Response(budgets)
 
-@api_view(['GET'])
-def get_debts(request, uid):
-    debts = database.child('users').child(uid).child('debts').get().val()
-    debts = [debts.get(i) for i in debts]
-    return Response(debts)
-
-@api_view(['GET'])
-def get_paid(request, uid):
-    debts = database.child('users').child(uid).child('paid').get().val()
-    debts = [debts.get(i) for i in debts]
-    return Response(debts)
-
 @api_view(['POST'])
 def input_debt(request, uid):
     data = request.data

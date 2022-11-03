@@ -232,8 +232,7 @@ body {
 }
 
 .chart {
-  position: relative;
-  width: 27.55%;
+  width: 28.5%;
   padding: 10px;
   margin-right: 5px;
   border-radius: 4px;
@@ -249,8 +248,12 @@ body {
 /** DebtPage
   Total owed and total debt
 */
+.totals {
+  display: flex;
+  width: 25%;
+}
+
 .total {
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -270,12 +273,10 @@ body {
 }
 
 .total-stacked {
-  position: relative;
   width: 15%;
 }
 
 .split {
-  position: relative;
   border-radius: 4px;
   box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.2);
   width: 100%;
@@ -367,7 +368,7 @@ body {
 .debt-bottom {
   position: relative;
   display: flex;
-  margin-top: 15px;
+  margin-top: 5px;
   height: 50%;
 }
 
@@ -383,7 +384,7 @@ body {
 }
 
 .debts-container:first-of-type {
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
 .debts-container::-webkit-scrollbar {
@@ -443,31 +444,47 @@ body {
 }
 
 /* laptops */
-@media only screen and (min-width: 769px) and (max-width: 1600px)  {
+@media only screen and (min-width: 769px) and (max-width: 1700px)  {
   .top-panel {
     width: 85vw;
     height: 8vh;
   }
 
-  .side-panel {
-    width: 15vw;
-  }
+  .side-panel {width: 15vw;}
 
   .tab-body {
     left: 15vw;
     top: 8vh;
   }
 
-  .create-debt {
-    width: 20%;
+  .create-debt {width: 20%;}
+  
+  .debt-top {height: 50%;}
+
+  .totals {
+    width: 15%; 
+    flex-direction: column;
+    margin-right: 5px;
+  }
+  
+  .total {
+    height: 33%; 
+    width: 100%;
+    margin: 0;
+    margin-top: 10px;
+    flex-direction: unset;
   }
 
-  .total {
-    width: 15%
-  }
+  .total h2 {font-size: 28px; margin-right: 10px;}
+  
+  .total-stacked {height: 66%; width: 100%;}
+
+  .top i {font-size: 32px;}
+
+  .bottom i {font-size: 32px;}
 }
 
 /* desktop */
-@media only screen and (min-width: 1601px)  {
+@media only screen and (min-width: 1701px)  {
   
 }
