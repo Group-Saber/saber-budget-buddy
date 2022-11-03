@@ -31,7 +31,10 @@ const Panel = ({uid}) => {
         <div>
             <div className="top-panel">
                 <div className="panel-name">
-                    <p>{name}</p>
+                    <button className='name-btn'>{name}<div className='dropdown-arrow'></div></button>
+                    <div className="dropdown-content">
+                        <a href="/">Logout</a>
+                    </div>
                 </div>
             </div>
             <div className="side-panel">
@@ -48,7 +51,7 @@ const Panel = ({uid}) => {
             </div>
             <Routes>
                 <Route path='budget' element={<BudgetsList />}></Route>
-                <Route path='debt' element={<DebtPage uid={uid} />}></Route>
+                <Route path='debt' element={<DebtPage uid={uid} user={user} />}></Route>
                 <Route path='user' element={<UserPage user={user} />}></Route>
             </Routes>
         </div>
