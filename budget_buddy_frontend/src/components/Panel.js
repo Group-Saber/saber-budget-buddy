@@ -31,7 +31,11 @@ const Panel = ({uid}) => {
         <div>
             <div className="top-panel">
                 <div className="panel-name">
-                    <p>{name}</p>
+                    {/* <p>{name}</p> */}
+                    <button className='name-btn'>{name}<div className='dropdown-arrow'></div></button>
+                    <div class="dropdown-content">
+                        <a href="/">Logout</a>
+                    </div>
                 </div>
             </div>
             <div className="side-panel">
