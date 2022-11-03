@@ -63,9 +63,7 @@ def unpaid(request, uid):
 @api_view(['GET'])
 def get_user(request, uid):
     user = database.child('users').child(uid).get().val()
-    print(user)
     return Response(user)
-    # return Response({'first': user['first'], 'last': user['last'], 'email': user['email'], 'uid': user['uid']})
 
 @api_view(['POST'])
 def login(request):
