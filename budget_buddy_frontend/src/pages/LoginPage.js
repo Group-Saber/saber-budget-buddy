@@ -10,8 +10,8 @@ const LoginPage = ({uid}) => {
     let login = async () => {
         if(email !== '' && password !== '') {
             const creds = {
-                'email': document.getElementById('email').value,
-                'password': document.getElementById('password').value,
+                'email': email,
+                'password': password,
             }
 
             let response = await fetch(`http://127.0.0.1:8000/app/login/`, {
@@ -65,7 +65,7 @@ const LoginPage = ({uid}) => {
                 </div>
                 {error !== '' ? <div className='login-error'>{error}</div> : null}
                 <div>
-                    <button className='login-button' onClick={()=>navigate('/signup')}>Signup</button>
+                    <button className='login-button' onClick={() => navigate('/signup')}>Signup</button>
                     <button className='login-button' onClick={login}>Login</button>
                 </div>
             </div>

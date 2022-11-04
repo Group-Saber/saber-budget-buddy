@@ -197,7 +197,7 @@ const DebtPage = ({uid, user}) => {
                                 <li className='debts-row' id={index}>
                                     <div className="col col-1" data-label="Name" id={index}>{debt.name}</div>
                                     <div className="col col-2" data-label="Amount" id={index}>{debt.amount.toFixed(2)}</div>
-                                    <div className="col col-3" data-label="Note" id={index}>{debt.note.length > 50 ? debt.note.substring(0, 50) + '...' : debt.note}</div>
+                                    <div className="col col-3" data-label="Note" id={index}>{debt.note.length > 25 ? debt.note.substring(0, 25) + '...' : debt.note}</div>
                                     <div className="col col-4" data-label="Date" id={index}>{formatDate(new Date(debt.date))}</div>
                                 </li>
                             </div>
@@ -217,7 +217,7 @@ const DebtPage = ({uid, user}) => {
                                 <li className='debts-row' id={index}>
                                     <div className="col col-1" data-label="Name" id={index}>{pay.name}</div>
                                     <div className="col col-2" data-label="Amount" id={index}>{pay.amount.toFixed(2)}</div>
-                                    <div className="col col-3" data-label="Note" id={index}>{pay.note.length > 50 ? pay.note.substring(0, 50) + '...' : pay.note}</div>
+                                    <div className="col col-3" data-label="Note" id={index}>{pay.note.length > 30 ? pay.note.substring(0, 30) + '...' : pay.note}</div>
                                     <div className="col col-4" data-label="Date" id={index}>{formatDate(new Date(pay.paid))}</div>
                                 </li>
                             </div>
