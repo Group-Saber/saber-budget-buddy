@@ -7,6 +7,8 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from budget_buddy_app.serializers import UserSerializer, GroupSerializer
 import pyrebase
+import math, random
+
 
 config={
     "apiKey": "AIzaSyA3R68DtVZapYJYO1ZNtnmYvPfs65lMLMk",
@@ -106,6 +108,69 @@ def signup(request):
         return Response('')
 
     return Response(uid)
+
+
+@api_view(['POST'])
+def verify(request):
+    data = request.data
+    email = data['email']
+    password = data['password']
+
+    try:
+        # if there is no error then signin the user with given email and password
+        user = authe.sign_in_with_email_and_password(email,password)
+        return Response('')
+    except:
+        temp = generateOTP()
+        import smtplib
+
+        gmail_user = 'saberbudgetbuddy@gmail.com'
+        gmail_password = 'libokshxwsmqcane'
+
+        sent_from = gmail_user
+        to = [email]
+        subject = 'BudgetBuddy'
+        body = 'Hey, whats up?\n\n- You'
+
+        email_text = """\
+        From: %s
+        To: %s
+        Subject: %s
+
+        %s
+        """ % (sent_from, ", ".join(to), subject, body)
+
+        try:
+            server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+            server.ehlo()
+            server.login(gmail_user, gmail_password)
+            server.sendmail(sent_from, to, email_text)
+            server.close()
+
+            print('Email sent!')
+        except:
+            print('Something went wrong...')
+
+        return Response(temp)
+
+
+
+def generateOTP() :
+ 
+    # Declare a string variable 
+    # which stores all string
+    string = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    OTP = ""
+    length = len(string)
+    for i in range(6) :
+        OTP += string[math.floor(random.random() * length)]
+ 
+    return OTP
+ 
+# Driver code
+if __name__ == "__main__" :
+     
+    print("OTP of length 6:", generateOTP())
 
 class UserViewSet(viewsets.ModelViewSet):
     """
