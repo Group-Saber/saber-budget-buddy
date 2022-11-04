@@ -6,11 +6,25 @@ const VerifyPage = () => {
     let [error, setError] = useState('')
     const navigate = useNavigate()
     const location = useLocation()
-    const test = 'A3NS0J'
 
-    let verify = () => {
-        if(code === test) {
-            console.log(location.state)
+    let signup = async () => {
+        let response = await fetch(`http://127.0.0.1:8000/app/signup/`, {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify(location.state.creds)
+        })
+        let data = await response.json()
+
+        if(data !== '') {
+            navigate('/login')
+        }
+    }
+
+    let verify = async () => {
+        if(code === location.state.code) {
+            await signup()
             navigate('/login')
         } else {
             setError('Invalid code.')
