@@ -130,7 +130,7 @@ def verify(request):
         sent_from = gmail_user
         to = [email]
         subject = 'BudgetBuddy'
-        body = 'Hey, whats up?\n\n- You'
+        body = 'The generated code is bellow\n' + temp 
 
         email_text = """\
         From: %s
@@ -138,7 +138,7 @@ def verify(request):
         Subject: %s
 
         %s
-        """ % (sent_from, ", ".join(to), subject, body)
+        """ % (sent_from,to, subject, body)
 
         try:
             server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
