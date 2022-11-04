@@ -18,19 +18,23 @@ const SignupPage = () => {
                 'first': first,
                 'last': last,
             }
-            navigate('/verify', {state:creds})
-            // let response = await fetch(`http://127.0.0.1:8000/app/signup/`, {
-            //         method: "POST",
-            //         headers: {
-            //             'Content-type': 'application/json'
-            //         },
-            //         body: JSON.stringify(creds)
-            // })
-            // let data = response.json()
 
-            // if(data !== '') {
-            //     navigate('/login')
-            // }
+            let response = await fetch(`http://127.0.0.1:8000/app/verify/`, {
+                    method: "POST",
+                    headers: {
+                        'Content-type': 'application/json'
+                    },
+                    body: JSON.stringify(creds)
+            })
+            let data = await response.json()
+
+            if(data === 'sign') {
+                setError('Error signing up.')
+            } else if(data === 'taken') {
+                setError('Account already exists.')
+            } else {
+                navigate('/verify', {state:{creds: creds, code: data}})
+            }
         } else {
             if(pass.length < 8) {
                 setError('Password must be at least 8 characters.')

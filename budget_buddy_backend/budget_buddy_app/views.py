@@ -7,6 +7,9 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from budget_buddy_app.serializers import UserSerializer, GroupSerializer
 import pyrebase
+import math, random
+import smtplib
+
 
 config={
     "apiKey": "AIzaSyA3R68DtVZapYJYO1ZNtnmYvPfs65lMLMk",
@@ -106,6 +109,60 @@ def signup(request):
         return Response('')
 
     return Response(uid)
+
+@api_view(['POST'])
+def verify(request):
+    data = request.data
+    email = data['email']
+    password = data['password']
+
+    try:
+        # if there is no error then signin the user with given email and password
+        user = authe.sign_in_with_email_and_password(email,password)
+        
+        return Response('taken')
+    except Exception as e:
+        if e.args[1].find('INVALID_PASSWORD') >= 0:
+            return Response('taken')
+
+        code = generateOTP()
+
+        gmail_user = 'saberbudgetbuddy@gmail.com'
+        gmail_password = 'libokshxwsmqcane'
+
+        sent_from = gmail_user
+        to = email
+        subject = 'Budget Buddy Verification Code'
+        body = 'Your verification code: ' + code
+
+        email_text = """From: %s\nTo: %s\nSubject: %s\n\n%s
+        """ % (sent_from, to, subject, body)
+
+        try:
+            server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+            server.ehlo()
+            server.login(gmail_user, gmail_password)
+            server.sendmail(sent_from, to, email_text)
+            server.close()
+
+            print('Email sent!')
+        except:
+            print('Something went wrong...')
+            return Response('sign')
+
+        return Response(code)
+
+def generateOTP() :
+    # Declare a string variable 
+    # which stores all string
+    string = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    OTP = ""
+    length = len(string)
+
+    for i in range(6) :
+        OTP += string[math.floor(random.random() * length)]
+
+    return OTP
 
 class UserViewSet(viewsets.ModelViewSet):
     """
