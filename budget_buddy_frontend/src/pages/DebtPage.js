@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import DebtLineChart from '../components/DebtLineChart'
+import DebtLineChart from '../components/DebtBarChart'
 
 const DebtPage = ({uid, user}) => {
     let [debts, setDebts] = useState([])
@@ -159,10 +159,10 @@ const DebtPage = ({uid, user}) => {
                     </div>
                 </div>
                 <div className='chart'>
-                    <DebtLineChart debts={debts.map((debt) => debt.amount >= 0 ? (debt) : (0))} />
+                    <DebtLineChart debts={debts.map((debt) => debt.amount >= 0 ? (debt) : (0))} color={'#599656'} />
                 </div>
                 <div className='chart'>
-                    <DebtLineChart debts={debts.map((debt) => debt.amount < 0 ? (debt) : (0))} />
+                    <DebtLineChart debts={debts.map((debt) => debt.amount < 0 ? (debt) : (0))} color={'#ec0a00'} />
                 </div>
                 <div className='create-debt'>
                     <div className='debt-input'>
