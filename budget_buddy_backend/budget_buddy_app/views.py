@@ -50,10 +50,22 @@ def input_debt(request, uid):
     return Response(data)
 
 @api_view(['POST'])
+def delete_debt(request, uid):
+    data = request.data
+    database.child('users').child(uid).child('debts').child(data['date']).remove()
+    return Response(data)
+
+@api_view(['POST'])
 def input_paid(request, uid):
     data = request.data
     database.child('users').child(uid).child('debts').child(data['date']).remove()
     database.child('users').child(uid).child('paid').child(data['paid']).set(data)
+    return Response(data)
+
+@api_view(['POST'])
+def delete_paid(request, uid):
+    data = request.data
+    database.child('users').child(uid).child('paid').child(data['paid']).remove()
     return Response(data)
 
 @api_view(['POST'])

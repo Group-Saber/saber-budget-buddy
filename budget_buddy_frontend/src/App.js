@@ -31,7 +31,7 @@ function App() {
           <Route path='/login' element={<LoginPage uid={updateUID} />}></Route>
           <Route path='/signup' element={<SignupPage />}></Route>
           <Route path='/verify' element={<VerifyPage />}></Route>
-          <Route path='/main/*' element={<Panel uid={uid} />}></Route>
+          <Route path='/main/*' element={<Panel uid={uid} updateUID={updateUID} />}></Route>
         </Routes>
       </div>
     </Router>

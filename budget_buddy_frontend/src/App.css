@@ -91,6 +91,7 @@ body {
   border: 2px solid var(--blue);
   background-color: var(--white);
   color: var(--blue);
+  cursor: pointer;
 }
 
 .login-error {
@@ -148,16 +149,18 @@ body {
 }
 
 /* Links inside the dropdown */
-.dropdown-content a {
+.dropdown-content button {
   color: black;
   padding: 12px 28px;
   text-decoration: none;
   display: block;
+  border: none;
 }
 
-.dropdown-content a:hover {
+.dropdown-content button:hover {
   background-color: var(--blue);
   color: white;
+  cursor: pointer;
 }
 
 .panel-name:hover .dropdown-content {
@@ -224,11 +227,21 @@ body {
 }
 
 .chart {
-  width: 28.5%;
+  width: 35%;
   padding: 10px;
   margin-right: 5px;
   border-radius: 4px;
   box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+.box {
+  height: 100px;
+  width: 100px;
+}
+
+.box:hover {
+  cursor: pointer;
 }
 
 /** DebtPage */
@@ -242,7 +255,7 @@ body {
 */
 .totals {
   display: flex;
-  width: 25%;
+  width: 30%;
 }
 
 .total {
@@ -296,12 +309,34 @@ body {
 /** DebtPage
   Debt inputs and buttons
 */
-.create-debt {
-  width: 15%;
-  padding: 25px;
-  border-radius: 4px;
-  /* margin-left: 10px; */
+.debt-body {
+  position: fixed;
+  left: 10vw;
+  top: 5vh;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+
+.debt-box {
   box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.2);
+  background-color: white;
+  border-radius: 4px;
+  /* width: 25%; */
+}
+
+.create-debt {
+  padding: 25px;
+}
+
+.debt-title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 15px;
 }
 
 .debt-input {
@@ -343,10 +378,15 @@ body {
   margin-right: 15px;
 }
 
+.debt-button:last-of-type {
+  margin-right: 0;
+}
+
 .debt-button:hover {
   border: 2px solid var(--debt-red);
   background-color: var(--white);
   color: var(--red);
+  cursor: pointer;
 }
 
 /** DebtPage 
@@ -409,15 +449,34 @@ body {
 }
 
 .col-3 {
-  flex-basis: 45%;
+  flex-basis: 40%;
 }
 
 .col-4 {
   flex-basis: 10%;
 }
 
-.row-click {
+.col-5 {
+  flex-basis: 5%;
+}
+
+.debt-icon {
   cursor: pointer;
+}
+
+.user-info {
+  padding: 15px;
+  width: 20%;
+  border-radius: 4px;
+  box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.2);
+}
+
+.user-detail {
+  margin-bottom: 10px;
+}
+
+.user-detail:last-of-type {
+  margin-bottom: 0;
 }
 
 /* mobile */
