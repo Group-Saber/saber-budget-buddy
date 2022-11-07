@@ -248,6 +248,7 @@ body {
 .debt-top {
   position: relative;
   display: flex;
+  height: 32%;
 }
 
 /** DebtPage
@@ -396,7 +397,7 @@ body {
   position: relative;
   display: flex;
   margin-top: 5px;
-  height: 50%;
+  height: 68%;
 }
 
 .debts-container {
