@@ -1,22 +1,25 @@
 import React, { useEffect, useState } from 'react'
-import { Route, Routes, Link, useLocation } from "react-router-dom";
+import { Route, Routes, Link, useLocation, useNavigate } from "react-router-dom";
 import DebtPage from '../pages/DebtPage';
 import UserPage from '../pages/UserPage'
 import BudgetsList from './BudgetsList'
 
 
-const Panel = ({uid}) => {
+const Panel = ({uid, updateUID}) => {
     let locate = useLocation()
+    let navigate = useNavigate()
     let [user, setUser] = useState({})
     let [name, setName] = useState('You')
 
 
     useEffect(() => {
         let getUser = async () => {
-            let response = await fetch(`http://127.0.0.1:8000/app/user/${uid}`)
-            let data = await response.json()
-            setUser(data)
-            setName(`${data.first} ${data.last}`)
+            if(uid !== '') {
+                let response = await fetch(`http://127.0.0.1:8000/app/user/${uid}`)
+                let data = await response.json()
+                setUser(data)
+                setName(`${data.first} ${data.last}`)
+            }
         }
 
         getUser()
@@ -24,7 +27,13 @@ const Panel = ({uid}) => {
 
     let isCurrent = (path) => {
         console.log(locate.pathname)
-        return locate.pathname === `/main${path}` ? 'current' : ''
+        return locate.pathname.includes(`/main${path}`) ? 'current' : ''
+        // return locate.pathname === `/main${path}` ? 'current' : ''
+    }
+
+    let logout = () => {
+        updateUID('')
+        navigate('/login')
     }
 
     return (
@@ -33,7 +42,7 @@ const Panel = ({uid}) => {
                 <div className="panel-name">
                     <button className='name-btn'>{name}<div className='dropdown-arrow'></div></button>
                     <div className="dropdown-content">
-                        <a href="/">Logout</a>
+                        <button onClick={logout}>Logout</button>
                     </div>
                 </div>
             </div>
@@ -51,7 +60,7 @@ const Panel = ({uid}) => {
             </div>
             <Routes>
                 <Route path='budget' element={<BudgetsList />}></Route>
-                <Route path='debt' element={<DebtPage uid={uid} user={user} />}></Route>
+                <Route path='debt/*' element={<DebtPage uid={uid} user={user} />}></Route>
                 <Route path='user' element={<UserPage user={user} />}></Route>
             </Routes>
         </div>
