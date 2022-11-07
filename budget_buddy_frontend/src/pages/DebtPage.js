@@ -126,7 +126,7 @@ const DebtPage = ({uid, user}) => {
                             <div className='col col-2'>Amount</div>
                             <div className='col col-3'>Note</div>
                             <div className='col col-4'>Date</div>
-                            <div className='col col-5'></div>
+                            <div className='col col-5'><i className='material-icons debt-icon'>add</i></div>
                         </li>
                         {paid.map((pay, index) => (
                             <li className='debts-row' key={index}>

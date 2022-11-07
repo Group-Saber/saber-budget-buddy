@@ -18,11 +18,22 @@ const UserPage = ({user}) => {
     return (
         <div className='tab-body'>
             <div className='user-info'>
-                <div className='user-detail'>First Name: {user.first}</div>
-                <div className='user-detail'>Last Name: {user.last}</div>
-                <div className='user-detail'>Email: {user.email}</div>
+                <div className='user-detail'>
+                    <div className='user-label'>Email:</div>
+                    <div className='user-text'>{user.email}</div>
+                </div>
+                <div className='user-detail'>
+                    <div className='user-label'>First Name:</div>
+                    <div className='user-text'>{user.first}</div>
+                    <div className='user-icon'><i className='material-icons'>edit</i></div>
+                </div>
+                <div className='user-detail'>
+                    <div className='user-label'>Last Name:</div>
+                    <div className='user-text'>{user.last}</div>
+                    <div className='user-icon'><i className='material-icons'>edit</i></div>
+                </div>
             </div>
-            <div className='box' style={{backgroundColor: color}} onClick={handleClick}></div>
+            <div className='box' style={{backgroundColor: color}} onClick={handleClick}>{color}</div>
         </div>
     )
 }
