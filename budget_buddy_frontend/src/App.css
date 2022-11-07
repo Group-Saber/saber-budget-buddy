@@ -227,7 +227,7 @@ body {
 }
 
 .chart {
-  width: 35%;
+  width: 37.5%;
   padding: 10px;
   margin-right: 5px;
   border-radius: 4px;
@@ -255,7 +255,7 @@ body {
 */
 .totals {
   display: flex;
-  width: 30%;
+  width: 25%;
 }
 
 .total {
@@ -502,10 +502,22 @@ body {
     left: 15vw;
     top: 8vh;
   }
-
-  .create-debt {width: 20%;}
   
   .debt-top {height: 50%;}
+
+  .debt-bottom {
+    height: 100%;
+    flex-direction: column;
+    right: 0;
+  }
+
+  .debts-container {
+    height: 50%;
+    width: 96%;
+    margin-bottom: 5px;
+  }
+
+  .chart {width: 45%;}
 
   .totals {
     width: 15%; 
