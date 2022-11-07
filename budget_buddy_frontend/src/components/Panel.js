@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Route, Routes, Link, useLocation, useNavigate } from "react-router-dom";
+import DashboardPage from '../pages/DashboardPage';
 import DebtPage from '../pages/DebtPage';
 import UserPage from '../pages/UserPage'
 import BudgetsList from './BudgetsList'
@@ -59,6 +60,7 @@ const Panel = ({uid, updateUID}) => {
                 </div>
             </div>
             <Routes>
+                <Route path='dashboard' element={<DashboardPage uid={uid} user={user} />}></Route>
                 <Route path='budget' element={<BudgetsList />}></Route>
                 <Route path='debt/*' element={<DebtPage uid={uid} user={user} />}></Route>
                 <Route path='user' element={<UserPage user={user} />}></Route>

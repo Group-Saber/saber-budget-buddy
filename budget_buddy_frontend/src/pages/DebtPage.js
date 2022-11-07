@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom'
-import DebtLineChart from '../components/DebtBarChart'
+import DebtBarChart from '../components/DebtBarChart'
 import InputDebt from '../components/InputDebt'
 import EditDebt from '../components/EditDebt'
 import EditPayment from '../components/EditPayment'
@@ -89,15 +89,16 @@ const DebtPage = ({uid, user}) => {
                         <p>${(positive + negative).toFixed(2)}</p>
                     </div>
                 </div>
-                <div className='chart'>
-                    <DebtLineChart debts={debts.map((debt) => debt.amount >= 0 ? (debt) : (0))} color={'#599656'} title={'Positive Debt'} />
+                <div className='debt-chart'>
+                    <DebtBarChart debts={debts.map((debt) => debt.amount >= 0 ? (debt) : (0))} color={'#599656'} title={'Positive Debt'} />
                 </div>
-                <div className='chart'>
-                    <DebtLineChart debts={debts.map((debt) => debt.amount < 0 ? (debt) : (0))} color={'#ec0a00'} title={'Negative Debt'} />
+                <div className='debt-chart'>
+                    <DebtBarChart debts={debts.map((debt) => debt.amount < 0 ? (debt) : (0))} color={'#ec0a00'} title={'Negative Debt'} />
                 </div>
             </div>
             <div className='debt-bottom'>
                 <div className='debts-container'>
+                    <div className='debts-table-title'>Debts</div>
                     <ul className='debts-table'>
                         <li className='debts-header'>
                             <div className='col col-1'>Name</div>
@@ -118,6 +119,7 @@ const DebtPage = ({uid, user}) => {
                     </ul>
                 </div>
                 <div className='debts-container'>
+                    <div className='debts-table-title'>Payments</div>
                     <ul className='debts-table'>
                         <li className='debts-header paid'>
                             <div className='col col-1'>Name</div>
