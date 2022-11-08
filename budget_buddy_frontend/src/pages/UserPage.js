@@ -27,12 +27,14 @@ const UserPage = ({user}) => {
                     <div className='user-detail'>
                         <div className='user-label'>Name:</div>
                         <div className='user-text'>{`${user.first} ${user.last}`}</div>
-                        <div className='user-icon'><i className='material-icons'>edit</i></div>
+                        <i className='material-icons user-icon'>edit</i>
                     </div>
                     <div className='user-detail'>
                         <div className='user-label'>Email:</div>
                         <div className='user-text'>{user.email}</div>
                     </div>
+                    <i className='material-icons user-icon'>dark_mode</i>
+                    <i className='material-icons user-icon'>light_mode</i>
                 </div>
                 <div className='user-budget'>Budget</div>
             </div>

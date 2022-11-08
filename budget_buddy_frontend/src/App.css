@@ -415,8 +415,8 @@ body {
 
 .debt-button {
   background-color: var(--red);
-  border: 2px solid var(--white);
-  color: var(--white);
+  border: 2px solid var(--fg-color);
+  color: var(--fg-color);
   padding: 10px 28px;
   text-align: center;
   text-decoration: none;
@@ -578,6 +578,11 @@ body {
 }
 
 .user-icon {
+  position: relative;
+  top: 5px;
+}
+
+.user-icon:first-of-type {
   margin-left: 25px;
 }
 
