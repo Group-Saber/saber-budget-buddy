@@ -1,7 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const UserPage = ({user}) => {
-    let [color, setColor] = useState('#222222')
+    let [color, setColor] = useState('')
+
+    useEffect(() => {
+        handleClick()
+    }, [user])
 
     let handleClick = () => {
         const hex = '0123456789abcdef'
@@ -17,12 +21,21 @@ const UserPage = ({user}) => {
 
     return (
         <div className='tab-body'>
-            <div className='user-info'>
-                <div className='user-detail'>First Name: {user.first}</div>
-                <div className='user-detail'>Last Name: {user.last}</div>
-                <div className='user-detail'>Email: {user.email}</div>
+            <div className='user-top'>
+                <div className='user-info'>
+                    <div className='user-img box' style={{backgroundColor: color}} onClick={handleClick}>Profile Image</div>
+                    <div className='user-detail'>
+                        <div className='user-label'>Name:</div>
+                        <div className='user-text'>{`${user.first} ${user.last}`}</div>
+                        <div className='user-icon'><i className='material-icons'>edit</i></div>
+                    </div>
+                    <div className='user-detail'>
+                        <div className='user-label'>Email:</div>
+                        <div className='user-text'>{user.email}</div>
+                    </div>
+                </div>
+                <div className='user-budget'>Budget</div>
             </div>
-            <div className='box' style={{backgroundColor: color}} onClick={handleClick}></div>
         </div>
     )
 }

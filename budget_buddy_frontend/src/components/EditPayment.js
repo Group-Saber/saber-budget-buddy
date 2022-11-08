@@ -70,7 +70,7 @@ const EditPayment = ({uid, pos, neg, setPos, setNeg, debts, setDebts, paid, setP
         <div className='debt-body'>
             <div className='debt-box'>
                 <div className='create-debt'>
-                    <div className='debt-title'>Edit Debt</div>
+                    <div className='debt-title'>Edit Payment</div>
                     <div className='debt-input'>
                         <label>Amount:</label>
                         <input id='amount' type='number' value={paid[index].amount}></input>
