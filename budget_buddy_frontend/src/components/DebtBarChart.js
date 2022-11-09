@@ -55,7 +55,7 @@ const DebtLineChart = ({debts, color, title}) => {
 
     return (
         <>
-        <h2>{title}</h2>
+        <h2>{title} (5 Weeks)</h2>
         <ResponsiveContainer width="100%" height={300}>
             <BarChart
                 data={data}
