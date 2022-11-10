@@ -77,16 +77,16 @@ const DebtPage = ({uid, user}) => {
                     <div className='total-stacked'>
                         <div className='split top'>
                             <i className='material-icons'>arrow_upward</i> 
-                            <p>$ {positive.toFixed(2)}</p>
+                            <p>${positive.toFixed(2)}</p>
                         </div>
                         <div className='split bottom'>
                         <i className='material-icons'>arrow_downward</i>
-                            <p>$ {negative.toFixed(2)}</p>
+                            <p>-${Math.abs(negative).toFixed(2)}</p>
                         </div>
                     </div>
                     <div className='total'>
                         <h2>Total</h2>
-                        <p>$ {(positive + negative).toFixed(2)}</p>
+                        <p>{positive + negative >= 0 ? '$' + (positive + negative).toFixed(2) : '-$' + Math.abs(positive + negative).toFixed(2)}</p>
                     </div>
                 </div>
                 <div className='debt-chart'>

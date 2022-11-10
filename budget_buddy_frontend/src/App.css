@@ -286,6 +286,27 @@ body {
   justify-content: center;
 }
 
+/** BudgetPage */
+.budget-top {
+  height: 50%;
+}
+
+.salary {
+  height: 30%;
+  width: 15%;
+  border-radius: 4px;
+  background-color: var(--fg-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.salary:hover {
+  cursor: pointer;
+}
+
 /** DebtPage */
 .debt-top {
   position: relative;
