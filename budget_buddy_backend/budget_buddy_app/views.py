@@ -8,6 +8,7 @@ from rest_framework.decorators import api_view
 from budget_buddy_app.serializers import UserSerializer, GroupSerializer
 import pyrebase
 import math, random
+import smtplib
 
 
 config={
@@ -31,16 +32,10 @@ database=firebase.database()
 #     return Response(budget)
 
 @api_view(['POST'])
-def input_budget(request):
+def input_salary(request, uid):
     data = request.data
-    database.child('Budgets').child(data['date']).child('amount').set(float(data['amount']))
+    database.child('users').child(uid).child('salary').set(data)
     return Response(data)
-
-@api_view(['GET'])
-def get_budgets(request):
-    budgets = database.child('Budgets').get().val()
-    budgets = [budgets.get(i) for i in budgets]
-    return Response(budgets)
 
 @api_view(['POST'])
 def input_debt(request, uid):
@@ -49,10 +44,22 @@ def input_debt(request, uid):
     return Response(data)
 
 @api_view(['POST'])
+def delete_debt(request, uid):
+    data = request.data
+    database.child('users').child(uid).child('debts').child(data['date']).remove()
+    return Response(data)
+
+@api_view(['POST'])
 def input_paid(request, uid):
     data = request.data
     database.child('users').child(uid).child('debts').child(data['date']).remove()
     database.child('users').child(uid).child('paid').child(data['paid']).set(data)
+    return Response(data)
+
+@api_view(['POST'])
+def delete_paid(request, uid):
+    data = request.data
+    database.child('users').child(uid).child('paid').child(data['paid']).remove()
     return Response(data)
 
 @api_view(['POST'])
@@ -99,7 +106,7 @@ def signup(request):
         # creating a user with the given email and password
         user=authe.create_user_with_email_and_password(email,password)
         uid = user['localId']
-        store = {'email': email, 'first': first_name, 'last': last_name, 'uid': uid}
+        store = {'email': email, 'first': first_name, 'last': last_name, 'uid': uid, 'salary': 0}
 
         database.child('users').child(uid).set(store)
     except:
@@ -108,7 +115,6 @@ def signup(request):
         return Response('')
 
     return Response(uid)
-
 
 @api_view(['POST'])
 def verify(request):
@@ -119,26 +125,24 @@ def verify(request):
     try:
         # if there is no error then signin the user with given email and password
         user = authe.sign_in_with_email_and_password(email,password)
-        return Response('')
-    except:
-        temp = generateOTP()
-        import smtplib
+        
+        return Response('taken')
+    except Exception as e:
+        if e.args[1].find('INVALID_PASSWORD') >= 0:
+            return Response('taken')
+
+        code = generateOTP()
 
         gmail_user = 'saberbudgetbuddy@gmail.com'
         gmail_password = 'libokshxwsmqcane'
 
         sent_from = gmail_user
-        to = [email]
-        subject = 'BudgetBuddy'
-        body = 'The generated code is bellow\n' + temp 
+        to = email
+        subject = 'Budget Buddy Verification Code'
+        body = 'Your verification code: ' + code
 
-        email_text = """\
-        From: %s
-        To: %s
-        Subject: %s
-
-        %s
-        """ % (sent_from,to, subject, body)
+        email_text = """From: %s\nTo: %s\nSubject: %s\n\n%s
+        """ % (sent_from, to, subject, body)
 
         try:
             server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
@@ -150,27 +154,21 @@ def verify(request):
             print('Email sent!')
         except:
             print('Something went wrong...')
+            return Response('sign')
 
-        return Response(temp)
-
-
+        return Response(code)
 
 def generateOTP() :
- 
     # Declare a string variable 
     # which stores all string
-    string = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    string = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     OTP = ""
     length = len(string)
+
     for i in range(6) :
         OTP += string[math.floor(random.random() * length)]
- 
+
     return OTP
- 
-# Driver code
-if __name__ == "__main__" :
-     
-    print("OTP of length 6:", generateOTP())
 
 class UserViewSet(viewsets.ModelViewSet):
     """
