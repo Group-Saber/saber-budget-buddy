@@ -106,7 +106,7 @@ def signup(request):
         # creating a user with the given email and password
         user=authe.create_user_with_email_and_password(email,password)
         uid = user['localId']
-        store = {'email': email, 'first': first_name, 'last': last_name, 'uid': uid}
+        store = {'email': email, 'first': first_name, 'last': last_name, 'uid': uid, 'salary': 0}
 
         database.child('users').child(uid).set(store)
     except:

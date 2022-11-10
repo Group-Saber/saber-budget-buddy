@@ -84,10 +84,10 @@ const EditPayment = ({uid, pos, neg, setPos, setNeg, debts, setDebts, paid, setP
                         <textarea id='note' type='text' rows='3' cols='25' value={paid[index].note}></textarea>
                     </div>
                     <div>
-                        <button className='debt-button' onClick={back}>Back</button>
-                        <button className='debt-button' onClick={deletePayment}>Delete</button>
-                        <button className='debt-button' onClick={unpayDebt}>Unpay</button>
-                        <button className='debt-button' onClick={back}>Done</button>
+                        <button className='debt-button button' onClick={back}>Back</button>
+                        <button className='debt-button button' onClick={deletePayment}>Delete</button>
+                        <button className='debt-button button' onClick={unpayDebt}>Unpay</button>
+                        <button className='debt-button button' onClick={back}>Done</button>
                     </div>
                 </div>
             </div>

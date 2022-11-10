@@ -65,8 +65,8 @@ const LoginPage = ({uid}) => {
                 </div>
                 {error !== '' ? <div className='login-error'>{error}</div> : null}
                 <div>
-                    <button className='login-button' onClick={() => navigate('/signup')}>Signup</button>
-                    <button className='login-button' onClick={login}>Login</button>
+                    <button className='login-button button' onClick={() => navigate('/signup')}>Signup</button>
+                    <button className='login-button button' onClick={login}>Login</button>
                 </div>
             </div>
         </div>

@@ -16,6 +16,24 @@ body {
   background-color: var(--bg-color);
 }
 
+.button {
+  padding: 10px 28px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 4px;
+  transition-duration: 0.4s;
+  margin-right: 15px;
+}
+
+.button:last-of-type {
+  margin-right: 0;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
 /* LoginPage */
 .login-body {
   height: 100vh;
@@ -81,23 +99,12 @@ body {
   background-color: var(--blue);
   border: 2px solid var(--fg-color);
   color: var(--fg-color);
-  padding: 10px 28px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  border-radius: 4px;
-  transition-duration: 0.4s;
-}
-
-.login-button:first-of-type {
-  margin-right: 15px;
 }
 
 .login-button:hover {
   border: 2px solid var(--blue);
   background-color: var(--fg-color);
   color: var(--blue);
-  cursor: pointer;
 }
 
 .login-error {
@@ -307,6 +314,40 @@ body {
   cursor: pointer;
 }
 
+.budget-button {
+  background-color: var(--blue);
+  border: 2px solid var(--fg-color);
+  color: var(--fg-color);
+}
+
+.budget-button:hover {
+  border: 2px solid var(--blue);
+  background-color: var(--fg-color);
+  color: var(--blue);
+}
+
+.budget-input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.budget-input label {
+  font-weight: bold;
+  color: var(--blue);
+  margin-bottom: 5px;
+}
+
+.budget-input input {
+  /* outline: 0;
+  border: none;
+  border-bottom: 2px solid var(--black); */
+  border: 2px solid var(--black);
+  border-radius: 4px;
+  padding: 12px 20px;
+  text-transform: capitalize;
+}
+
 /** DebtPage */
 .debt-top {
   position: relative;
@@ -438,24 +479,12 @@ body {
   background-color: var(--red);
   border: 2px solid var(--fg-color);
   color: var(--fg-color);
-  padding: 10px 28px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  border-radius: 4px;
-  transition-duration: 0.4s;
-  margin-right: 15px;
-}
-
-.debt-button:last-of-type {
-  margin-right: 0;
 }
 
 .debt-button:hover {
   border: 2px solid var(--red);
   background-color: var(--fg-color);
   color: var(--red);
-  cursor: pointer;
 }
 
 .debt-chart {

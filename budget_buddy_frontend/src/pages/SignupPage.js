@@ -98,8 +98,8 @@ const SignupPage = () => {
                 </div>
                 {error !== '' ? <div className='login-error'>{error}</div> : null}
                 <div>
-                    <button className='login-button' onClick={() => navigate('/login')}>Login</button>
-                    <button className='login-button' onClick={signup}>Signup</button>
+                    <button className='login-button button' onClick={() => navigate('/login')}>Login</button>
+                    <button className='login-button button' onClick={signup}>Signup</button>
                 </div>
             </div>
         </div>

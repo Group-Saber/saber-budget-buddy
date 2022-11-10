@@ -49,14 +49,14 @@ const InputSalary = ({user}) => {
             <div className='debt-box'>
                 <div className='create-debt'>
                     <div className='debt-title'>Input Monthly Salary</div>
-                    <div className='debt-input'>
+                    <div className='budget-input'>
                         <label>Salary:</label>
                         <input id='salary' type='number' onChange={handleChange}></input>
                     </div>
                     <div>
-                        <button className='debt-button' onClick={back}>Back</button>
-                        <button className='debt-button' onClick={clear}>Clear</button>
-                        <button className='debt-button' onClick={update}>Enter</button>
+                        <button className='budget-button button' onClick={back}>Back</button>
+                        <button className='budget-button button' onClick={clear}>Clear</button>
+                        <button className='budget-button button' onClick={update}>Enter</button>
                     </div>
                 </div>
             </div>
