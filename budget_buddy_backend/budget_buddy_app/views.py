@@ -32,16 +32,10 @@ database=firebase.database()
 #     return Response(budget)
 
 @api_view(['POST'])
-def input_budget(request):
+def input_salary(request, uid):
     data = request.data
-    database.child('Budgets').child(data['date']).child('amount').set(float(data['amount']))
+    database.child('users').child(uid).child('salary').set(data)
     return Response(data)
-
-@api_view(['GET'])
-def get_budgets(request):
-    budgets = database.child('Budgets').get().val()
-    budgets = [budgets.get(i) for i in budgets]
-    return Response(budgets)
 
 @api_view(['POST'])
 def input_debt(request, uid):
@@ -112,7 +106,7 @@ def signup(request):
         # creating a user with the given email and password
         user=authe.create_user_with_email_and_password(email,password)
         uid = user['localId']
-        store = {'email': email, 'first': first_name, 'last': last_name, 'uid': uid}
+        store = {'email': email, 'first': first_name, 'last': last_name, 'uid': uid, 'salary': 0}
 
         database.child('users').child(uid).set(store)
     except:

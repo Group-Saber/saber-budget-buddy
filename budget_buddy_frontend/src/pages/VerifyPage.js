@@ -46,8 +46,8 @@ const VerifyPage = () => {
                 </div>
                 {error !== '' ? <div className='login-error'>{error}</div> : null}
                 <div>
-                    <button className='login-button' onClick={() => navigate('/login')}>Cancel</button>
-                    <button className='login-button' onClick={verify}>Enter</button>
+                    <button className='login-button button' onClick={() => navigate('/login')}>Cancel</button>
+                    <button className='login-button button' onClick={verify}>Enter</button>
                 </div>
             </div>
         </div>

@@ -85,9 +85,9 @@ const InputDebt = ({uid, pos, neg, setPos, setNeg, debts, setDebts}) => {
                         <textarea id='note' type='text' rows='3' cols='25' onChange={handleChange}></textarea>
                     </div>
                     <div>
-                        <button className='debt-button' onClick={back}>Back</button>
-                        <button className='debt-button' onClick={clear}>Clear</button>
-                        <button className='debt-button' onClick={inputDebt}>Enter</button>
+                        <button className='debt-button button' onClick={back}>Back</button>
+                        <button className='debt-button button' onClick={clear}>Clear</button>
+                        <button className='debt-button button' onClick={inputDebt}>Enter</button>
                     </div>
                 </div>
             </div>

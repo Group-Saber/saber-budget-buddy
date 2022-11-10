@@ -6,36 +6,36 @@ const DebtLineChart = ({debts, color, title}) => {
 
     useEffect(() => {
         let getDates = () => {
-            let month = []
+            let week = []
             let today = new Date()
             today.setHours(0, 0, 0, 0)
-            
+
             if(today.getDay() !== 0) {
-                today.setDate(today.getDate()-today.getDate()-1)
+                today.setDate(today.getDate() - today.getDay())
             }
 
             for(let i = 0; i < 5; i++) {
-                month.push({amount: 0, date: new Date(today)})
+                week.push({amount: 0, date: new Date(today)})
                 today.setDate(today.getDate()-7)
             }
 
             for(let i = 0; i < debts.length; i++) {
                 today = debts[i].date
                 
-                if(today >= month[0].date.getTime()) {
-                    month[0].amount += debts[i].amount
-                } else if(today >= month[1].date.getTime()) {
-                    month[1].amount += debts[i].amount
-                } else if(today >= month[2].date.getTime()) {
-                    month[2].amount += debts[i].amount
-                } else if(today >= month[3].date.getTime()) {
-                    month[3].amount += debts[i].amount
-                } else if(today >= month[4].date.getTime()) {
-                    month[4].amount += debts[i].amount
+                if(today >= week[0].date.getTime()) {
+                    week[0].amount += debts[i].amount
+                } else if(today >= week[1].date.getTime()) {
+                    week[1].amount += debts[i].amount
+                } else if(today >= week[2].date.getTime()) {
+                    week[2].amount += debts[i].amount
+                } else if(today >= week[3].date.getTime()) {
+                    week[3].amount += debts[i].amount
+                } else if(today >= week[4].date.getTime()) {
+                    week[4].amount += debts[i].amount
                 } 
             }
 
-            setDates(month)
+            setDates(week)
         }
         
         getDates()
@@ -55,7 +55,7 @@ const DebtLineChart = ({debts, color, title}) => {
 
     return (
         <>
-        <h2>{title}</h2>
+        <h2>{title} (5 Weeks)</h2>
         <ResponsiveContainer width="100%" height={300}>
             <BarChart
                 data={data}

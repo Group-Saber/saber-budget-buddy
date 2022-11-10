@@ -157,10 +157,10 @@ const EditDebt = ({uid, pos, neg, setPos, setNeg, debts, setDebts, paid, setPaid
                         <textarea id='note' type='text' rows='3' cols='25' onChange={handleChange}></textarea>
                     </div>
                     <div>
-                        <button className='debt-button' onClick={back}>Back</button>
-                        <button className='debt-button' onClick={deleteDebt}>Delete</button>
-                        <button className='debt-button' onClick={payDebt}>Pay</button>
-                        <button className='debt-button' onClick={update}>Done</button>
+                        <button className='debt-button button' onClick={back}>Back</button>
+                        <button className='debt-button button' onClick={deleteDebt}>Delete</button>
+                        <button className='debt-button button' onClick={payDebt}>Pay</button>
+                        <button className='debt-button button' onClick={update}>Done</button>
                     </div>
                 </div>
             </div>
