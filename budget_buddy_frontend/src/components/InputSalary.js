@@ -49,7 +49,7 @@ const InputSalary = ({user}) => {
             <div className='debt-box'>
                 <div className='create-debt'>
                     <div className='debt-title'>Input Monthly Salary</div>
-                    <div className='budget-input'>
+                    <div className='budget-input label-input'>
                         <label>Salary:</label>
                         <input id='salary' type='number' onChange={handleChange}></input>
                     </div>

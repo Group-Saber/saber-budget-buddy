@@ -40,7 +40,7 @@ const VerifyPage = () => {
             <div className="login-info">
                 <div className='login-title'>Budget Buddy</div>
                 <div className='login-sub'>Verify Email</div>
-                <div className={error === '' || code !== '' ? 'login-input' : 'login-input error'}>
+                <div className={error === '' || code !== '' ? 'login-input label-input' : 'login-input label-input error'}>
                     <label>Code:</label>
                     <input id="code" type="text" onChange={handleChange}></input>
                 </div>

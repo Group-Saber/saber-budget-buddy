@@ -55,11 +55,11 @@ const LoginPage = ({uid}) => {
             <div className='login-info'>
                 <div className='login-title'>Budget Buddy</div>
                 <div className='login-sub'>Log in</div>
-                <div className={error === '' || email !== '' ? 'login-input' : 'login-input error'}>
+                <div className={error === '' || email !== '' ? 'login-input label-input' : 'login-input label-input error'}>
                     <label>Email:</label>
                     <input id="email" type="email" onChange={handleChange}></input>
                 </div>
-                <div className={error === '' || password !== '' ? 'login-input' : 'login-input error'}>
+                <div className={error === '' || password !== '' ? 'login-input label-input' : 'login-input label-input error'}>
                     <label>Password:</label>
                     <input id="password" type="password" onChange={handleChange}></input>
                 </div>

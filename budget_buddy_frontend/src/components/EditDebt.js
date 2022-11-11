@@ -144,17 +144,17 @@ const EditDebt = ({uid, pos, neg, setPos, setNeg, debts, setDebts, paid, setPaid
             <div className='debt-box'>
                 <div className='create-debt'>
                     <div className='debt-title'>Edit Debt</div>
-                    <div className='debt-input'>
+                    <div className='debt-input label-input'>
                         <label>Amount:</label>
                         <input id='amount' type='number' onChange={handleChange}></input>
                     </div>
-                    <div className='debt-input'>
+                    <div className='debt-input label-input'>
                         <label>Name:</label>
                         <input id='name' type='text' onChange={handleChange}></input>
                     </div>
-                    <div className='debt-input'>
+                    <div className='debt-input label-input'>
                         <label>Note:</label>
-                        <textarea id='note' type='text' rows='3' cols='25' onChange={handleChange}></textarea>
+                        <input id='note' type='text' rows='3' cols='25' onChange={handleChange}></input>
                     </div>
                     <div>
                         <button className='debt-button button' onClick={back}>Back</button>

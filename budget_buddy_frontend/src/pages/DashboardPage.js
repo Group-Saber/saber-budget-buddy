@@ -19,7 +19,7 @@ const DashboardPage = ({uid, user}) => {
         <div className='tab-body'>
             <div className='dash-top'>
                 <div className='dash-column'>
-                    <div className='dash-budget'>Budget</div>
+                    <div className='dash-budget'>${user.salary}</div>
                     <div className='dash-budget'>Remaining</div>
                     <div className='dash-budget'>Needed</div>
                 </div>
