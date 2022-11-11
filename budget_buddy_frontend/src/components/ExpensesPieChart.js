@@ -18,7 +18,7 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
 };
 
 const style = {
-  top: '30px',
+  top: 0,
   lineHeight: "24px"
 };
 
@@ -43,7 +43,7 @@ const ExpensesPieChart = ({bills, food, groceries, shopping, subscriptions, othe
               cy='50%'
               labelLine={false}
               label={renderCustomizedLabel}
-              outerRadius={250}
+              outerRadius={125}
               fill="#8884d8"
               dataKey="value"
               >

@@ -674,7 +674,15 @@ body {
   .dash-column {width: 15%;}
 
   .dash-chart {width: 42%;}
-  
+
+  .dash-piechart {width: 100%;}
+
+  .budget-top {height: 50%;}
+
+  .budget-bottom{
+    height: 50%;
+  }
+
   .debt-top {height: 50%;}
 
   .debt-bottom {
@@ -683,7 +691,7 @@ body {
     right: 0;
   }
 
-  .debts-container {
+  .table-container {
     height: 50%;
     width: 96%;
     margin-bottom: 5px;
