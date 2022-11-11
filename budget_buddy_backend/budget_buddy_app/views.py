@@ -75,6 +75,13 @@ def get_user(request, uid):
     return Response(user)
 
 @api_view(['POST'])
+def changeName(request, uid):
+    data = request.data
+    database.child('users').child(uid).update({"first": data['first']})
+    database.child('users').child(uid).update({"last": data['last']})
+    return Response()
+
+@api_view(['POST'])
 def login(request):
     data = request.data
     email = data['email']
