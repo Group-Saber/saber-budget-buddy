@@ -31,7 +31,6 @@ const InputDebt = ({uid, pos, neg, setPos, setNeg, debts, setDebts}) => {
             }
 
             setDebts(debts => [newDebt, ...debts])
-            clear()
             back()
         }
     }

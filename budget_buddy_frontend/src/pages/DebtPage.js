@@ -97,10 +97,10 @@ const DebtPage = ({uid, user}) => {
                 </div>
             </div>
             <div className='debt-bottom'>
-                <div className='debts-container'>
-                    <div className='debts-table-title'>Debts</div>
-                    <ul className='debts-table'>
-                        <li className='debts-header'>
+                <div className='table-container'>
+                    <div className='table-title'>Debts</div>
+                    <ul className='table'>
+                        <li className='table-header debt-header'>
                             <div className='col col-1'>Name</div>
                             <div className='col col-2'>Amount</div>
                             <div className='col col-3'>Note</div>
@@ -108,7 +108,7 @@ const DebtPage = ({uid, user}) => {
                             <div className='col col-5'><i className='material-icons debt-icon' onClick={add}>add</i></div>
                         </li>
                         {debts.map((debt, index) => (
-                            <li className='debts-row' key={index}>
+                            <li className='table-row' key={index}>
                                 <div className='col col-1' data-label='Name'>{debt.name}</div>
                                 <div className='col col-2' data-label='Amount'>{debt.amount.toFixed(2)}</div>
                                 <div className='col col-3' data-label='Note'>{debt.note.length > 50 ? debt.note.substring(0, 50) + '...' : debt.note}</div>
@@ -118,10 +118,10 @@ const DebtPage = ({uid, user}) => {
                         ))}
                     </ul>
                 </div>
-                <div className='debts-container'>
-                    <div className='debts-table-title'>Payments</div>
-                    <ul className='debts-table'>
-                        <li className='debts-header paid'>
+                <div className='table-container'>
+                    <div className='table-title'>Payments</div>
+                    <ul className='table'>
+                        <li className='table-header paid-header'>
                             <div className='col col-1'>Name</div>
                             <div className='col col-2'>Amount</div>
                             <div className='col col-3'>Note</div>
@@ -129,7 +129,7 @@ const DebtPage = ({uid, user}) => {
                             <div className='col col-5'><i className='material-icons debt-icon'>add</i></div>
                         </li>
                         {paid.map((pay, index) => (
-                            <li className='debts-row' key={index}>
+                            <li className='table-row' key={index}>
                                 <div className='col col-1' data-label='Name'>{pay.name}</div>
                                 <div className='col col-2' data-label='Amount'>{pay.amount.toFixed(2)}</div>
                                 <div className='col col-3' data-label='Note'>{pay.note.length > 50 ? pay.note.substring(0, 50) + '...' : pay.note}</div>

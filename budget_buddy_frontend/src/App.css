@@ -5,7 +5,7 @@
   --blue: #25537b;
   --orange: #ff6a06;
   --red: #e40b00;
-  --green: #345832;
+  --green: #437241;
   --debt-red: #ec0a00;
   --debt-green: #599656;
   --bg-color: #dddddd;
@@ -258,6 +258,7 @@ body {
 .dash-bottom {
   display: flex;
   height: 68%;
+  margin-top: 5px;
 }
 
 .dash-column {
@@ -290,25 +291,28 @@ body {
 }
 
 .dash-piechart {
-  width: 35%;
+  width: 50%;
   height: 100%;
-  margin-top: 5px;
   border-radius: 4px;
   background-color: var(--fg-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  text-align: center;
 }
 
 /** BudgetPage */
 .budget-top {
-  height: 50%;
+  height: 32%;
   display: flex;
+}
+
+.budget-bottom {
+  height: 68%;
+  display: flex;
+  margin-top: 5px;
 }
 
 .salary {
   height: 32%;
-  width: 15%;
+  width: 10%;
   border-radius: 4px;
   background-color: var(--fg-color);
   display: flex;
@@ -334,6 +338,16 @@ body {
 
 .budget-input label {
   color: var(--green);
+}
+
+.budget-input select {
+  border: 2px solid var(--black);
+  border-radius: 4px;
+  padding: 12px 20px;
+}
+
+.expenses-header {
+  background-color: var(--green);
 }
 
 /** DebtPage */
@@ -476,7 +490,7 @@ body {
   height: 68%;
 }
 
-.debts-container {
+.table-container {
   position: relative;
   padding-right: 50px;
   width: 50%;
@@ -486,29 +500,28 @@ body {
   scroll-behavior: smooth;
 }
 
-.debts-container:first-of-type {
+.table-container:first-of-type {
   margin-right: 5px;
 }
 
-.debts-container::-webkit-scrollbar {
+.table-container::-webkit-scrollbar {
   display: none;
 }
 
-.debts-table-title {
+.table-title {
   text-align: center;
-  font-size: 32px;
+  font-size: 24px;
   font-weight: bold;
   margin-top: 15px;
 }
 
-.debts-table li {
+.table li {
   padding: 25px 30px;
   display: flex;
   justify-content: space-between;
 }
 
-.debts-header {
-  background-color: var(--red);
+.table-header {
   color: var(--fg-color);
   font-weight: bold;
   text-transform: uppercase;
@@ -516,11 +529,15 @@ body {
   border-radius: 4px;
 }
 
-.paid {
+.debt-header {
+  background-color: var(--red);
+}
+
+.paid-header {
   background-color: var(--orange);
 }
 
-.debts-row {
+.table-row {
   border-bottom: 1px solid var(--gray);
 }
 

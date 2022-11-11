@@ -38,6 +38,12 @@ def input_salary(request, uid):
     return Response(data)
 
 @api_view(['POST'])
+def input_expense(request, uid):
+    data = request.data
+    database.child('users').child(uid).child('expenses').child(data['date']).set(data)
+    return Response(data)
+
+@api_view(['POST'])
 def input_debt(request, uid):
     data = request.data
     database.child('users').child(uid).child('debts').child(data['date']).set(data)
