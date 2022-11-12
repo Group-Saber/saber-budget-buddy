@@ -71,17 +71,17 @@ const EditPayment = ({uid, pos, neg, setPos, setNeg, debts, setDebts, paid, setP
             <div className='debt-box'>
                 <div className='create-debt'>
                     <div className='debt-title'>Edit Payment</div>
-                    <div className='debt-input'>
+                    <div className='debt-input label-input'>
                         <label>Amount:</label>
                         <input id='amount' type='number' value={paid[index].amount}></input>
                     </div>
-                    <div className='debt-input'>
+                    <div className='debt-input label-input'>
                         <label>Name:</label>
                         <input id='name' type='text' value={paid[index].name}></input>
                     </div>
-                    <div className='debt-input'>
+                    <div className='debt-input label-input'>
                         <label>Note:</label>
-                        <textarea id='note' type='text' rows='3' cols='25' value={paid[index].note}></textarea>
+                        <input id='note' type='text' value={paid[index].note}></input>
                     </div>
                     <div>
                         <button className='debt-button button' onClick={back}>Back</button>

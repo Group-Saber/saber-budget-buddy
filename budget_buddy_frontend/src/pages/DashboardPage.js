@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import DebtBarChart from '../components/DebtBarChart'
+import ExpensesPieChart from '../components/ExpensesPieChart'
 
 const DashboardPage = ({uid, user}) => {
     let [debts, setDebts] = useState([])
@@ -19,7 +20,7 @@ const DashboardPage = ({uid, user}) => {
         <div className='tab-body'>
             <div className='dash-top'>
                 <div className='dash-column'>
-                    <div className='dash-budget'>Budget</div>
+                    <div className='dash-budget'>${user.salary}</div>
                     <div className='dash-budget'>Remaining</div>
                     <div className='dash-budget'>Needed</div>
                 </div>
@@ -29,7 +30,9 @@ const DashboardPage = ({uid, user}) => {
                 </div>
             </div>
             <div className='dash-bottom'>
-                <div className='dash-piechart'>Pie Chart</div>
+                <div className='dash-piechart'>
+                    <ExpensesPieChart />
+                </div>
             </div>
         </div>
     )
