@@ -31,7 +31,7 @@ const DashboardPage = ({uid, user}) => {
             </div>
             <div className='dash-bottom'>
                 <div className='dash-piechart'>
-                    <ExpensesPieChart />
+                    <ExpensesPieChart expenses={user.expenses}/>
                 </div>
             </div>
         </div>

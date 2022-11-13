@@ -10,11 +10,26 @@
   --debt-green: #599656;
   --bg-color: #dddddd;
   --fg-color: white;
+  --font: var(--black);
 }
 
 body {
   font-family: 'Ubuntu', sans-serif;
   background-color: var(--bg-color);
+  color: var(--font);
+  user-select: none;
+}
+
+.light-theme {
+  --bg-color: #dddddd;
+  --fg-color: #ffffff;
+  --font: var(--black);
+}
+
+.dark-theme {
+  --bg-color: var(--gray);
+  --fg-color: var(--black);
+  --font: #ffffff;
 }
 
 .button {
@@ -51,10 +66,7 @@ body {
 }
 
 .label-input input {
-  /* outline: 0;
-  border: none;
-  border-bottom: 2px solid var(--black); */
-  border: 2px solid var(--black);
+  border: 2px solid var(--font); 
   border-radius: 4px;
   padding: 12px 20px;
 }
@@ -129,6 +141,17 @@ body {
   background-color: var(--black);
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
   z-index: 1;
+}
+
+.top-icon {
+  color: white;
+  position: absolute;
+  right: 175px;
+  bottom: 25px;
+}
+
+.top-icon:hover {
+  cursor: pointer;
 }
 
 .panel-name {

@@ -6,12 +6,6 @@ import InputSalary from '../components/InputSalary'
 
 const BudgetPage = ({uid, user}) => {
     let [expenses, setExpenses] = useState([])
-    let [bills, setBills] = useState(0)
-    let [food, setFood] = useState(0)
-    let [groceries, setGroceries] = useState(0)
-    let [other, setOther] = useState(0)
-    let [shopping, setShopping] = useState(0)
-    let [subscriptions, setSubscriptions] = useState(0)
     let [total, setTotal] = useState(0)
     let navigate = useNavigate()
 
@@ -43,29 +37,6 @@ const BudgetPage = ({uid, user}) => {
         for(let i in data) {
             if(data[i].date >= today.getTime()) {
                 temp += data[i].amount
-
-                switch(data[i].type) {
-                    case 'bills':
-                        setBills(bills + data[i].amount)
-                        break
-                    case 'food':
-                        setFood(food + data[i].amount)
-                        break
-                    case 'groceries':
-                        setGroceries(groceries + data[i].amount)
-                        break
-                    case 'other':
-                        setOther(other + data[i].amount)
-                        break
-                    case 'shopping':
-                        setShopping(shopping + data[i].amount)
-                        break
-                    case 'subscriptions':
-                        setSubscriptions(subscriptions + data[i].amount)
-                        break
-                    default:
-                        break
-                }
             }
         }
 
@@ -114,7 +85,7 @@ const BudgetPage = ({uid, user}) => {
                     </ul>
                 </div>
                 <div className='dash-piechart'>
-                    <ExpensesPieChart bills={bills} food={food} groceries={groceries} shopping={shopping} subscriptions={subscriptions} other={other} />
+                    <ExpensesPieChart expenses={user.expenses} />
                 </div>
             </div>
             <Routes>
