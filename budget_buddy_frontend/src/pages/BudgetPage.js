@@ -61,8 +61,9 @@ const BudgetPage = ({uid, user}) => {
     return (
         <div className='tab-body'>
             <div className='budget-top'>
-                <div className='salary' onClick={inputSalary}>${user.salary}</div>                
+                <div className='salary' onClick={inputSalary}>${parseFloat(user.salary).toFixed(2)}</div>                
                 <div className='salary' onClick={inputExpense}>${total.toFixed(2)}</div>
+                <div className='salary'>${(user.salary - total).toFixed(2)}</div>
             </div>
             <div className='budget-bottom'>
                 <div className='table-container'>

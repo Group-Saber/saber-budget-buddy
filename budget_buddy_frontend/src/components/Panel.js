@@ -42,8 +42,6 @@ const Panel = ({uid, updateUID}) => {
 
         const mode = document.body.className;
         console.log('current class name: ' + mode);
-
-        console.log(window.innerWidth)
     }
 
     return (

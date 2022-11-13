@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { PieChart, Pie, Legend, Cell, ResponsiveContainer } from 'recharts'
+import { PieChart, Pie, Legend, Cell, Tooltip, ResponsiveContainer } from 'recharts'
 
 const ExpensesPieChart = ({ expenses }) => {
     let [bills, setBills] = useState(0)
@@ -68,7 +68,7 @@ const ExpensesPieChart = ({ expenses }) => {
         { name: 'Other', value: other }
     ]
 
-    const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#A2F3B3', '#DB91B1']
+    const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#FE0E3A', '#DB91B1']
     const RADIAN = Math.PI / 180;
     const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
         const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
@@ -85,6 +85,18 @@ const ExpensesPieChart = ({ expenses }) => {
     const style = {
         top: 0,
         lineHeight: "24px"
+    }
+
+    const CustomTooltip = ({active, payload}) => {
+        if (active && payload && payload.length) {
+            return (
+              <div className='custom-tooltip'>
+                <p>{`${payload[0].name} : ${payload[0].value.toFixed(2)}`}</p>
+              </div>
+            );
+          }
+        
+          return null;
     }
 
     return (
@@ -106,6 +118,7 @@ const ExpensesPieChart = ({ expenses }) => {
                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}
                 </Pie>
+                <Tooltip content={<CustomTooltip />}/>
                 <Legend iconSize={10} layout="horizontal" verticalAlign="middle" wrapperStyle={style} />
             </PieChart>
         </ResponsiveContainer>
