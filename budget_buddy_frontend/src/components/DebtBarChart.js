@@ -53,6 +53,18 @@ const DebtLineChart = ({debts, color, title}) => {
 
     const data = dates.map((debt) => debt === 0 ? null : ({amount: Math.abs(debt.amount), date: formatDate(new Date(debt.date))})).filter(n => n).reverse()
 
+    const CustomTooltip = ({active, payload}) => {
+        if (active && payload && payload.length) {
+            return (
+              <div className='custom-tooltip' style={{color: color}}>
+                <p>{`${payload[0].name} : ${payload[0].value.toFixed(2)}`}</p>
+              </div>
+            );
+          }
+        
+          return null;
+    }
+
     return (
         <>
         <h2>{title} (5 Weeks)</h2>
@@ -69,7 +81,7 @@ const DebtLineChart = ({debts, color, title}) => {
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey='date' />
                 <YAxis />
-                <Tooltip />
+                <Tooltip content={<CustomTooltip />} />
                 <Legend />
                 <Bar dataKey='amount' fill={color} />
             </BarChart>

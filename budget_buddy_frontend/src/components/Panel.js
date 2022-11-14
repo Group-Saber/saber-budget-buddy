@@ -29,7 +29,6 @@ const Panel = ({uid, updateUID}) => {
     let isCurrent = (path) => {
         console.log(locate.pathname)
         return locate.pathname.includes(`/main${path}`) ? 'current' : ''
-        // return locate.pathname === `/main${path}` ? 'current' : ''
     }
 
     let logout = () => {
@@ -37,9 +36,18 @@ const Panel = ({uid, updateUID}) => {
         navigate('/login')
     }
 
+    let switchMode = async () => {
+        document.body.classList.toggle('light-theme')
+        document.body.classList.toggle('dark-theme')
+
+        const mode = document.body.className;
+        console.log('current class name: ' + mode);
+    }
+
     return (
         <div>
             <div className='top-panel'>
+                <i className='material-icons top-icon' onClick={switchMode}>light_mode</i>
                 <div className='panel-name'>
                     <button className='name-btn'>{name}<div className='dropdown-arrow'></div></button>
                     <div className='dropdown-content'>

@@ -35,8 +35,6 @@ const UserPage = ({user}) => {
                         <div className='user-label'>Email:</div>
                         <div className='user-text'>{user.email}</div>
                     </div>
-                    <i className='material-icons user-icon'>dark_mode</i>
-                    <i className='material-icons user-icon'>light_mode</i>
                 </div>
                 <div className='user-budget'>Budget</div>
             </div>
