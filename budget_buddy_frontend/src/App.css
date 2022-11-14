@@ -322,10 +322,9 @@ body {
 }
 
 .custom-tooltip {
-  border-radius: 2px;
+  border-radius: 4px;
   padding: 0;
-  background-color: var(--font);
-  color: var(--fg-color);
+  background-color: var(--gray);
 }
 
 .custom-tooltip p {
@@ -346,19 +345,30 @@ body {
 }
 
 .budget-column {
-  width: 10%;
+  width: 20%;
 }
 
 .budget-row {
   height: 32.4%;
+  margin-bottom: 5px;
+  display: flex;
+}
+
+.budget-tile {
+  height: 100%;
+  width: 50%;
   border-radius: 4px;
   background-color: var(--fg-color);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 5px;
   font-size: 28px;
   font-weight: bold;
+  margin-right: 5px;
+}
+
+.budget-tile:last-of-type {
+  margin-right: 0;
 }
 
 .budget-row:last-of-type {
@@ -436,7 +446,7 @@ body {
   border-radius: 4px;
   background-color: var(--fg-color);
   width: 100%;
-  height: 49%;
+  height: 49.3%;
   display: flex;
   align-items: center;
   justify-content: center;

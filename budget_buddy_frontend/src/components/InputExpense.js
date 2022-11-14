@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 const InputExpense = ({user, expenses, setExpenses, total, setTotal}) => {
     let [amount, setAmount] = useState('')
     let [type, setType] = useState('bills')
+    let [recurring, setRecurring] = useState(false)
     let navigate = useNavigate()
 
     let update = () => {
@@ -32,7 +33,9 @@ const InputExpense = ({user, expenses, setExpenses, total, setTotal}) => {
 
     let clear = () => {
         setAmount('')
+        setRecurring(false)
         document.getElementById('amount').value = ''
+        document.getElementById('recurring').checked = false
     }
 
     let back = () => {
@@ -49,11 +52,12 @@ const InputExpense = ({user, expenses, setExpenses, total, setTotal}) => {
             case 'type':
                 setType(e.target.value)
                 break
+            case 'recurring':
+                setRecurring(!recurring)
+                break
             default:
                 break
         }
-
-        console.log(type)
     }
 
     return (
@@ -63,7 +67,7 @@ const InputExpense = ({user, expenses, setExpenses, total, setTotal}) => {
                     <div className='debt-title'>Input Expense</div>
                     <div className='budget-input label-input'>
                         <label>Amount:</label>
-                        <input id='amount' type='number' min={0} onChange={handleChange}></input>
+                        <input id='amount' type='number' min='0' onChange={handleChange}></input>
                     </div>
                     <div className='budget-input label-input'>
                         <label htmlFor='type'>Type:</label>
@@ -76,6 +80,13 @@ const InputExpense = ({user, expenses, setExpenses, total, setTotal}) => {
                             <option value='other'>Other</option>
                         </select>
                     </div>
+                    <div className='budget-input label-input'>
+                        <label><input id='recurring' type='checkbox' value='recurring' onChange={handleChange}></input>Recurring</label>
+                    </div>
+                    {recurring ? <div className='budget-input label-input'>
+                        <label>Day of Month:</label>
+                        <input id='day' type='number' min='1' max='31'></input>
+                    </div> : null}
                     <div>
                         <button className='budget-button button' onClick={back}>Back</button>
                         <button className='budget-button button' onClick={clear}>Clear</button>

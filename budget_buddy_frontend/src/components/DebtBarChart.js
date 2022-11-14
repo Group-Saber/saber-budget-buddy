@@ -56,7 +56,7 @@ const DebtLineChart = ({debts, color, title}) => {
     const CustomTooltip = ({active, payload}) => {
         if (active && payload && payload.length) {
             return (
-              <div className='custom-tooltip'>
+              <div className='custom-tooltip' style={{color: color}}>
                 <p>{`${payload[0].name} : ${payload[0].value.toFixed(2)}`}</p>
               </div>
             );

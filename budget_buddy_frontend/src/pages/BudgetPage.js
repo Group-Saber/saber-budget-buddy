@@ -62,9 +62,18 @@ const BudgetPage = ({uid, user}) => {
         <div className='tab-body'>
             <div className='budget-top'>
                 <div className='budget-column'>
-                    <div className='budget-row' onClick={inputSalary}>${parseFloat(user.salary).toFixed(2)}</div>
-                    <div className='budget-row'>${total.toFixed(2)}</div>
-                    <div className='budget-row'>${(user.salary - total).toFixed(2)}</div>
+                    <div className='budget-row'>
+                        <div className='budget-tile'>Salary</div>
+                        <div className='budget-tile' onClick={inputSalary}>${parseFloat(user.salary).toFixed(2)}</div>
+                    </div>
+                    <div className='budget-row'>
+                        <div className='budget-tile'>Expenses</div>
+                        <div className='budget-tile'>${total.toFixed(2)}</div>
+                    </div>
+                    <div className='budget-row'>
+                        <div className='budget-tile'>Remaining</div>
+                        <div className='budget-tile'>${(user.salary - total).toFixed(2)}</div>
+                    </div>
                 </div>
             </div>
             <div className='budget-bottom'>

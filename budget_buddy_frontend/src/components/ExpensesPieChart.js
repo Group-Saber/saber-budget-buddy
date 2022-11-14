@@ -90,7 +90,7 @@ const ExpensesPieChart = ({ expenses }) => {
     const CustomTooltip = ({active, payload}) => {
         if (active && payload && payload.length) {
             return (
-              <div className='custom-tooltip'>
+              <div className='custom-tooltip' style={{color: payload[0].payload.fill}}>
                 <p>{`${payload[0].name} : ${payload[0].value.toFixed(2)}`}</p>
               </div>
             );
