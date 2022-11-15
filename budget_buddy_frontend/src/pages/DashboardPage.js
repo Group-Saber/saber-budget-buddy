@@ -45,12 +45,12 @@ const DashboardPage = ({uid, user}) => {
                 </div>
                 <div className='dash-chart'>Spending Chart</div>
                 <div className='dash-chart'>
-                    <DebtBarChart debts={debts.map((debt) => debt)} color={'#25537b'} title={'Debts'} />
+                    <DebtBarChart debts={debts.map((debt) => debt)} color={'#618796'} title={'Debts'} />
                 </div>
             </div>
             <div className='dash-bottom'>
                 <div className='dash-piechart'>
-                    <ExpensesPieChart expenses={user.expenses}/>
+                    <ExpensesPieChart expenses={user.expenses} />
                 </div>
                 <div className='user-info'>
                     <div className='user-img box' style={{backgroundColor: color, color: contrast}} onClick={handleClick}>Profile Image</div>

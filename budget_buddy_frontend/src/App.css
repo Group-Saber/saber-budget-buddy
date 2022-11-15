@@ -471,7 +471,7 @@ body {
 /** DebtPage
   Debt inputs and buttons
 */
-.debt-body {
+.input-body {
   position: fixed;
   left: 10vw;
   top: 5vh;
@@ -483,17 +483,17 @@ body {
   backdrop-filter: blur(8px) contrast(40%);
 }
 
-.debt-box {
+.input-box {
   box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.2);
   background-color: var(--fg-color);
   border-radius: 4px;
 }
 
-.create-debt {
+.create-input {
   padding: 25px;
 }
 
-.debt-title {
+.input-title {
   text-align: center;
   font-size: 32px;
   font-weight: bold;
@@ -705,7 +705,7 @@ body {
 }
 
 /* laptops */
-@media only screen and (min-width: 769px) and (max-width: 1700px)  {
+@media only screen and (min-width: 769px) and (max-width: 1800px)  {
   .top-panel {
     width: 85vw;
     height: 8vh;
@@ -726,20 +726,16 @@ body {
 
   .dash-chart {width: 42%;}
 
-  /* .dash-piechart {width: 100%;} */
-
   .budget-top {height: 50%;}
 
   .budget-bottom{height: 50%;}
 
-  .budget-column {width: 15%;}
+  .budget-column {width: 30%;}
 
   .debt-top {height: 50%;}
 
   .debt-bottom {
     height: 50%;
-    /* flex-direction: column;
-    right: 0; */
   }
 
   /* .table-container {

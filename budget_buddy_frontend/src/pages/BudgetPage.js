@@ -98,7 +98,7 @@ const BudgetPage = ({uid, user}) => {
                     </ul>
                 </div>
                 <div className='dash-piechart'>
-                    <ExpensesPieChart expenses={user.expenses} />
+                    <ExpensesPieChart expenses={expenses} />
                 </div>
             </div>
             <Routes>
