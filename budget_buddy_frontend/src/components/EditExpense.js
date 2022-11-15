@@ -4,7 +4,6 @@ import { useLocation, useNavigate } from 'react-router-dom'
 const EditExpense = ({uid, total, setTotal, expenses, setExpenses}) => {
     let [amount, setAmount] = useState(0)
     let [type, setType] = useState('')
-    let [recurring, setRecurring] = useState(false)
     let [index, setIndex] = useState(0)
     let navigate = useNavigate()
     let location = useLocation()
@@ -82,9 +81,6 @@ const EditExpense = ({uid, total, setTotal, expenses, setExpenses}) => {
             case 'type':
                 setType(e.target.value)
                 break
-            case 'recurring':
-                setRecurring(!recurring)
-                break
             default:
                 break
         }
@@ -109,14 +105,7 @@ const EditExpense = ({uid, total, setTotal, expenses, setExpenses}) => {
                             <option value='subscriptions'>Subscriptions</option>
                             <option value='other'>Other</option>
                         </select>
-                    </div>
-                    <div className='budget-input label-input'>
-                        <label><input id='recurring' type='checkbox' value='recurring' onChange={handleChange}></input>Recurring</label>
-                    </div>
-                    {recurring ? <div className='budget-input label-input'>
-                        <label>Day of Month:</label>
-                        <input id='day' type='number' min='1' max='31'></input>
-                    </div> : null}
+                    </div>    
                     <div>
                         <button className='budget-button button' onClick={back}>Back</button>
                         <button className='budget-button button' onClick={deleteExpense}>Delete</button>
