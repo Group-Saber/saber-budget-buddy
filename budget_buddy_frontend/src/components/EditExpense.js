@@ -1,24 +1,42 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 
-const InputExpense = ({user, expenses, setExpenses, total, setTotal}) => {
-    let [amount, setAmount] = useState('')
-    let [type, setType] = useState('bills')
-    let [recurring, setRecurring] = useState(false)
+const EditExpense = ({uid, total, setTotal, expenses, setExpenses}) => {
+    let [amount, setAmount] = useState(0)
+    let [type, setType] = useState('')
+    let [index, setIndex] = useState(0)
     let navigate = useNavigate()
+    let location = useLocation()
+
+    useEffect(() => {
+        let getExpense = (index) => {
+            let temp = expenses[index]
+
+            setAmount(temp.amount)
+            setType(temp.type)
+            document.getElementById('amount').value = temp.amount
+            document.getElementById('type').value = temp.type
+
+            setIndex(index)
+        }
+        
+        getExpense(location.state)
+    }, [expenses, location.state])
 
     let update = () => {
-        input()
+        const oldExpense = Object.assign({}, expenses[index])
+
+        expenses[location.state].amount = parseFloat(amount)
+        expenses[location.state].type = type
+    
+        input(oldExpense)
     }
 
-    let input = async () => {
-        const newExpense = {
-            'amount': parseFloat(amount),
-            'type': type,
-            'date': Date.now()
-        }
+    let input = async (oldExpense) => {
+        const newExpense = expenses[index]
+        let tempTotal = total - oldExpense.amount
 
-        await fetch(`http://127.0.0.1:8000/app/budget/input/${user.uid}`, {
+        await fetch(`http://127.0.0.1:8000/app/budget/input/${uid}`, {
             method: "POST",
             headers: {
                 'Content-type': 'application/json'
@@ -26,16 +44,27 @@ const InputExpense = ({user, expenses, setExpenses, total, setTotal}) => {
             body: JSON.stringify(newExpense)
         })
 
-        setTotal(total + newExpense.amount)
-        setExpenses(expenses => [newExpense, ...expenses])
+        setTotal(tempTotal + newExpense.amount)
         back()
     }
 
-    let clear = () => {
-        setAmount('')
-        setRecurring(false)
-        document.getElementById('amount').value = ''
-        document.getElementById('recurring').checked = false
+    let deleteExpense = async () => {
+        await fetch(`http://127.0.0.1:8000/app/budget/delete/${uid}`, {
+            method: "POST",
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(expenses[index])
+        })
+
+        setTotal(total - expenses[index])
+
+        setExpenses(expenses => [
+            ...expenses.slice(0, index),
+            ...expenses.slice(index + 1, expenses.length)
+        ]);
+
+        back()
     }
 
     let back = () => {
@@ -51,9 +80,6 @@ const InputExpense = ({user, expenses, setExpenses, total, setTotal}) => {
                 break
             case 'type':
                 setType(e.target.value)
-                break
-            case 'recurring':
-                setRecurring(!recurring)
                 break
             default:
                 break
@@ -79,17 +105,10 @@ const InputExpense = ({user, expenses, setExpenses, total, setTotal}) => {
                             <option value='subscriptions'>Subscriptions</option>
                             <option value='other'>Other</option>
                         </select>
-                    </div>
-                    <div className='budget-input label-input'>
-                        <label><input id='recurring' type='checkbox' value='recurring' onChange={handleChange}></input>Recurring</label>
-                    </div>
-                    {recurring ? <div className='budget-input label-input'>
-                        <label>Day of Month:</label>
-                        <input id='day' type='number' min='1' max='31'></input>
-                    </div> : null}
+                    </div>    
                     <div>
                         <button className='budget-button button' onClick={back}>Back</button>
-                        <button className='budget-button button' onClick={clear}>Clear</button>
+                        <button className='budget-button button' onClick={deleteExpense}>Delete</button>
                         <button className='budget-button button' onClick={update}>Enter</button>
                     </div>
                 </div>
@@ -98,4 +117,4 @@ const InputExpense = ({user, expenses, setExpenses, total, setTotal}) => {
     )
 }
 
-export default InputExpense
+export default EditExpense

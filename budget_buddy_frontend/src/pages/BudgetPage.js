@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom'
+import EditExpense from '../components/EditExpense'
 import ExpensesPieChart from '../components/ExpensesPieChart'
 import InputExpense from '../components/InputExpense'
 import InputSalary from '../components/InputSalary'
@@ -55,7 +56,7 @@ const BudgetPage = ({uid, user}) => {
     }
 
     let editExpense = (index) => {
-        console.log(index)
+        navigate('/main/budget/e' + index, {state:index})
     }
 
     return (
@@ -97,12 +98,13 @@ const BudgetPage = ({uid, user}) => {
                     </ul>
                 </div>
                 <div className='dash-piechart'>
-                    <ExpensesPieChart expenses={user.expenses} />
+                    <ExpensesPieChart expenses={expenses} />
                 </div>
             </div>
             <Routes>
                 <Route path='salary' element={<InputSalary user={user} />}></Route>
                 <Route path='expense' element={<InputExpense user={user} expenses={expenses} setExpenses={setExpenses} total={total} setTotal={setTotal} />}></Route>
+                <Route path='e:index' element={<EditExpense uid={uid} total={total} setTotal={setTotal} expenses={expenses} setExpenses={setExpenses} />}></Route>
             </Routes>
         </div>
     )
