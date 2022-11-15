@@ -6,6 +6,7 @@ urlpatterns = [
     path('hello/', views.say_hello),
     path('salary/input/<str:uid>', views.input_salary),
     path('budget/input/<str:uid>', views.input_expense),
+    path('budget/delete/<str:uid>', views.delete_expense),
     path('user/<str:uid>', views.get_user),
     path('debts/input/<str:uid>', views.input_debt),
     path('debts/delete/<str:uid>', views.delete_debt),

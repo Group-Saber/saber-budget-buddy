@@ -438,9 +438,7 @@ body {
   font-weight: bold;
 }
 
-.total-stacked {
-  width: 60%;
-}
+.total-stacked {width: 60%;}
 
 .split {
   border-radius: 4px;
@@ -762,7 +760,7 @@ body {
     height: 32.5%; 
     width: 100%;
     margin: 0;
-    margin-top: 5px;
+    margin-top: 6px;
     flex-direction: unset;
   }
 

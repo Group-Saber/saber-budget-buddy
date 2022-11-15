@@ -44,6 +44,12 @@ def input_expense(request, uid):
     return Response(data)
 
 @api_view(['POST'])
+def delete_expense(request, uid):
+    data = request.data
+    database.child('users').child(uid).child('expenses').child(data['date']).remove()
+    return Response(data)
+
+@api_view(['POST'])
 def input_debt(request, uid):
     data = request.data
     database.child('users').child(uid).child('debts').child(data['date']).set(data)
