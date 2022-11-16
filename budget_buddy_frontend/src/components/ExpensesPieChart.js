@@ -102,15 +102,15 @@ const ExpensesPieChart = ({ expenses }) => {
     return (
         <>
         <h2>Monthly Expenses</h2>
-        <ResponsiveContainer width='100%' height='90%'>
-            <PieChart width={400} height={400}>
+        <ResponsiveContainer width='100%' height='85%'>
+            <PieChart width={300} height={300}>
                 <Pie
                     data={data}
                     cx='50%'
                     cy='50%'
                     labelLine={false}
                     label={renderCustomizedLabel}
-                    outerRadius={window.innerWidth > 1700 ? 250 : 125}
+                    outerRadius={window.innerWidth > 1800 ? 250 : 125}
                     fill='#8884d8'
                     dataKey='value'
                 >

@@ -36,7 +36,7 @@ const Panel = ({uid, updateUID}) => {
         navigate('/login')
     }
 
-    let switchMode = async () => {
+    let switchTheme = async () => {
         document.body.classList.toggle('light-theme')
         document.body.classList.toggle('dark-theme')
 
@@ -47,7 +47,7 @@ const Panel = ({uid, updateUID}) => {
     return (
         <div>
             <div className='top-panel'>
-                <i className='material-icons top-icon' onClick={switchMode}>light_mode</i>
+                <i className='material-icons top-icon' onClick={switchTheme}>light_mode</i>
                 <div className='panel-name'>
                     <button className='name-btn'>{name}<div className='dropdown-arrow'></div></button>
                     <div className='dropdown-content'>

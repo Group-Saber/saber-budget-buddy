@@ -15,11 +15,26 @@ function App() {
   }
 
   useEffect(() => {
-    const data = window.localStorage.getItem('uid');
-
-    if(data !== null) {
-      setUID(JSON.parse(data));
+    let getUID = () => {
+      const data = window.localStorage.getItem('uid');
+  
+      if(data !== null) {
+        setUID(JSON.parse(data));
+      }
     }
+
+    let detectTheme = () => {
+      const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)")
+
+      if (darkThemeMq.matches) {
+        document.body.className = 'dark-theme'
+      } else {
+        document.body.className = 'light-theme'
+      }
+    }
+
+    getUID()
+    detectTheme()
   }, [uid])
 
   return (
