@@ -6,10 +6,11 @@ import DebtPage from '../pages/DebtPage';
 
 
 const Panel = ({uid, updateUID}) => {
-    let locate = useLocation()
-    let navigate = useNavigate()
     let [user, setUser] = useState({})
     let [name, setName] = useState('You')
+    let [color, setColor] = useState('#ffffff')
+    let locate = useLocation()
+    let navigate = useNavigate()
 
 
     useEffect(() => {
@@ -43,6 +44,18 @@ const Panel = ({uid, updateUID}) => {
         console.log('current class name: ' + mode);
     }
 
+    let randomColor = () => {
+        const hex = '0123456789ABCDEF'
+        let newColor = ''
+
+        for(let i = 0; i < 6; i++) {
+            newColor += hex.charAt(Math.floor(Math.random() * hex.length))
+        }
+
+        console.log(newColor)
+        setColor('#' + newColor)
+    }
+
     return (
         <div>
             <div className='top-panel'>
@@ -56,7 +69,7 @@ const Panel = ({uid, updateUID}) => {
             </div>
             <div className='side-panel'>
                 <div className='side-header'>
-                    <h2>Budget Buddy</h2>
+                    <h2 style={{color: color}} onClick={randomColor}>Budget Buddy</h2>
                     <hr></hr>
                 </div>
                 <div className='links'>                    

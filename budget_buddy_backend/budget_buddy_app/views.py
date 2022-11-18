@@ -87,6 +87,13 @@ def get_user(request, uid):
     return Response(user)
 
 @api_view(['POST'])
+def change_name(request, uid):
+    data = request.data
+    database.child('users').child(uid).update({"first": data['first']})
+    database.child('users').child(uid).update({"last": data['last']})
+    return Response()
+
+@api_view(['POST'])
 def login(request):
     data = request.data
     email = data['email']
@@ -118,7 +125,7 @@ def signup(request):
         # creating a user with the given email and password
         user=authe.create_user_with_email_and_password(email,password)
         uid = user['localId']
-        store = {'email': email, 'first': first_name, 'last': last_name, 'uid': uid, 'salary': 0}
+        store = {'email': email, 'first': first_name, 'last': last_name, 'uid': uid, 'salary': 0, 'aside': 0}
 
         database.child('users').child(uid).set(store)
     except:

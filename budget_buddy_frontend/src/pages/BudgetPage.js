@@ -63,19 +63,21 @@ const BudgetPage = ({uid, user}) => {
         <div className='tab-body'>
             <div className='budget-top'>
                 <div className='budget-column'>
+                    <div className='budget-title'>Monthly Details</div>
                     <div className='budget-row'>
                         <div className='budget-tile'>Salary</div>
-                        <div className='budget-tile' onClick={inputSalary}>${parseFloat(user.salary).toFixed(2)}</div>
-                    </div>
-                    <div className='budget-row'>
+                        <div className='budget-tile'>Aside</div>
                         <div className='budget-tile'>Expenses</div>
-                        <div className='budget-tile'>${total.toFixed(2)}</div>
+                        <div className='budget-tile'>Remaining</div>
                     </div>
                     <div className='budget-row'>
-                        <div className='budget-tile'>Remaining</div>
-                        <div className='budget-tile'>${(user.salary - total).toFixed(2)}</div>
+                        <div className='budget-tile click-tile' onClick={inputSalary}>${parseFloat(user.salary).toFixed(2)}</div>
+                        <div className='budget-tile click-tile'>${parseFloat(user.aside).toFixed(2)}</div>
+                        <div className='budget-tile click-tile' onClick={inputExpense}>${total.toFixed(2)}</div>
+                        <div className='budget-tile'>${(user.salary - user.aside - total).toFixed(2)}</div>
                     </div>
                 </div>
+                <div className='budget-chart'>Spending Chart</div>
             </div>
             <div className='budget-bottom'>
                 <div className='table-container'>
@@ -89,7 +91,7 @@ const BudgetPage = ({uid, user}) => {
                         </li>
                         {expenses.map((expense, index) => (
                             <li className='table-row' key={index}>
-                                <div className='col col-1' data-label='Name'>{expense.type}</div>
+                                <div className='col col-1' data-label='Type'>{expense.type.charAt(0).toUpperCase() + expense.type.slice(1)}</div>
                                 <div className='col col-2' data-label='Amount'>{expense.amount.toFixed(2)}</div>
                                 <div className='col col-4' data-label='Date'>{formatDate(new Date(expense.date))}</div>
                                 <div className='col col-5' data-label='Button'><i className='material-icons debt-icon' onClick={() => editExpense(index)}>more_vert</i></div>

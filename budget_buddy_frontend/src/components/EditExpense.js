@@ -90,7 +90,7 @@ const EditExpense = ({uid, total, setTotal, expenses, setExpenses}) => {
         <div className='input-body'>
             <div className='input-box'>
                 <div className='create-input'>
-                    <div className='input-title'>Input Expense</div>
+                    <div className='input-title'>Edit Expense</div>
                     <div className='budget-input label-input'>
                         <label>Amount:</label>
                         <input id='amount' type='number' min='0' onChange={handleChange}></input>
