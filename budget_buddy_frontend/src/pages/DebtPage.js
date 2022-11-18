@@ -11,13 +11,13 @@ const DebtPage = ({uid, user}) => {
     let [positive, setPositive] = useState(0)
     let [negative, setNegative] = useState(0)
     let navigate = useNavigate()
+    const noteLength = window.innerWidth > 1800 ? 50 : 25
 
     useEffect(() => {
         let getDebts = async () => {
             if(uid !== '' && Object.keys(user).length !== 0) { 
                 let data = Object.values(user.debts)
-                setDebts(data.reverse())
-                getTotals(data)
+                getMonthlyDebts(data)
             }
         }
 
@@ -32,18 +32,24 @@ const DebtPage = ({uid, user}) => {
         getPaid()
     }, [uid, user])
 
-    let getTotals = (data) => {
+    let getMonthlyDebts = (data) => {
         let p = 0
         let n = 0
+        let today = new Date()
+        today.setDate(1)
+        today.setHours(0,0,0,0)
 
         for(let i in data) {
-            if(data[i].amount >= 0) {
-                p += data[i].amount
-            } else {
-                n += data[i].amount
+            if(data[i].date >= today.getTime()) {
+                if(data[i].amount >= 0) {
+                    p += data[i].amount
+                } else {
+                    n += data[i].amount
+                }
             }
         }
-        
+
+        setDebts(data.reverse())
         setPositive(p)
         setNegative(n)
     }
@@ -111,7 +117,7 @@ const DebtPage = ({uid, user}) => {
                             <li className='table-row' key={index}>
                                 <div className='col col-1' data-label='Name'>{debt.name}</div>
                                 <div className='col col-2' data-label='Amount'>{debt.amount.toFixed(2)}</div>
-                                <div className='col col-3' data-label='Note'>{debt.note.length > 50 ? debt.note.substring(0, 50) + '...' : debt.note}</div>
+                                <div className='col col-3' data-label='Note'>{debt.note.length > noteLength ? debt.note.substring(0, noteLength) + '...' : debt.note}</div>
                                 <div className='col col-4' data-label='Date'>{formatDate(new Date(debt.date))}</div>
                                 <div className='col col-5' data-label='Button'><i className='material-icons debt-icon' onClick={() => editDebt(index)}>more_vert</i></div>
                             </li>
@@ -132,7 +138,7 @@ const DebtPage = ({uid, user}) => {
                             <li className='table-row' key={index}>
                                 <div className='col col-1' data-label='Name'>{pay.name}</div>
                                 <div className='col col-2' data-label='Amount'>{pay.amount.toFixed(2)}</div>
-                                <div className='col col-3' data-label='Note'>{pay.note.length > 50 ? pay.note.substring(0, 50) + '...' : pay.note}</div>
+                                <div className='col col-3' data-label='Note'>{pay.note.length > noteLength ? pay.note.substring(0, noteLength) + '...' : pay.note}</div>
                                 <div className='col col-4' data-label='Date'>{formatDate(new Date(pay.paid))}</div>
                                 <div className='col col-5' data-label='Button'><i className='material-icons debt-icon' onClick={() => editPayment(index)}>more_vert</i></div>
                             </li>

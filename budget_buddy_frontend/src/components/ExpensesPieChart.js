@@ -110,7 +110,7 @@ const ExpensesPieChart = ({ expenses }) => {
                     cy='50%'
                     labelLine={false}
                     label={renderCustomizedLabel}
-                    outerRadius={window.innerWidth > 1800 ? 250 : 125}
+                    outerRadius={window.innerWidth > 1800 ? 300 : 125}
                     fill='#8884d8'
                     dataKey='value'
                 >

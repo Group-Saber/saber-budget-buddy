@@ -3,7 +3,6 @@ import { Route, Routes, Link, useLocation, useNavigate } from "react-router-dom"
 import BudgetPage from '../pages/BudgetPage';
 import DashboardPage from '../pages/DashboardPage';
 import DebtPage from '../pages/DebtPage';
-import UserPage from '../pages/UserPage'
 
 
 const Panel = ({uid, updateUID}) => {
@@ -64,14 +63,12 @@ const Panel = ({uid, updateUID}) => {
                     <Link to='dashboard' className={isCurrent('/dashboard')}><i className='material-icons panel-icon'>space_dashboard</i> Dashboard</Link>
                     <Link to='budget' className={isCurrent('/budget')}><i className='material-icons panel-icon'>savings</i> Budget</Link>
                     <Link to='debt' className={isCurrent('/debt')}><i className='material-icons panel-icon'>payments</i> Debt</Link>
-                    <Link to='user' className={isCurrent('/user')}><i className='material-icons panel-icon'>person</i> User</Link>
                 </div>
             </div>
             <Routes>
                 <Route path='dashboard' element={<DashboardPage uid={uid} user={user} />}></Route>
                 <Route path='budget/*' element={<BudgetPage uid={uid} user={user} />}></Route>
                 <Route path='debt/*' element={<DebtPage uid={uid} user={user} />}></Route>
-                <Route path='user' element={<UserPage user={user} />}></Route>
             </Routes>
         </div>
     )
