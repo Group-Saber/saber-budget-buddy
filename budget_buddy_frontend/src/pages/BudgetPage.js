@@ -21,14 +21,6 @@ const BudgetPage = ({uid, user}) => {
         getData()
     }, [uid, user])
 
-    let inputSalary = () => {
-        navigate('/main/budget/salary')
-    }
-
-    let inputExpense = () => {
-        navigate('/main/budget/expense')
-    }
-
     let getExpenses = (data) => {
         let temp = 0
         let today = new Date()
@@ -43,6 +35,14 @@ const BudgetPage = ({uid, user}) => {
 
         setExpenses(data.reverse())
         setTotal(temp)
+    }
+
+    let inputSalary = () => {
+        navigate('/main/budget/salary')
+    }
+
+    let inputExpense = () => {
+        navigate('/main/budget/expense')
     }
 
     let formatDate = (date) => {

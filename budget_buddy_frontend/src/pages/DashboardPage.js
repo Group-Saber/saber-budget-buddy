@@ -19,7 +19,11 @@ const DashboardPage = ({uid, user}) => {
     }, [uid, user])
 
     let handleClick = () => {
-        const hex = '0123456789abcdef'
+        randomColor()
+    }
+
+    let randomColor = () => {
+        const hex = '0123456789ABCDEF'
         let newColor = ''
 
         for(let i = 0; i < 6; i++) {
