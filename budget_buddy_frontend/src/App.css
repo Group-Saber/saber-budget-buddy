@@ -11,6 +11,7 @@
   --bg-color: #dddddd;
   --fg-color: white;
   --font: var(--black);
+  --olive: #5B876E;
 }
 
 body {
@@ -248,7 +249,7 @@ body {
 }
 
 .links a {
-  color: var(--white);
+  color: white;
   text-decoration: none;
   padding: 15px;
 }
@@ -291,6 +292,7 @@ body {
 
 .dash-column {
   width: 10%;
+  margin-right: 5px;
 }
 
 .dash-budget {
@@ -310,12 +312,16 @@ body {
 }
 
 .dash-chart {
-  width: 37.5%;
-  margin-left: 5px;
+  width: 40%;
   border-radius: 4px;
   background-color: var(--fg-color);
   text-align: center;
   padding: 10px;
+  margin-right: 5px;
+}
+
+.dash-chart:last-of-type {
+  margin-right: 0;
 }
 
 .dash-piechart {
@@ -425,6 +431,10 @@ body {
 
 .small-col-2 {
   flex-basis: 45%;
+}
+
+.months-header {
+  background-color: var(--olive);
 }
 
 .budget-button {

@@ -32,7 +32,7 @@ const BudgetPage = ({uid, user}) => {
         let index = 0
 
         prevMonths.push({
-            date: prevMonth,
+            date: new Date(prevMonth),
             amount: 0
         })
 
@@ -44,10 +44,9 @@ const BudgetPage = ({uid, user}) => {
             if(data[i].date >= prevMonth.getTime()) {
                 prevMonths[index].amount += data[i].amount
             } else {
-                prevMonth = new Date(prevMonth)
                 prevMonth.setMonth(prevMonth.getMonth() - 1)
                 prevMonths.push({
-                    date: prevMonth,
+                    date: new Date(prevMonth),
                     amount: data[i].amount
                 })
 
@@ -115,7 +114,7 @@ const BudgetPage = ({uid, user}) => {
                 <div className='small-table'>
                     <div className='table-title'>Expenses per Month</div>
                     <ul className='table'>
-                        <li className='table-header expenses-header'>
+                        <li className='table-header months-header'>
                             <div className='col small-col-1'>Month</div>
                             <div className='col small-col-2'>Amount</div>
                         </li>

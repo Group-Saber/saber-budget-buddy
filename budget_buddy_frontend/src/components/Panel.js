@@ -73,9 +73,9 @@ const Panel = ({uid, updateUID}) => {
                     <hr></hr>
                 </div>
                 <div className='links'>                    
-                    <Link to='dashboard' className={isCurrent('/dashboard')}><i className='material-icons panel-icon'>space_dashboard</i> Dashboard</Link>
-                    <Link to='budget' className={isCurrent('/budget')}><i className='material-icons panel-icon'>savings</i> Budget</Link>
-                    <Link to='debt' className={isCurrent('/debt')}><i className='material-icons panel-icon'>payments</i> Debt</Link>
+                    <Link to='dashboard' className={isCurrent('/dashboard')} style={{color: color}}><i className='material-icons panel-icon'>space_dashboard</i> Dashboard</Link>
+                    <Link to='budget' className={isCurrent('/budget')} style={{color: color}}><i className='material-icons panel-icon'>savings</i> Budget</Link>
+                    <Link to='debt' className={isCurrent('/debt')} style={{color: color}}><i className='material-icons panel-icon'>payments</i> Debt</Link>
                 </div>
             </div>
             <Routes>
