@@ -26,7 +26,7 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ec2-18-144-27-81.us-west-1.compute.amazonaws.com', '127.0.0.1']
+ALLOWED_HOSTS = ['ec2-18-144-27-81.us-west-1.compute.amazonaws.com', 'saber.andrewarteaga.com', '127.0.0.1']
 
 
 # Application definition
@@ -63,6 +63,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'http://ec2-18-144-27-81.us-west-1.compute.amazonaws.com:8080',
     'http://ec2-18-144-27-81.us-west-1.compute.amazonaws.com',
+    'http://saber.andrewarteaga.com',
 ]
 
 MIDDLEWARE = [

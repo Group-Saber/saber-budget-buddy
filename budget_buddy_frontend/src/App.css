@@ -11,6 +11,7 @@
   --bg-color: #dddddd;
   --fg-color: white;
   --font: var(--black);
+  --olive: #5B876E;
 }
 
 body {
@@ -230,6 +231,10 @@ body {
   padding: 10px 0;
 }
 
+.side-header h2:hover {
+  cursor: pointer;
+}
+
 .side-header hr {
   border: 0.5px solid var(--gray);
   opacity: 0.3;
@@ -244,7 +249,7 @@ body {
 }
 
 .links a {
-  color: var(--white);
+  color: white;
   text-decoration: none;
   padding: 15px;
 }
@@ -259,6 +264,7 @@ body {
 .panel-icon {
   position: relative;
   top: 5px;
+  margin-right: 10px;
 }
 
 /** Body for each tab on pages */
@@ -286,6 +292,7 @@ body {
 
 .dash-column {
   width: 10%;
+  margin-right: 5px;
 }
 
 .dash-budget {
@@ -305,12 +312,16 @@ body {
 }
 
 .dash-chart {
-  width: 30%;
-  margin-left: 5px;
+  width: 40%;
   border-radius: 4px;
   background-color: var(--fg-color);
   text-align: center;
   padding: 10px;
+  margin-right: 5px;
+}
+
+.dash-chart:last-of-type {
+  margin-right: 0;
 }
 
 .dash-piechart {
@@ -345,11 +356,28 @@ body {
 }
 
 .budget-column {
-  width: 20%;
+  width: 40%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.budget-title {
+  width: 100%;
+  height: 32.4%;
+  border-radius: 4px;
+  background-color: var(--fg-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  margin-right: 5px;
 }
 
 .budget-row {
   height: 32.4%;
+  width: 100%;
   margin-bottom: 5px;
   display: flex;
 }
@@ -367,16 +395,46 @@ body {
   margin-right: 5px;
 }
 
-.budget-tile:last-of-type {
-  margin-right: 0;
-}
-
 .budget-row:last-of-type {
   margin-bottom: 0;
 }
 
-.budget-row:first-of-type:hover {
+.click-tile:hover {
   cursor: pointer;
+}
+
+.budget-chart {
+  width: 37.5%;
+  border-radius: 4px;
+  background-color: var(--fg-color);
+  text-align: center;
+  padding: 10px;
+}
+
+.small-table {
+  width: 22.5%;
+  border-radius: 4px;
+  margin-left: 5px;
+  background-color: var(--fg-color);
+  padding-right: 50px;
+  overflow: scroll;
+  scroll-behavior: smooth;
+}
+
+.small-table::-webkit-scrollbar {
+  display: none;
+}
+
+.small-col-1 {
+  flex-basis: 65%;
+}
+
+.small-col-2 {
+  flex-basis: 45%;
+}
+
+.months-header {
+  background-color: var(--olive);
 }
 
 .budget-button {
@@ -563,10 +621,14 @@ body {
   font-size: 24px;
   font-weight: bold;
   margin-top: 15px;
+  padding-left: 50px;
 }
 
 .table li {
-  padding: 25px 30px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 25px;
+  padding-bottom: 15px;
   display: flex;
   justify-content: space-between;
 }
@@ -588,7 +650,7 @@ body {
 }
 
 .table-row {
-  border-bottom: 1px solid var(--gray);
+  border-bottom: 2px solid var(--bg-color);
 }
 
 .col-1 {
@@ -686,16 +748,6 @@ body {
   cursor: pointer;
 }
 
-/* mobile */
-@media only screen and (min-width: 320px) and (max-width: 480px) {
-
-}
-
-/* tablets */
-@media only screen and (min-width: 481px) and (max-width: 768px)  {
-  
-}
-
 /* laptops */
 @media only screen and (min-width: 769px) and (max-width: 1800px)  {
   .top-panel {
@@ -722,19 +774,13 @@ body {
 
   .budget-bottom{height: 50%;}
 
-  .budget-column {width: 30%;}
+  .budget-column {width: 58%;}
+
+  .budget-chart{width: 42%;}
 
   .debt-top {height: 50%;}
 
-  .debt-bottom {
-    height: 50%;
-  }
-
-  /* .table-container {
-    height: 50%;
-    width: 96%;
-    margin-bottom: 5px;
-  } */
+  .debt-bottom {height: 50%;}
 
   .debt-chart {width: 42%;}
 
@@ -763,9 +809,4 @@ body {
   .user-top {height: 70%;}
 
   .user-info {width: 30%;}
-}
-
-/* desktop */
-@media only screen and (min-width: 1701px)  {
-  
 }
