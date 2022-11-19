@@ -8,13 +8,14 @@ import InputSalary from '../components/InputSalary'
 const BudgetPage = ({uid, user}) => {
     let [expenses, setExpenses] = useState([])
     let [total, setTotal] = useState(0)
+    let [months, setMonths] = useState([])
     let navigate = useNavigate()
 
     useEffect(() => {
         let getData = () => {
             if(uid !== '' && Object.keys(user).length !== 0) {
                 let data = Object.values(user.expenses)
-                getExpenses(data)
+                getExpenses(data.reverse())
             }
         }
         
@@ -23,18 +24,40 @@ const BudgetPage = ({uid, user}) => {
 
     let getExpenses = (data) => {
         let temp = 0
-        let today = new Date()
-        today.setDate(1)
-        today.setHours(0,0,0,0)
+        let curMonth = new Date()
+        curMonth.setDate(1)
+        curMonth.setHours(0,0,0,0)
+        let prevMonth = new Date(curMonth)
+        let prevMonths = []
+        let index = 0
+
+        prevMonths.push({
+            date: prevMonth,
+            amount: 0
+        })
 
         for(let i in data) {
-            if(data[i].date >= today.getTime()) {
+            if(data[i].date >= curMonth.getTime()) {
                 temp += data[i].amount
             }
-        }
 
-        setExpenses(data.reverse())
+            if(data[i].date >= prevMonth.getTime()) {
+                prevMonths[index].amount += data[i].amount
+            } else {
+                prevMonth = new Date(prevMonth)
+                prevMonth.setMonth(prevMonth.getMonth() - 1)
+                prevMonths.push({
+                    date: prevMonth,
+                    amount: data[i].amount
+                })
+
+                index++
+            }
+        }
+        
+        setExpenses(data)
         setTotal(temp)
+        setMonths(prevMonths)
     }
 
     let inputSalary = () => {
@@ -53,6 +76,16 @@ const BudgetPage = ({uid, user}) => {
         }
 
         return newDate
+    }
+
+    let formatMonth = (date) => {
+        let month = date.toLocaleString('default', { month: 'long' })
+
+        if(date.getFullYear() !== new Date().getFullYear()) {
+            month += ` ${date.getFullYear()}`
+        }
+
+        return month
     }
 
     let editExpense = (index) => {
@@ -78,6 +111,22 @@ const BudgetPage = ({uid, user}) => {
                     </div>
                 </div>
                 <div className='budget-chart'>Spending Chart</div>
+                {window.innerWidth > 1800 ? 
+                <div className='small-table'>
+                    <div className='table-title'>Expenses per Month</div>
+                    <ul className='table'>
+                        <li className='table-header expenses-header'>
+                            <div className='col small-col-1'>Month</div>
+                            <div className='col small-col-2'>Amount</div>
+                        </li>
+                        {months.map((month, index) => (
+                            <li className='table-row' key={index}>
+                                <div className='col small-col-1'>{formatMonth(month.date)}</div>
+                                <div className='col small-col-2'>{month.amount.toFixed(2)}</div>
+                            </li>
+                        ))}
+                    </ul>
+                </div> : null}
             </div>
             <div className='budget-bottom'>
                 <div className='table-container'>

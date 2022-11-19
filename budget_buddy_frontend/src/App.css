@@ -405,6 +405,28 @@ body {
   padding: 10px;
 }
 
+.small-table {
+  width: 22.5%;
+  border-radius: 4px;
+  margin-left: 5px;
+  background-color: var(--fg-color);
+  padding-right: 50px;
+  overflow: scroll;
+  scroll-behavior: smooth;
+}
+
+.small-table::-webkit-scrollbar {
+  display: none;
+}
+
+.small-col-1 {
+  flex-basis: 65%;
+}
+
+.small-col-2 {
+  flex-basis: 45%;
+}
+
 .budget-button {
   background-color: var(--green);
 }
@@ -589,6 +611,7 @@ body {
   font-size: 24px;
   font-weight: bold;
   margin-top: 15px;
+  padding-left: 50px;
 }
 
 .table li {
@@ -715,16 +738,6 @@ body {
   cursor: pointer;
 }
 
-/* mobile */
-@media only screen and (min-width: 320px) and (max-width: 480px) {
-
-}
-
-/* tablets */
-@media only screen and (min-width: 481px) and (max-width: 768px)  {
-  
-}
-
 /* laptops */
 @media only screen and (min-width: 769px) and (max-width: 1800px)  {
   .top-panel {
@@ -757,9 +770,7 @@ body {
 
   .debt-top {height: 50%;}
 
-  .debt-bottom {
-    height: 50%;
-  }
+  .debt-bottom {height: 50%;}
 
   .debt-chart {width: 42%;}
 
@@ -788,9 +799,4 @@ body {
   .user-top {height: 70%;}
 
   .user-info {width: 30%;}
-}
-
-/* desktop */
-@media only screen and (min-width: 1701px)  {
-  
 }
