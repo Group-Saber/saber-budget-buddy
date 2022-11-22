@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import DebtBarChart from '../components/DebtBarChart'
+import ExpensesLineChart from '../components/ExpensesLineChart'
 import ExpensesPieChart from '../components/ExpensesPieChart'
+import ExpensesRadarChart from '../components/ExpensesRadarChart'
 
 const DashboardPage = ({uid, user}) => {
     let [debts, setDebts] = useState([])
     let [expenses, setExpenses] = useState([])
     let [total, setTotal] = useState(0)
-    let [color, setColor] = useState('#222222')
-    let [contrast, setContrast] = useState('#ffffff')
 
     useEffect(() => {
         let getDebts = async () => {
@@ -44,27 +44,6 @@ const DashboardPage = ({uid, user}) => {
         setTotal(temp)
     }
 
-    let handleClick = () => {
-        randomColor()
-    }
-
-    let randomColor = () => {
-        const hex = '0123456789ABCDEF'
-        let newColor = ''
-
-        for(let i = 0; i < 6; i++) {
-            newColor += hex.charAt(Math.floor(Math.random() * hex.length))
-        }
-
-        console.log(newColor)
-        setColor('#' + newColor)
-        setContrast('#' + invertHex(newColor))
-    }
-
-    let invertHex = (hex) => {
-        return (Number(`0x1${hex}`) ^ 0xFFFFFF).toString(16).substring(1)
-    }
-
     return (
         <div className='tab-body'>
             <div className='dash-top'>
@@ -78,7 +57,9 @@ const DashboardPage = ({uid, user}) => {
                     <div className='dash-budget'>${parseFloat(user.aside).toFixed(2)}</div>
                     <div className='dash-budget'>${(user.salary - total).toFixed(2)}</div>
                 </div>
-                <div className='dash-chart'>Spending Chart</div>
+                <div className='dash-chart'>
+                    <ExpensesLineChart expenses={expenses} color='#E8896E'></ExpensesLineChart>
+                </div>
                 <div className='dash-chart'>
                     <DebtBarChart debts={debts.map((debt) => debt)} color={'#618796'} title={'Debts'} />
                 </div>
@@ -87,17 +68,8 @@ const DashboardPage = ({uid, user}) => {
                 <div className='dash-piechart'>
                     <ExpensesPieChart expenses={expenses} />
                 </div>
-                <div className='user-info'>
-                    <div className='user-img box' style={{backgroundColor: color, color: contrast}} onClick={handleClick}>Profile Image</div>
-                    <div className='user-detail'>
-                        <div className='user-label'>Name:</div>
-                        <div className='user-text'>{`${user.first} ${user.last}`}</div>
-                        <i className='material-icons user-icon'>edit</i>
-                    </div>
-                    <div className='user-detail'>
-                        <div className='user-label'>Email:</div>
-                        <div className='user-text'>{user.email}</div>
-                    </div>
+                <div className='dash-piechart'>
+                    <ExpensesRadarChart expenses={expenses} color={'#FE2A4D'} />
                 </div>
             </div>
         </div>

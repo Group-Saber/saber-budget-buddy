@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import EditExpense from '../components/EditExpense'
+import ExpensesLineChart from '../components/ExpensesLineChart'
 import ExpensesPieChart from '../components/ExpensesPieChart'
+import InputAside from '../components/InputAside'
 import InputExpense from '../components/InputExpense'
 import InputSalary from '../components/InputSalary'
 
@@ -63,6 +65,10 @@ const BudgetPage = ({uid, user}) => {
         navigate('/main/budget/salary')
     }
 
+    let inputAside = () => {
+        navigate('/main/budget/aside')
+    }
+
     let inputExpense = () => {
         navigate('/main/budget/expense')
     }
@@ -104,12 +110,14 @@ const BudgetPage = ({uid, user}) => {
                     </div>
                     <div className='budget-row'>
                         <div className='budget-tile click-tile' onClick={inputSalary}>${parseFloat(user.salary).toFixed(2)}</div>
-                        <div className='budget-tile click-tile'>${parseFloat(user.aside).toFixed(2)}</div>
+                        <div className='budget-tile click-tile' onClick={inputAside}>${parseFloat(user.aside).toFixed(2)}</div>
                         <div className='budget-tile click-tile' onClick={inputExpense}>${total.toFixed(2)}</div>
                         <div className='budget-tile'>${(user.salary - user.aside - total).toFixed(2)}</div>
                     </div>
                 </div>
-                <div className='budget-chart'>Spending Chart</div>
+                <div className='budget-chart'>
+                    <ExpensesLineChart expenses={expenses} color={'#6C43B0'}></ExpensesLineChart>
+                </div>
                 {window.innerWidth > 1800 ? 
                 <div className='small-table'>
                     <div className='table-title'>Expenses per Month</div>
@@ -153,6 +161,7 @@ const BudgetPage = ({uid, user}) => {
             </div>
             <Routes>
                 <Route path='salary' element={<InputSalary user={user} />}></Route>
+                <Route path='aside' element={<InputAside user={user} />}></Route>
                 <Route path='expense' element={<InputExpense user={user} expenses={expenses} setExpenses={setExpenses} total={total} setTotal={setTotal} />}></Route>
                 <Route path='e:index' element={<EditExpense uid={uid} total={total} setTotal={setTotal} expenses={expenses} setExpenses={setExpenses} />}></Route>
             </Routes>

@@ -2,21 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { PieChart, Pie, Legend, Cell, Tooltip, ResponsiveContainer } from 'recharts'
 
 const ExpensesPieChart = ({ expenses }) => {
-    let [bills, setBills] = useState(0)
-    let [food, setFood] = useState(0)
-    let [groceries, setGroceries] = useState(0)
-    let [other, setOther] = useState(0)
-    let [shopping, setShopping] = useState(0)
-    let [subscriptions, setSubscriptions] = useState(0)
+    let [data, setData] = useState([])
 
     useEffect(() => {
         let getCategories = () => {
-            let tBills = 0
-            let tFood = 0
-            let tGroceries = 0
-            let tOther = 0
-            let tShopping = 0
-            let tSubscriptions = 0
+            let categories = [
+                {name: 'Bills', value: 0},
+                {name: 'Food', value: 0},
+                {name: 'Groceries', value: 0},
+                {name: 'Other', value: 0},
+                {name: 'Shopping', value: 0},
+                {name: 'Subscriptions', value: 0}]
             let today = new Date()
             today.setDate(1)
             today.setHours(0, 0, 0, 0)
@@ -25,22 +21,22 @@ const ExpensesPieChart = ({ expenses }) => {
                 if (expenses[i].date >= today.getTime()) {
                     switch (expenses[i].type) {
                         case 'bills':
-                            tBills += expenses[i].amount
+                            categories[0].value += expenses[i].amount
                             break
                         case 'food':
-                            tFood += expenses[i].amount
+                            categories[1].value += expenses[i].amount
                             break
                         case 'groceries':
-                            tGroceries += expenses[i].amount
+                            categories[2].value += expenses[i].amount
                             break
                         case 'other':
-                            tOther += expenses[i].amount
+                            categories[3].value += expenses[i].amount
                             break
                         case 'shopping':
-                            tShopping += expenses[i].amount
+                            categories[4].value += expenses[i].amount
                             break
                         case 'subscriptions':
-                            tSubscriptions += expenses[i].amount
+                            categories[5].value += expenses[i].amount
                             break
                         default:
                             break
@@ -48,35 +44,21 @@ const ExpensesPieChart = ({ expenses }) => {
                 }
             }
 
-            setBills(tBills)
-            setFood(tFood)
-            setGroceries(tGroceries)
-            setOther(tOther)
-            setShopping(tShopping)
-            setSubscriptions(tSubscriptions)
+            setData(categories)
         }
 
         getCategories()
     }, [expenses])
 
-    const data = [
-        { name: 'Bills', value: bills },
-        { name: 'Food', value: food },
-        { name: 'Groceries', value: groceries },
-        { name: 'Shopping', value: shopping },
-        { name: 'Subscriptions', value: subscriptions },
-        { name: 'Other', value: other }
-    ]
-
     const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#FE0E3A', '#DB91B1']
-    const RADIAN = Math.PI / 180;
     const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
+        const RADIAN = Math.PI / 180;
         const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
         const x = cx + radius * Math.cos(-midAngle * RADIAN);
         const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
         return (
-            <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+            <text x={x} y={y} fill='white' textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
                 {`${(percent * 100).toFixed(0)}%`}
             </text>
         )
@@ -84,7 +66,7 @@ const ExpensesPieChart = ({ expenses }) => {
 
     const style = {
         top: 0,
-        lineHeight: "24px"
+        lineHeight: '24px'
     }
 
     const CustomTooltip = ({active, payload}) => {
@@ -110,7 +92,7 @@ const ExpensesPieChart = ({ expenses }) => {
                     cy='50%'
                     labelLine={false}
                     label={renderCustomizedLabel}
-                    outerRadius={window.innerWidth > 1800 ? 300 : 125}
+                    outerRadius='85%'
                     fill='#8884d8'
                     dataKey='value'
                 >
@@ -119,7 +101,7 @@ const ExpensesPieChart = ({ expenses }) => {
                     ))}
                 </Pie>
                 <Tooltip content={<CustomTooltip />}/>
-                <Legend iconSize={10} layout="horizontal" verticalAlign="middle" wrapperStyle={style} />
+                <Legend iconSize={10} layout='horizontal' verticalAlign='middle' wrapperStyle={style} />
             </PieChart>
         </ResponsiveContainer>
         </>
