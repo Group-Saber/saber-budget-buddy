@@ -147,9 +147,9 @@ const DebtPage = ({uid, user}) => {
                 </div>
             </div>
             <Routes>
-                <Route path='input' element={<InputDebt uid={uid} pos={positive} neg={negative} setPos={setPositive} setNeg={setNegative} debts={debts} setDebts={setDebts} />}></Route>
-                <Route path='d:index' element={<EditDebt uid={uid} pos={positive} neg={negative} setPos={setPositive} setNeg={setNegative} debts={debts} setDebts={setDebts} paid={paid} setPaid={setPaid} />}></Route>
-                <Route path='p:index' element={<EditPayment uid={uid} pos={positive} neg={negative} setPos={setPositive} setNeg={setNegative} debts={debts} setDebts={setDebts} paid={paid} setPaid={setPaid} />}></Route>
+                <Route path='input' element={<InputDebt user={user} uid={uid} pos={positive} neg={negative} setPos={setPositive} setNeg={setNegative} debts={debts} setDebts={setDebts} />}></Route>
+                <Route path='d:index' element={<EditDebt user={user} uid={uid} pos={positive} neg={negative} setPos={setPositive} setNeg={setNegative} debts={debts} setDebts={setDebts} paid={paid} setPaid={setPaid} />}></Route>
+                <Route path='p:index' element={<EditPayment user={user} uid={uid} pos={positive} neg={negative} setPos={setPositive} setNeg={setNegative} debts={debts} setDebts={setDebts} paid={paid} setPaid={setPaid} />}></Route>
             </Routes>
         </div>
     )

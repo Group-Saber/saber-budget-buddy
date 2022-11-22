@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-const EditExpense = ({uid, total, setTotal, expenses, setExpenses}) => {
+const EditExpense = ({user, uid, total, setTotal, expenses, setExpenses}) => {
     let [amount, setAmount] = useState(0)
     let [type, setType] = useState('')
     let [index, setIndex] = useState(0)
@@ -24,6 +24,7 @@ const EditExpense = ({uid, total, setTotal, expenses, setExpenses}) => {
     }, [expenses, location.state])
 
     let update = () => {
+        user.expenses[index] = expenses[index]
         const oldExpense = Object.assign({}, expenses[index])
 
         expenses[location.state].amount = parseFloat(amount)
@@ -59,10 +60,15 @@ const EditExpense = ({uid, total, setTotal, expenses, setExpenses}) => {
 
         setTotal(total - expenses[index])
 
+        user.expenses = [
+            ...expenses.slice(0, index),
+            ...expenses.slice(index + 1, expenses.length)
+        ].reverse()
+
         setExpenses(expenses => [
             ...expenses.slice(0, index),
             ...expenses.slice(index + 1, expenses.length)
-        ]);
+        ])
 
         back()
     }

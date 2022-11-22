@@ -26,6 +26,7 @@ const InputExpense = ({user, expenses, setExpenses, total, setTotal}) => {
         })
 
         setTotal(total + newExpense.amount)
+        user.expenses = [newExpense, ...expenses].reverse()
         setExpenses(expenses => [newExpense, ...expenses])
         back()
     }

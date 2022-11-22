@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-const EditDebt = ({uid, pos, neg, setPos, setNeg, debts, setDebts, paid, setPaid}) => {
+const EditDebt = ({user, uid, pos, neg, setPos, setNeg, debts, setDebts, paid, setPaid}) => {
     let [amount, setAmount] = useState('')
     let [name, setName] = useState('')
     let [note, setNote] = useState('')
@@ -38,6 +38,7 @@ const EditDebt = ({uid, pos, neg, setPos, setNeg, debts, setDebts, paid, setPaid
 
     let inputDebt = async (oldDebt) => {
         if(amount !== '' && name !== '' && note !== '') {
+            user.debts[index] = debts[index]
             const newDebt = debts[index]
             let tempPos = pos
             let tempNeg = neg
@@ -84,13 +85,9 @@ const EditDebt = ({uid, pos, neg, setPos, setNeg, debts, setDebts, paid, setPaid
             setNeg(neg - debts[index].amount)
         }
 
+        user.paid = [debts[index], ...paid].reverse()
         setPaid(paid => [debts[index], ...paid])
-
-        setDebts(debts => [
-            ...debts.slice(0, index),
-            ...debts.slice(index + 1, debts.length)
-        ]);
-
+        removeDebt()
         back()
     }
 
@@ -109,12 +106,20 @@ const EditDebt = ({uid, pos, neg, setPos, setNeg, debts, setDebts, paid, setPaid
             setNeg(neg - debts[index].amount)
         }
 
+        removeDebt()
+        back()
+    }
+
+    let removeDebt = () => {
+        user.debts = [
+            ...debts.slice(0, index),
+            ...debts.slice(index + 1, debts.length)
+        ].reverse()
+
         setDebts(debts => [
             ...debts.slice(0, index),
             ...debts.slice(index + 1, debts.length)
-        ]);
-
-        back()
+        ])
     }
 
     let back = () => {

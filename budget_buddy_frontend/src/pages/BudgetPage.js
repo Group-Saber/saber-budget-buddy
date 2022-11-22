@@ -163,7 +163,7 @@ const BudgetPage = ({uid, user}) => {
                 <Route path='salary' element={<InputSalary user={user} />}></Route>
                 <Route path='aside' element={<InputAside user={user} />}></Route>
                 <Route path='expense' element={<InputExpense user={user} expenses={expenses} setExpenses={setExpenses} total={total} setTotal={setTotal} />}></Route>
-                <Route path='e:index' element={<EditExpense uid={uid} total={total} setTotal={setTotal} expenses={expenses} setExpenses={setExpenses} />}></Route>
+                <Route path='e:index' element={<EditExpense user={user} uid={uid} total={total} setTotal={setTotal} expenses={expenses} setExpenses={setExpenses} />}></Route>
             </Routes>
         </div>
     )

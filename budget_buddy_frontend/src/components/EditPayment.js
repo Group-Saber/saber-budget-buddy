@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-const EditPayment = ({uid, pos, neg, setPos, setNeg, debts, setDebts, paid, setPaid}) => {
+const EditPayment = ({user, uid, pos, neg, setPos, setNeg, debts, setDebts, paid, setPaid}) => {
     let [index, setIndex] = useState(0)
     const navigate = useNavigate()
     const location = useLocation()
@@ -35,13 +35,9 @@ const EditPayment = ({uid, pos, neg, setPos, setNeg, debts, setDebts, paid, setP
             setNeg(neg + paid[index].amount)
         }
 
+        user.debts = [paid[index], ...debts].reverse()
         setDebts(debts => [paid[index], ...debts])
-
-        setPaid(paid => [
-            ...paid.slice(0, index),
-            ...paid.slice(index + 1, paid.length)
-        ]);
-
+        removePaid()
         back()
     }
 
@@ -54,12 +50,20 @@ const EditPayment = ({uid, pos, neg, setPos, setNeg, debts, setDebts, paid, setP
             body: JSON.stringify(paid[index])
         })
 
+        removePaid()
+        back()
+    }
+
+    let removePaid = () => {
+        user.paid = [
+            ...paid.slice(0, index),
+            ...paid.slice(index + 1, paid.length)
+        ].reverse()
+
         setPaid(paid => [
             ...paid.slice(0, index),
             ...paid.slice(index + 1, paid.length)
-        ]);
-
-        back()
+        ])
     }
 
     let back = () => {

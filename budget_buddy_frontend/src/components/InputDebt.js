@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const InputDebt = ({uid, pos, neg, setPos, setNeg, debts, setDebts}) => {
+const InputDebt = ({user, uid, pos, neg, setPos, setNeg, debts, setDebts}) => {
     let [amount, setAmount] = useState('')
     let [name, setName] = useState('')
     let [note, setNote] = useState('')
@@ -30,6 +30,7 @@ const InputDebt = ({uid, pos, neg, setPos, setNeg, debts, setDebts}) => {
                 setNeg(neg + newDebt.amount)
             }
 
+            user.debts = [newDebt, ...debts].reverse()
             setDebts(debts => [newDebt, ...debts])
             back()
         }
