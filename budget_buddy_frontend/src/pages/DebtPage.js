@@ -97,9 +97,9 @@ const DebtPage = ({uid, user}) => {
     }
 
     return (
-        <div className='tab-body'>
+        <div>
             {window.innerWidth > 768 ? 
-            <div>
+            <div className='tab-body'>
                 <div className='debt-top'>
                     <div className='totals'>
                         <div className='total-stacked'>
@@ -169,7 +169,7 @@ const DebtPage = ({uid, user}) => {
                     </div>
                 </div>
             </div> : 
-            <div>
+            <div className='tab-body'>
                 <div className='mobile-total top'>
                         <i className='material-icons positive'>arrow_upward</i> 
                         <p>${positive.toFixed(2)}</p>
