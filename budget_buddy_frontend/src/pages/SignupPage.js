@@ -10,7 +10,11 @@ const SignupPage = () => {
     let [error, setError] = useState('')
     const navigate = useNavigate()
 
+    /**
+     * allows the user to sign up
+     */
     let signup = async () => {
+        // checks that all fields are not empty
         if(email !== '' && pass !== '' && repass !== '' && first !== '' && last !== '' && pass.length >= 8 && pass === repass) {
             const creds = {
                 'email': email,
@@ -19,6 +23,7 @@ const SignupPage = () => {
                 'last': last,
             }
 
+            // checks that the user does not exist
             let response = await fetch(`http://127.0.0.1:8000/app/verify/`, {
                     method: "POST",
                     headers: {
@@ -28,6 +33,7 @@ const SignupPage = () => {
             })
             let data = await response.json()
 
+            // gives error message or creates user account
             if(data === 'sign') {
                 setError('Error signing up.')
             } else if(data === 'taken') {
@@ -46,6 +52,11 @@ const SignupPage = () => {
         }
     }
 
+    /**
+     * changes the value of the variable that was edited by user
+     * 
+     * @param {*} e 
+     */
     let handleChange = (e) => {
         const id = e.target.id
         const value = e.target.value

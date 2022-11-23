@@ -7,13 +7,18 @@ const LoginPage = ({uid}) => {
     let [error, setError] = useState('')
     const navigate = useNavigate()
 
+    /**
+     * allows the user to log into their account
+     */
     let login = async () => {
+        // checks that the email and password are not empty
         if(email !== '' && password !== '') {
             const creds = {
                 'email': email,
                 'password': password,
             }
 
+            // checks that the email and password are valid
             let response = await fetch(`http://127.0.0.1:8000/app/login/`, {
                     method: "POST",
                     headers: {
@@ -23,6 +28,7 @@ const LoginPage = ({uid}) => {
             })
             let data = await response.json()
 
+            // logs in valid user, or gives an error message
             if(data !== '') {
                 uid(data)
                 navigate('/main')
@@ -34,6 +40,11 @@ const LoginPage = ({uid}) => {
         }
     }
 
+    /**
+     * changes the value of the variable that was edited by user
+     * 
+     * @param {*} e 
+     */
     let handleChange = (e) => {
         const id = e.target.id
         const value = e.target.value

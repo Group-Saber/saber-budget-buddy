@@ -38,6 +38,12 @@ def input_salary(request, uid):
     return Response(data)
 
 @api_view(['POST'])
+def input_aside(request, uid):
+    data = request.data
+    database.child('users').child(uid).child('aside').set(data)
+    return Response(data)
+
+@api_view(['POST'])
 def input_expense(request, uid):
     data = request.data
     database.child('users').child(uid).child('expenses').child(data['date']).set(data)
@@ -85,13 +91,6 @@ def unpaid(request, uid):
 def get_user(request, uid):
     user = database.child('users').child(uid).get().val()
     return Response(user)
-
-@api_view(['POST'])
-def change_name(request, uid):
-    data = request.data
-    database.child('users').child(uid).update({"first": data['first']})
-    database.child('users').child(uid).update({"last": data['last']})
-    return Response()
 
 @api_view(['POST'])
 def login(request):

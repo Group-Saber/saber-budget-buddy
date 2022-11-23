@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-const EditExpense = ({uid, total, setTotal, expenses, setExpenses}) => {
+const EditExpense = ({user, uid, total, setTotal, expenses, setExpenses}) => {
     let [amount, setAmount] = useState(0)
     let [type, setType] = useState('')
     let [index, setIndex] = useState(0)
@@ -9,6 +9,11 @@ const EditExpense = ({uid, total, setTotal, expenses, setExpenses}) => {
     let location = useLocation()
 
     useEffect(() => {
+        /**
+         * gets the values for the selected expense
+         * 
+         * @param {*} index 
+         */
         let getExpense = (index) => {
             let temp = expenses[index]
 
@@ -23,16 +28,25 @@ const EditExpense = ({uid, total, setTotal, expenses, setExpenses}) => {
         getExpense(location.state)
     }, [expenses, location.state])
 
+    /**
+     * updates the values of the expense
+     */
     let update = () => {
+        user.expenses[index] = expenses[index]
         const oldExpense = Object.assign({}, expenses[index])
 
         expenses[location.state].amount = parseFloat(amount)
         expenses[location.state].type = type
     
-        input(oldExpense)
+        inputExpense(oldExpense)
     }
 
-    let input = async (oldExpense) => {
+    /**
+     * updates the expense in the database through backend api call
+     * 
+     * @param {*} oldExpense 
+     */
+    let inputExpense = async (oldExpense) => {
         const newExpense = expenses[index]
         let tempTotal = total - oldExpense.amount
 
@@ -48,6 +62,9 @@ const EditExpense = ({uid, total, setTotal, expenses, setExpenses}) => {
         back()
     }
 
+    /**
+     * deletes an expense from the database through backend api call
+     */
     let deleteExpense = async () => {
         await fetch(`http://127.0.0.1:8000/app/budget/delete/${uid}`, {
             method: "POST",
@@ -59,10 +76,15 @@ const EditExpense = ({uid, total, setTotal, expenses, setExpenses}) => {
 
         setTotal(total - expenses[index])
 
+        user.expenses = [
+            ...expenses.slice(0, index),
+            ...expenses.slice(index + 1, expenses.length)
+        ].reverse()
+
         setExpenses(expenses => [
             ...expenses.slice(0, index),
             ...expenses.slice(index + 1, expenses.length)
-        ]);
+        ])
 
         back()
     }
@@ -71,6 +93,11 @@ const EditExpense = ({uid, total, setTotal, expenses, setExpenses}) => {
         navigate(-1)
     }
 
+    /**
+     * changes the value of the variable that was edited by user
+     * 
+     * @param {*} e 
+     */
     let handleChange = (e) => {
         const id = e.target.id
 

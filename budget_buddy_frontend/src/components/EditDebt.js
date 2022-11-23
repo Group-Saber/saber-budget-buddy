@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-const EditDebt = ({uid, pos, neg, setPos, setNeg, debts, setDebts, paid, setPaid}) => {
+const EditDebt = ({user, uid, pos, neg, setPos, setNeg, debts, setDebts, paid, setPaid}) => {
     let [amount, setAmount] = useState('')
     let [name, setName] = useState('')
     let [note, setNote] = useState('')
@@ -10,6 +10,11 @@ const EditDebt = ({uid, pos, neg, setPos, setNeg, debts, setDebts, paid, setPaid
     const location = useLocation()
 
     useEffect(() => {
+        /**
+         * gets the values for the selected debt
+         * 
+         * @param {*} index 
+         */
         let getDebt = (index) => {
             let temp = debts[index]
 
@@ -26,6 +31,9 @@ const EditDebt = ({uid, pos, neg, setPos, setNeg, debts, setDebts, paid, setPaid
         getDebt(location.state)
     }, [debts, location.state])
 
+    /**
+     * updates the values of the debt
+     */
     let update = () => {
         const oldDebt = Object.assign({}, debts[index])
 
@@ -36,8 +44,14 @@ const EditDebt = ({uid, pos, neg, setPos, setNeg, debts, setDebts, paid, setPaid
         inputDebt(oldDebt)
     }
 
+    /**
+     * updates the debt in the database through backend api call
+     * 
+     * @param {*} oldDebt 
+     */
     let inputDebt = async (oldDebt) => {
         if(amount !== '' && name !== '' && note !== '') {
+            user.debts[index] = debts[index]
             const newDebt = debts[index]
             let tempPos = pos
             let tempNeg = neg
@@ -66,6 +80,10 @@ const EditDebt = ({uid, pos, neg, setPos, setNeg, debts, setDebts, paid, setPaid
         }
     }
 
+    /**
+     * moves a debt into the payment section in the database through
+     * backend api call, and updates the debt totals
+     */
     let payDebt = async () => {
         debts[index] = Object.assign(debts[index], {'paid': Date.now()})
         console.log(debts.index)
@@ -84,16 +102,16 @@ const EditDebt = ({uid, pos, neg, setPos, setNeg, debts, setDebts, paid, setPaid
             setNeg(neg - debts[index].amount)
         }
 
+        user.paid = [debts[index], ...paid].reverse()
         setPaid(paid => [debts[index], ...paid])
-
-        setDebts(debts => [
-            ...debts.slice(0, index),
-            ...debts.slice(index + 1, debts.length)
-        ]);
-
+        removeDebt()
         back()
     }
 
+    /**
+     * deletes a debt from the database through backend api call,
+     * updates the debt totals
+     */
     let deleteDebt = async () => {
         await fetch(`http://127.0.0.1:8000/app/debts/delete/${uid}`, {
             method: "POST",
@@ -109,18 +127,34 @@ const EditDebt = ({uid, pos, neg, setPos, setNeg, debts, setDebts, paid, setPaid
             setNeg(neg - debts[index].amount)
         }
 
+        removeDebt()
+        back()
+    }
+
+    /**
+     * removes a debt at the index from the list
+     */
+    let removeDebt = () => {
+        user.debts = [
+            ...debts.slice(0, index),
+            ...debts.slice(index + 1, debts.length)
+        ].reverse()
+
         setDebts(debts => [
             ...debts.slice(0, index),
             ...debts.slice(index + 1, debts.length)
-        ]);
-
-        back()
+        ])
     }
 
     let back = () => {
         navigate(-1)
     }
 
+    /**
+     * changes the value of the variable that was edited by user
+     * 
+     * @param {*} e 
+     */
     let handleChange = (e) => {
         const id = e.target.id
 

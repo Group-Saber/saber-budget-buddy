@@ -6,28 +6,30 @@ const InputExpense = ({user, expenses, setExpenses, total, setTotal}) => {
     let [type, setType] = useState('bills')
     let navigate = useNavigate()
 
-    let update = () => {
-        input()
-    }
-
-    let input = async () => {
-        const newExpense = {
-            'amount': parseFloat(amount),
-            'type': type,
-            'date': Date.now()
+    /**
+     * inputs the newly created expense into the database through backend api call
+     */
+    let inputExpense = async () => {
+        if(amount !== '' && type !== '') {
+            const newExpense = {
+                'amount': parseFloat(amount),
+                'type': type,
+                'date': Date.now()
+            }
+    
+            await fetch(`http://127.0.0.1:8000/app/budget/input/${user.uid}`, {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify(newExpense)
+            })
+    
+            setTotal(total + newExpense.amount)
+            user.expenses = [newExpense, ...expenses].reverse()
+            setExpenses(expenses => [newExpense, ...expenses])
+            back()
         }
-
-        await fetch(`http://127.0.0.1:8000/app/budget/input/${user.uid}`, {
-            method: "POST",
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify(newExpense)
-        })
-
-        setTotal(total + newExpense.amount)
-        setExpenses(expenses => [newExpense, ...expenses])
-        back()
     }
 
     let clear = () => {
@@ -39,6 +41,11 @@ const InputExpense = ({user, expenses, setExpenses, total, setTotal}) => {
         navigate(-1)
     }
 
+    /**
+     * changes the value of the variable that was edited by user
+     * 
+     * @param {*} e 
+     */
     let handleChange = (e) => {
         const id = e.target.id
 
@@ -77,7 +84,7 @@ const InputExpense = ({user, expenses, setExpenses, total, setTotal}) => {
                     <div>
                         <button className='budget-button button' onClick={back}>Back</button>
                         <button className='budget-button button' onClick={clear}>Clear</button>
-                        <button className='budget-button button' onClick={update}>Enter</button>
+                        <button className='budget-button button' onClick={inputExpense}>Enter</button>
                     </div>
                 </div>
             </div>

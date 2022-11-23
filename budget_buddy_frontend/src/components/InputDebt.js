@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const InputDebt = ({uid, pos, neg, setPos, setNeg, debts, setDebts}) => {
+const InputDebt = ({user, uid, pos, neg, setPos, setNeg, debts, setDebts}) => {
     let [amount, setAmount] = useState('')
     let [name, setName] = useState('')
     let [note, setNote] = useState('')
     let navigate = useNavigate()
 
+    /**
+     * inputs the newly created debt into the database through backend api call
+     */
     let inputDebt = async () => {
         if(amount !== '' && name !== '' && note !== '') {
             const newDebt = {
@@ -30,6 +33,7 @@ const InputDebt = ({uid, pos, neg, setPos, setNeg, debts, setDebts}) => {
                 setNeg(neg + newDebt.amount)
             }
 
+            user.debts = [newDebt, ...debts].reverse()
             setDebts(debts => [newDebt, ...debts])
             back()
         }
@@ -44,6 +48,15 @@ const InputDebt = ({uid, pos, neg, setPos, setNeg, debts, setDebts}) => {
         document.getElementById('note').value = ''
     }
 
+    let back = () => {
+        navigate(-1)
+    }
+
+    /**
+     * changes the value of the variable that was edited by user
+     * 
+     * @param {*} e 
+     */
     let handleChange = (e) => {
         const id = e.target.id
 
@@ -60,10 +73,6 @@ const InputDebt = ({uid, pos, neg, setPos, setNeg, debts, setDebts}) => {
             default:
                 break;
         }
-    }
-    
-    let back = () => {
-        navigate(-1)
     }
 
     return (

@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react'
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
+import React, { useEffect, useState } from 'react'
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 
-const DebtLineChart = ({debts, color, title}) => {
+const ExpensesLineChart = ({expenses, color}) => {
     let [dates, setDates] = useState([])
 
     useEffect(() => {
         /**
-         * gets the total debts amount for the past six weeks
+         * gets the total expenses amount for the past six weeks
          */
         let getDates = () => {
             let week = []
@@ -22,21 +22,21 @@ const DebtLineChart = ({debts, color, title}) => {
                 today.setDate(today.getDate() - 7)
             }
 
-            for(let i = 0; i < debts.length; i++) {
-                today = debts[i].date
+            for(let i = 0; i < expenses.length; i++) {
+                today = expenses[i].date
                 
                 if(today >= week[0].date.getTime()) {
-                    week[0].amount += debts[i].amount
+                    week[0].amount += expenses[i].amount
                 } else if(today >= week[1].date.getTime()) {
-                    week[1].amount += debts[i].amount
+                    week[1].amount += expenses[i].amount
                 } else if(today >= week[2].date.getTime()) {
-                    week[2].amount += debts[i].amount
+                    week[2].amount += expenses[i].amount
                 } else if(today >= week[3].date.getTime()) {
-                    week[3].amount += debts[i].amount
+                    week[3].amount += expenses[i].amount
                 } else if(today >= week[4].date.getTime()) {
-                    week[4].amount += debts[i].amount
+                    week[4].amount += expenses[i].amount
                 } else if(today >= week[5].date.getTime()) {
-                    week[5].amount += debts[i].amount
+                    week[5].amount += expenses[i].amount
                 } 
             }
 
@@ -44,7 +44,7 @@ const DebtLineChart = ({debts, color, title}) => {
         }
         
         getDates()
-    }, [debts])
+    }, [expenses])
 
     let formatDate = (date) => {
         let newDate = `${date.getMonth() + 1}/${date.getDate()}`
@@ -56,7 +56,7 @@ const DebtLineChart = ({debts, color, title}) => {
         return newDate
     }
 
-    const data = dates.map((debt) => debt === 0 ? null : ({amount: Math.abs(debt.amount), date: formatDate(new Date(debt.date))})).filter(n => n).reverse()
+    const data = dates.map((expense) => ({amount: Math.abs(expense.amount), date: formatDate(new Date(expense.date))})).filter(n => n).reverse()
 
     const CustomTooltip = ({active, payload}) => {
         if (active && payload && payload.length) {
@@ -72,27 +72,29 @@ const DebtLineChart = ({debts, color, title}) => {
 
     return (
         <>
-        <h2>{title} (6 Weeks)</h2>
+        <h2>Expenses (6 Weeks)</h2>
         <ResponsiveContainer width='100%' height='80%'>
-            <BarChart
-                data={data}
-                margin={{
-                    top: 5,
-                    right: 30,
-                    left: 20,
-                    bottom: 5,
-                }}
-                >
-                <CartesianGrid strokeDasharray='3 3' />
-                <XAxis dataKey='date' />
-                <YAxis />
-                <Tooltip content={<CustomTooltip />} />
-                <Legend />
-                <Bar dataKey='amount' fill={color} />
-            </BarChart>
+          <LineChart
+            width={500}
+            height={300}
+            data={data}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray='3 3' />
+            <XAxis dataKey='date' />
+            <YAxis />
+            <Tooltip content={<CustomTooltip />} />
+            <Legend />
+            <Line type='monotone' dataKey='amount' stroke={color} strokeWidth={3} activeDot={{ r: 8 }} />
+          </LineChart>
         </ResponsiveContainer>
         </>
     )
 }
 
-export default DebtLineChart
+export default ExpensesLineChart

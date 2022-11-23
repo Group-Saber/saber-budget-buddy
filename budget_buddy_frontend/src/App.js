@@ -9,12 +9,10 @@ import VerifyPage from './pages/VerifyPage';
 function App() {
   let [uid, setUID] = useState('')
 
-  let updateUID = (newUID) => {
-    window.localStorage.setItem('uid', JSON.stringify(newUID));
-    setUID(newUID)
-  }
-
   useEffect(() => {
+    /**
+     * keeps user logged in
+     */
     let getUID = () => {
       const data = window.localStorage.getItem('uid');
   
@@ -23,6 +21,9 @@ function App() {
       }
     }
 
+    /**
+     * checks the systems theme preferences to apply dark or light theme
+     */
     let detectTheme = () => {
       const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)")
 
@@ -36,6 +37,15 @@ function App() {
     getUID()
     detectTheme()
   }, [uid])
+
+  /**
+   * sets the new uid and stores in the window
+   * @param {*} newUID 
+   */
+   let updateUID = (newUID) => {
+    window.localStorage.setItem('uid', JSON.stringify(newUID));
+    setUID(newUID)
+  }
 
   return (
     <Router>
