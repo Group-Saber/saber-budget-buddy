@@ -123,71 +123,71 @@ const BudgetPage = ({uid, user}) => {
     }
 
     return (
-        <div className='tab-body'>
+        <div>
             {window.innerWidth > 768 ?
-            <div>
+            <div className='tab-body'>
                 <div className='budget-top'>
-                <div className='budget-column'>
-                    <div className='budget-title'>Monthly Details</div>
-                    <div className='budget-row'>
-                        <div className='budget-tile'>Salary</div>
-                        <div className='budget-tile'>Aside</div>
-                        <div className='budget-tile'>Expenses</div>
-                        <div className='budget-tile'>Remaining</div>
+                    <div className='budget-column'>
+                        <div className='budget-title'>Monthly Details</div>
+                        <div className='budget-row'>
+                            <div className='budget-tile'>Salary</div>
+                            <div className='budget-tile'>Aside</div>
+                            <div className='budget-tile'>Expenses</div>
+                            <div className='budget-tile'>Remaining</div>
+                        </div>
+                        <div className='budget-row'>
+                            <div className='budget-tile click-tile' onClick={inputSalary}>${parseFloat(user.salary).toFixed(2)}</div>
+                            <div className='budget-tile click-tile' onClick={inputAside}>${parseFloat(user.aside).toFixed(2)}</div>
+                            <div className='budget-tile click-tile' onClick={inputExpense}>${total.toFixed(2)}</div>
+                            <div className='budget-tile'>${(user.salary - user.aside - total).toFixed(2)}</div>
+                        </div>
                     </div>
-                    <div className='budget-row'>
-                        <div className='budget-tile click-tile' onClick={inputSalary}>${parseFloat(user.salary).toFixed(2)}</div>
-                        <div className='budget-tile click-tile' onClick={inputAside}>${parseFloat(user.aside).toFixed(2)}</div>
-                        <div className='budget-tile click-tile' onClick={inputExpense}>${total.toFixed(2)}</div>
-                        <div className='budget-tile'>${(user.salary - user.aside - total).toFixed(2)}</div>
+                    <div className='budget-chart'>
+                        <ExpensesLineChart expenses={expenses} color={'#6C43B0'}></ExpensesLineChart>
+                    </div>
+                    {window.innerWidth > 1800 ? 
+                    <div className='small-table'>
+                        <div className='table-title'>Expenses per Month</div>
+                        <ul className='table'>
+                            <li className='table-header months-header'>
+                                <div className='col small-col-1'>Month</div>
+                                <div className='col small-col-2'>Amount</div>
+                            </li>
+                            {months.map((month, index) => (
+                                <li className='table-row' key={index}>
+                                    <div className='col small-col-1'>{formatMonth(month.date)}</div>
+                                    <div className='col small-col-2'>{month.amount.toFixed(2)}</div>
+                                </li>
+                            ))}
+                        </ul>
+                    </div> : null}
+                </div>
+                <div className='budget-bottom'>
+                    <div className='table-container'>
+                        <div className='table-title'>Expenses</div>
+                        <ul className='table'>
+                            <li className='table-header expenses-header'>
+                                <div className='col col-1'>Type</div>
+                                <div className='col col-2'>Amount</div>
+                                <div className='col col-4'>Date</div>
+                                <div className='col col-5'><i className='material-icons debt-icon' onClick={inputExpense}>add</i></div>
+                            </li>
+                            {expenses.map((expense, index) => (
+                                <li className='table-row' key={index}>
+                                    <div className='col col-1' data-label='Type'>{expense.type.charAt(0).toUpperCase() + expense.type.slice(1)}</div>
+                                    <div className='col col-2' data-label='Amount'>{expense.amount.toFixed(2)}</div>
+                                    <div className='col col-4' data-label='Date'>{formatDate(new Date(expense.date))}</div>
+                                    <div className='col col-5' data-label='Button'><i className='material-icons debt-icon' onClick={() => editExpense(index)}>more_vert</i></div>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div className='budget-piechart'>
+                        <ExpensesPieChart expenses={expenses} />
                     </div>
                 </div>
-                <div className='budget-chart'>
-                    <ExpensesLineChart expenses={expenses} color={'#6C43B0'}></ExpensesLineChart>
-                </div>
-                {window.innerWidth > 1800 ? 
-                <div className='small-table'>
-                    <div className='table-title'>Expenses per Month</div>
-                    <ul className='table'>
-                        <li className='table-header months-header'>
-                            <div className='col small-col-1'>Month</div>
-                            <div className='col small-col-2'>Amount</div>
-                        </li>
-                        {months.map((month, index) => (
-                            <li className='table-row' key={index}>
-                                <div className='col small-col-1'>{formatMonth(month.date)}</div>
-                                <div className='col small-col-2'>{month.amount.toFixed(2)}</div>
-                            </li>
-                        ))}
-                    </ul>
-                </div> : null}
-            </div>
-            <div className='budget-bottom'>
-                <div className='table-container'>
-                    <div className='table-title'>Expenses</div>
-                    <ul className='table'>
-                        <li className='table-header expenses-header'>
-                            <div className='col col-1'>Type</div>
-                            <div className='col col-2'>Amount</div>
-                            <div className='col col-4'>Date</div>
-                            <div className='col col-5'><i className='material-icons debt-icon' onClick={inputExpense}>add</i></div>
-                        </li>
-                        {expenses.map((expense, index) => (
-                            <li className='table-row' key={index}>
-                                <div className='col col-1' data-label='Type'>{expense.type.charAt(0).toUpperCase() + expense.type.slice(1)}</div>
-                                <div className='col col-2' data-label='Amount'>{expense.amount.toFixed(2)}</div>
-                                <div className='col col-4' data-label='Date'>{formatDate(new Date(expense.date))}</div>
-                                <div className='col col-5' data-label='Button'><i className='material-icons debt-icon' onClick={() => editExpense(index)}>more_vert</i></div>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-                <div className='budget-piechart'>
-                    <ExpensesPieChart expenses={expenses} />
-                </div>
-            </div>
             </div> : 
-            <div>
+            <div className='tab-body'>
                 <div className='mobile-title'>Monthly Details</div>
                 <div className='mobile-column'>
                     <div className='mobile-row'>
