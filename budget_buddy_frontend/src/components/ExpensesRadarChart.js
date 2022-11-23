@@ -5,6 +5,9 @@ const ExpensesRadarChart = ({expenses, color}) => {
     let [data, setData] = useState([])
 
     useEffect(() => {
+        /**
+         * gets the total amount of expenses for each category
+         */
         let getCategories = () => {
             let categories = [
                 {type: 'Bills', amount: 0},

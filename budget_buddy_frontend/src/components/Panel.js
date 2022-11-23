@@ -14,6 +14,9 @@ const Panel = ({uid, updateUID}) => {
 
 
     useEffect(() => {
+        /**
+         * Gets all the user data from database
+         */
         let getUser = async () => {
             if(uid !== '') {
                 let response = await fetch(`http://127.0.0.1:8000/app/user/${uid}`)
@@ -26,16 +29,27 @@ const Panel = ({uid, updateUID}) => {
         getUser()
     }, [uid])
 
+    /**
+     * checks if path given is currently selected
+     * 
+     * @param {*} path 
+     * @returns a class name for the currently selected path
+     */
     let isCurrent = (path) => {
-        console.log(locate.pathname)
         return locate.pathname.includes(`/main${path}`) ? 'current' : ''
     }
 
+    /**
+     * Logs out the user
+     */
     let logout = () => {
         updateUID('')
         navigate('/login')
     }
 
+    /**
+     * toggles the theme between light and dark mode
+     */
     let switchTheme = async () => {
         document.body.classList.toggle('light-theme')
         document.body.classList.toggle('dark-theme')
@@ -44,6 +58,10 @@ const Panel = ({uid, updateUID}) => {
         console.log('current class name: ' + mode);
     }
 
+    /**
+     * generates six random characters from a string to
+     * create a hex color code
+     */
     let randomColor = () => {
         const hex = '0123456789ABCDEF'
         let newColor = ''

@@ -7,6 +7,9 @@ const VerifyPage = () => {
     const navigate = useNavigate()
     const location = useLocation()
 
+    /**
+     * creates the user account if the code is verified
+     */
     let signup = async () => {
         let response = await fetch(`http://127.0.0.1:8000/app/signup/`, {
                 method: "POST",
@@ -22,6 +25,9 @@ const VerifyPage = () => {
         }
     }
 
+    /**
+     * checks that user inputted code is the same as the generated code
+     */
     let verify = async () => {
         if(code === location.state.code) {
             await signup()
@@ -31,6 +37,11 @@ const VerifyPage = () => {
         }
     }
 
+    /**
+     * changes the value of the variable that was edited by user
+     * 
+     * @param {*} e 
+     */
     let handleChange = (e) => {
         setCode(e.target.value)
     }

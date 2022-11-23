@@ -7,7 +7,12 @@ const EditPayment = ({user, uid, pos, neg, setPos, setNeg, debts, setDebts, paid
     const location = useLocation()
 
     useEffect(() => {
-        let getDebt = (index) => {
+        /**
+         * gets the values of the selected payment
+         * 
+         * @param {*} index 
+         */
+        let getPayment = (index) => {
             let temp = paid[index]
 
             document.getElementById('amount').value = temp.amount
@@ -17,9 +22,12 @@ const EditPayment = ({user, uid, pos, neg, setPos, setNeg, debts, setDebts, paid
             setIndex(index)
         }
 
-        getDebt(location.state)
+        getPayment(location.state)
     }, [paid, location.state])
 
+    /**
+     * moves the payment to debt section in the database through backend api call
+     */
     let unpayDebt = async () => {
         await fetch(`http://127.0.0.1:8000/app/paid/unpaid/${uid}`, {
                 method: "POST",
@@ -37,10 +45,13 @@ const EditPayment = ({user, uid, pos, neg, setPos, setNeg, debts, setDebts, paid
 
         user.debts = [paid[index], ...debts].reverse()
         setDebts(debts => [paid[index], ...debts])
-        removePaid()
+        removePayment()
         back()
     }
 
+    /**
+     * deletes the payment from the database through backend api call
+     */
     let deletePayment = async () => {
         await fetch(`http://127.0.0.1:8000/app/paid/delete/${uid}`, {
             method: "POST",
@@ -50,11 +61,14 @@ const EditPayment = ({user, uid, pos, neg, setPos, setNeg, debts, setDebts, paid
             body: JSON.stringify(paid[index])
         })
 
-        removePaid()
+        removePayment()
         back()
     }
 
-    let removePaid = () => {
+    /**
+     * removes a payment at the index from the list
+     */
+    let removePayment = () => {
         user.paid = [
             ...paid.slice(0, index),
             ...paid.slice(index + 1, paid.length)

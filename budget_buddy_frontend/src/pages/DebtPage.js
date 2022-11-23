@@ -14,6 +14,9 @@ const DebtPage = ({uid, user}) => {
     const noteLength = window.innerWidth > 1800 ? 50 : 25
 
     useEffect(() => {
+        /**
+         * Gets all debts the user has
+         */
         let getDebts = async () => {
             if(uid !== '' && Object.keys(user).length !== 0) { 
                 let data = Object.values(user.debts)
@@ -21,6 +24,9 @@ const DebtPage = ({uid, user}) => {
             }
         }
 
+        /**
+         * Gets all debt payments the user has
+         */
         let getPaid = async () => {
             if(uid !== '' && Object.keys(user).length !== 0) { 
                 let data = Object.values(user.paid)
@@ -32,13 +38,20 @@ const DebtPage = ({uid, user}) => {
         getPaid()
     }, [uid, user])
 
+    /**
+     * Calculates the debts for the current month
+     * 
+     * @param {*} data 
+     */
     let getMonthlyDebts = (data) => {
         let p = 0
         let n = 0
+        // get current date and set it to the first of the month
         let today = new Date()
         today.setDate(1)
         today.setHours(0,0,0,0)
 
+        // iterate through data and add only data that matches the month
         for(let i in data) {
             if(data[i].date >= today.getTime()) {
                 if(data[i].amount >= 0) {
@@ -54,6 +67,13 @@ const DebtPage = ({uid, user}) => {
         setNegative(n)
     }
 
+    /**
+     * Gets a date in milliseconds and converts it to the month and day,
+     * adds year to the end if it is not the same as the current year
+     * 
+     * @param {*} date 
+     * @returns the date in mm/dd or mm/dd/yyyy format
+     */
     let formatDate = (date) => {
         let newDate = `${date.getMonth() + 1}/${date.getDate()}`
 
@@ -64,7 +84,7 @@ const DebtPage = ({uid, user}) => {
         return newDate
     }
 
-    let add = () => {
+    let inputDebt = () => {
         navigate('/main/debt/input')
     }
 
@@ -96,10 +116,10 @@ const DebtPage = ({uid, user}) => {
                     </div>
                 </div>
                 <div className='debt-chart'>
-                    <DebtBarChart debts={debts.map((debt) => debt.amount >= 0 ? (debt) : (0))} color={'#599656'} title={'Positive Debt'} />
+                    <DebtBarChart debts={debts.map((debt) => debt.amount >= 0 ? (debt) : (0))} color={'#599656'} title={'Positive Debts'} />
                 </div>
                 <div className='debt-chart'>
-                    <DebtBarChart debts={debts.map((debt) => debt.amount < 0 ? (debt) : (0))} color={'#ec0a00'} title={'Negative Debt'} />
+                    <DebtBarChart debts={debts.map((debt) => debt.amount < 0 ? (debt) : (0))} color={'#ec0a00'} title={'Negative Debts'} />
                 </div>
             </div>
             <div className='debt-bottom'>
@@ -111,7 +131,7 @@ const DebtPage = ({uid, user}) => {
                             <div className='col col-2'>Amount</div>
                             <div className='col col-3'>Note</div>
                             <div className='col col-4'>Date</div>
-                            <div className='col col-5'><i className='material-icons debt-icon' onClick={add}>add</i></div>
+                            <div className='col col-5'><i className='material-icons debt-icon' onClick={inputDebt}>add</i></div>
                         </li>
                         {debts.map((debt, index) => (
                             <li className='table-row' key={index}>

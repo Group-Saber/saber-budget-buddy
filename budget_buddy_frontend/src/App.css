@@ -684,26 +684,18 @@ body {
 }
 
 /* laptops */
-@media only screen and (min-width: 769px) and (max-width: 1800px)  {
-  .top-panel {
-    width: 85vw;
-    height: 8vh;
-  }
+@media only screen and (max-width: 1800px)  {
+  .top-panel {width: 85vw; height: 8vh;}
 
   .side-panel {width: 15vw;}
 
-  .tab-body {
-    left: 15vw;
-    top: 8vh;
-  }
+  .tab-body {left: 15vw; top: 8vh;}
 
   .dash-top {height: 50%;}
 
   .dash-bottom {height: 50%;}
 
   .dash-column {width: 15%;}
-
-  .dash-budget {height: 32.6%;}
 
   .dash-chart {width: 42%;}
 

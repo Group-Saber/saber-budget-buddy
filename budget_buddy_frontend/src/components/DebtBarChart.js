@@ -5,6 +5,9 @@ const DebtLineChart = ({debts, color, title}) => {
     let [dates, setDates] = useState([])
 
     useEffect(() => {
+        /**
+         * gets the total debts amount for the past six weeks
+         */
         let getDates = () => {
             let week = []
             let today = new Date()

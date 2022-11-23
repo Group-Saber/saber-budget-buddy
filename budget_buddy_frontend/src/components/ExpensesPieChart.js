@@ -5,6 +5,9 @@ const ExpensesPieChart = ({ expenses }) => {
     let [data, setData] = useState([])
 
     useEffect(() => {
+        /**
+         * gets the total amount of expenses for each category
+         */
         let getCategories = () => {
             let categories = [
                 {name: 'Bills', value: 0},

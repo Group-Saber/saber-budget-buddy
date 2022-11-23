@@ -5,6 +5,9 @@ const ExpensesLineChart = ({expenses, color}) => {
     let [dates, setDates] = useState([])
 
     useEffect(() => {
+        /**
+         * gets the total expenses amount for the past six weeks
+         */
         let getDates = () => {
             let week = []
             let today = new Date()

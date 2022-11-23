@@ -6,6 +6,9 @@ const InputSalary = ({user}) => {
     let navigate = useNavigate()
 
     useEffect(() => {
+        /**
+         * gets the current user salary
+         */
         let getSalary = () => {
             setSalary(user.salary)
             document.getElementById('salary').value = user.salary
@@ -13,22 +16,24 @@ const InputSalary = ({user}) => {
 
         getSalary()
     }, [user])
+    
+    /**
+     * inputs the new salary into the database through backend api call
+     */
+    let inputSalary = async () => {
+        if(salary !== '') {
+            user.salary = parseFloat(salary)
 
-    let update = () => {
-        user.salary = parseFloat(salary)
-        input()
-    }
-
-    let input = async () => {
-        await fetch(`http://127.0.0.1:8000/app/salary/input/${user.uid}`, {
-            method: "POST",
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify(parseFloat(salary))
-        })
-
-        back()
+            await fetch(`http://127.0.0.1:8000/app/salary/input/${user.uid}`, {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify(parseFloat(salary))
+            })
+    
+            back()
+        }
     }
 
     let clear = () => {
@@ -40,6 +45,11 @@ const InputSalary = ({user}) => {
         navigate(-1)
     }
 
+    /**
+     * changes the value of the variable that was edited by user
+     * 
+     * @param {*} e 
+     */
     let handleChange = (e) => {
         setSalary(e.target.value)
     }
@@ -56,7 +66,7 @@ const InputSalary = ({user}) => {
                     <div>
                         <button className='budget-button button' onClick={back}>Back</button>
                         <button className='budget-button button' onClick={clear}>Clear</button>
-                        <button className='budget-button button' onClick={update}>Enter</button>
+                        <button className='budget-button button' onClick={inputSalary}>Enter</button>
                     </div>
                 </div>
             </div>

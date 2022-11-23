@@ -10,6 +10,11 @@ const EditDebt = ({user, uid, pos, neg, setPos, setNeg, debts, setDebts, paid, s
     const location = useLocation()
 
     useEffect(() => {
+        /**
+         * gets the values for the selected debt
+         * 
+         * @param {*} index 
+         */
         let getDebt = (index) => {
             let temp = debts[index]
 
@@ -26,6 +31,9 @@ const EditDebt = ({user, uid, pos, neg, setPos, setNeg, debts, setDebts, paid, s
         getDebt(location.state)
     }, [debts, location.state])
 
+    /**
+     * updates the values of the debt
+     */
     let update = () => {
         const oldDebt = Object.assign({}, debts[index])
 
@@ -36,6 +44,11 @@ const EditDebt = ({user, uid, pos, neg, setPos, setNeg, debts, setDebts, paid, s
         inputDebt(oldDebt)
     }
 
+    /**
+     * updates the debt in the database through backend api call
+     * 
+     * @param {*} oldDebt 
+     */
     let inputDebt = async (oldDebt) => {
         if(amount !== '' && name !== '' && note !== '') {
             user.debts[index] = debts[index]
@@ -67,6 +80,10 @@ const EditDebt = ({user, uid, pos, neg, setPos, setNeg, debts, setDebts, paid, s
         }
     }
 
+    /**
+     * moves a debt into the payment section in the database through
+     * backend api call, and updates the debt totals
+     */
     let payDebt = async () => {
         debts[index] = Object.assign(debts[index], {'paid': Date.now()})
         console.log(debts.index)
@@ -91,6 +108,10 @@ const EditDebt = ({user, uid, pos, neg, setPos, setNeg, debts, setDebts, paid, s
         back()
     }
 
+    /**
+     * deletes a debt from the database through backend api call,
+     * updates the debt totals
+     */
     let deleteDebt = async () => {
         await fetch(`http://127.0.0.1:8000/app/debts/delete/${uid}`, {
             method: "POST",
@@ -110,6 +131,9 @@ const EditDebt = ({user, uid, pos, neg, setPos, setNeg, debts, setDebts, paid, s
         back()
     }
 
+    /**
+     * removes a debt at the index from the list
+     */
     let removeDebt = () => {
         user.debts = [
             ...debts.slice(0, index),
@@ -126,6 +150,11 @@ const EditDebt = ({user, uid, pos, neg, setPos, setNeg, debts, setDebts, paid, s
         navigate(-1)
     }
 
+    /**
+     * changes the value of the variable that was edited by user
+     * 
+     * @param {*} e 
+     */
     let handleChange = (e) => {
         const id = e.target.id
 

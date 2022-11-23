@@ -6,6 +6,9 @@ const InputSalary = ({user}) => {
     let navigate = useNavigate()
 
     useEffect(() => {
+        /**
+         * gets the current user aside
+         */
         let getAside = () => {
             setAside(user.aside)
             document.getElementById('aside').value = user.aside
@@ -13,22 +16,24 @@ const InputSalary = ({user}) => {
 
         getAside()
     }, [user])
+    
+    /**
+     * inputs the new aside into the database through backend api call
+     */
+    let inputAside = async () => {
+        if(aside !== '') {
+            user.aside = parseFloat(aside)
 
-    let update = () => {
-        user.aside = parseFloat(aside)
-        input()
-    }
-
-    let input = async () => {
-        await fetch(`http://127.0.0.1:8000/app/aside/input/${user.uid}`, {
-            method: "POST",
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify(parseFloat(aside))
-        })
-
-        back()
+            await fetch(`http://127.0.0.1:8000/app/aside/input/${user.uid}`, {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify(parseFloat(aside))
+            })
+    
+            back()
+        }
     }
 
     let clear = () => {
@@ -40,6 +45,11 @@ const InputSalary = ({user}) => {
         navigate(-1)
     }
 
+    /**
+     * changes the value of the variable that was edited by user
+     * 
+     * @param {*} e 
+     */
     let handleChange = (e) => {
         setAside(e.target.value)
     }
@@ -56,7 +66,7 @@ const InputSalary = ({user}) => {
                     <div>
                         <button className='budget-button button' onClick={back}>Back</button>
                         <button className='budget-button button' onClick={clear}>Clear</button>
-                        <button className='budget-button button' onClick={update}>Enter</button>
+                        <button className='budget-button button' onClick={inputAside}>Enter</button>
                     </div>
                 </div>
             </div>

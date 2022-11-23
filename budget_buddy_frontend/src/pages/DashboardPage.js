@@ -10,6 +10,9 @@ const DashboardPage = ({uid, user}) => {
     let [total, setTotal] = useState(0)
 
     useEffect(() => {
+        /**
+         * Gets all the debts the user has
+         */
         let getDebts = async () => {
             if(uid !== '' && Object.keys(user).length !== 0) {
                 let data = Object.values(user.debts)
@@ -17,10 +20,13 @@ const DashboardPage = ({uid, user}) => {
             }
         }
 
+        /**
+         * Gets all the expenses the user has
+         */
         let getExpenses = async () => {
             if(uid !== '' && Object.keys(user).length !== 0) {
                 let data = Object.values(user.expenses)
-                getMonthly(data.reverse())
+                getMonthlyExpenses(data.reverse())
             }
         }
 
@@ -28,7 +34,12 @@ const DashboardPage = ({uid, user}) => {
         getExpenses()
     }, [uid, user])
 
-    let getMonthly = (data) => {
+    /**
+     * Calculates the total expenses for the current month
+     * 
+     * @param {*} data 
+     */
+    let getMonthlyExpenses = (data) => {
         let temp = 0
         let curMonth = new Date()
         curMonth.setDate(1)

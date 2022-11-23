@@ -7,6 +7,9 @@ const InputDebt = ({user, uid, pos, neg, setPos, setNeg, debts, setDebts}) => {
     let [note, setNote] = useState('')
     let navigate = useNavigate()
 
+    /**
+     * inputs the newly created debt into the database through backend api call
+     */
     let inputDebt = async () => {
         if(amount !== '' && name !== '' && note !== '') {
             const newDebt = {
@@ -45,6 +48,15 @@ const InputDebt = ({user, uid, pos, neg, setPos, setNeg, debts, setDebts}) => {
         document.getElementById('note').value = ''
     }
 
+    let back = () => {
+        navigate(-1)
+    }
+
+    /**
+     * changes the value of the variable that was edited by user
+     * 
+     * @param {*} e 
+     */
     let handleChange = (e) => {
         const id = e.target.id
 
@@ -61,10 +73,6 @@ const InputDebt = ({user, uid, pos, neg, setPos, setNeg, debts, setDebts}) => {
             default:
                 break;
         }
-    }
-    
-    let back = () => {
-        navigate(-1)
     }
 
     return (

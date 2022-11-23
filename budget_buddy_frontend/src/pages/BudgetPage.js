@@ -14,18 +14,27 @@ const BudgetPage = ({uid, user}) => {
     let navigate = useNavigate()
 
     useEffect(() => {
-        let getData = () => {
+        /**
+         * Gets all the expenses the user has
+         */
+        let getExpenses = () => {
             if(uid !== '' && Object.keys(user).length !== 0) {
                 let data = Object.values(user.expenses)
-                getExpenses(data.reverse())
+                getMonthlyExpenses(data.reverse())
             }
         }
         
-        getData()
+        getExpenses()
     }, [uid, user])
 
-    let getExpenses = (data) => {
+    /**
+     * Calculates the total expenses for the current month, and previous months
+     * 
+     * @param {*} data 
+     */
+    let getMonthlyExpenses = (data) => {
         let temp = 0
+        // set current date to the first of the month
         let curMonth = new Date()
         curMonth.setDate(1)
         curMonth.setHours(0,0,0,0)
@@ -39,10 +48,12 @@ const BudgetPage = ({uid, user}) => {
         })
 
         for(let i in data) {
+            // gets total for current month
             if(data[i].date >= curMonth.getTime()) {
                 temp += data[i].amount
             }
 
+            // gets total for previous months, or decreases the month
             if(data[i].date >= prevMonth.getTime()) {
                 prevMonths[index].amount += data[i].amount
             } else {
@@ -73,6 +84,13 @@ const BudgetPage = ({uid, user}) => {
         navigate('/main/budget/expense')
     }
 
+    /**
+     * Gets a date in milliseconds and converts it to the month and day,
+     * adds year to the end if it is not the same as the current year
+     * 
+     * @param {*} date 
+     * @returns the date in mm/dd or mm/dd/yyyy format
+     */
     let formatDate = (date) => {
         let newDate = `${date.getMonth() + 1}/${date.getDate()}`
 
@@ -83,6 +101,13 @@ const BudgetPage = ({uid, user}) => {
         return newDate
     }
 
+    /**
+     * Gets a date in milliseconds and converts it to the month,
+     * adds year to the end if it is not the same as the current year
+     * 
+     * @param {*} date 
+     * @returns the name of the month
+     */
     let formatMonth = (date) => {
         let month = date.toLocaleString('default', { month: 'long' })
 
