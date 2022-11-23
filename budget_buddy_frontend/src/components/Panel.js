@@ -76,26 +76,41 @@ const Panel = ({uid, updateUID}) => {
 
     return (
         <div>
-            <div className='top-panel'>
-                <i className='material-icons top-icon' onClick={switchTheme}>light_mode</i>
-                <div className='panel-name'>
-                    <button className='name-btn'>{name}<div className='dropdown-arrow'></div></button>
-                    <div className='dropdown-content'>
-                        <button onClick={logout}>Logout</button>
+            {window.innerWidth > 768 ? 
+            <div>
+                <div className='top-panel'>
+                    <i className='material-icons top-icon' onClick={switchTheme}>light_mode</i>
+                    <div className='panel-name'>
+                        <button className='name-btn'>{name}<div className='dropdown-arrow'></div></button>
+                        <div className='dropdown-content'>
+                            <button onClick={logout}>Logout</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div className='side-panel'>
-                <div className='side-header'>
-                    <h2 style={{color: color}} onClick={randomColor}>Budget Buddy</h2>
-                    <hr></hr>
+                <div className='side-panel'>
+                    <div className='side-header'>
+                        <h2 style={{color: color}} onClick={randomColor}>Budget Buddy</h2>
+                        <hr></hr>
+                    </div>
+                    <div className='links'>                    
+                        <Link to='dashboard' className={isCurrent('/dashboard')} style={{color: color}}><i className='material-icons panel-icon'>space_dashboard</i> Dashboard</Link>
+                        <Link to='budget' className={isCurrent('/budget')} style={{color: color}}><i className='material-icons panel-icon'>savings</i> Budget</Link>
+                        <Link to='debt' className={isCurrent('/debt')} style={{color: color}}><i className='material-icons panel-icon'>payments</i> Debt</Link>
+                    </div>
                 </div>
-                <div className='links'>                    
-                    <Link to='dashboard' className={isCurrent('/dashboard')} style={{color: color}}><i className='material-icons panel-icon'>space_dashboard</i> Dashboard</Link>
-                    <Link to='budget' className={isCurrent('/budget')} style={{color: color}}><i className='material-icons panel-icon'>savings</i> Budget</Link>
-                    <Link to='debt' className={isCurrent('/debt')} style={{color: color}}><i className='material-icons panel-icon'>payments</i> Debt</Link>
+            </div> : 
+            <div>
+                <div className='top-panel'>
+                    <div className='panel-title' style={{color: color}} onClick={randomColor}>Budget Buddy</div>
                 </div>
-            </div>
+                <div className='side-panel'>
+                    <div className='links'>                    
+                        <Link to='dashboard' className={isCurrent('/dashboard')} style={{color: color}}><i className='material-icons panel-icon'>space_dashboard</i></Link>
+                        <Link to='budget' className={isCurrent('/budget')} style={{color: color}}><i className='material-icons panel-icon'>savings</i></Link>
+                        <Link to='debt' className={isCurrent('/debt')} style={{color: color}}><i className='material-icons panel-icon'>payments</i></Link>
+                    </div>
+                </div>
+            </div>}
             <Routes>
                 <Route path='dashboard' element={<DashboardPage uid={uid} user={user} />}></Route>
                 <Route path='budget/*' element={<BudgetPage uid={uid} user={user} />}></Route>

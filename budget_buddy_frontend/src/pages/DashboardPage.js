@@ -63,11 +63,11 @@ const DashboardPage = ({uid, user}) => {
                     <div className='dash-budget'>Aside</div>
                     <div className='dash-budget'>Remaining</div>
                 </div> : null}
-                <div className='dash-column'>
+                {window.innerWidth > 768 ? <div className='dash-column'>
                     <div className='dash-budget'>${parseFloat(user.salary).toFixed(2)}</div>
                     <div className='dash-budget'>${parseFloat(user.aside).toFixed(2)}</div>
                     <div className='dash-budget'>${(user.salary - total).toFixed(2)}</div>
-                </div>
+                </div> : null}
                 <div className='dash-chart'>
                     <ExpensesLineChart expenses={expenses} color='#E8896E'></ExpensesLineChart>
                 </div>

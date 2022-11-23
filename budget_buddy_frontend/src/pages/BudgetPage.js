@@ -124,7 +124,9 @@ const BudgetPage = ({uid, user}) => {
 
     return (
         <div className='tab-body'>
-            <div className='budget-top'>
+            {window.innerWidth > 768 ?
+            <div>
+                <div className='budget-top'>
                 <div className='budget-column'>
                     <div className='budget-title'>Monthly Details</div>
                     <div className='budget-row'>
@@ -180,10 +182,31 @@ const BudgetPage = ({uid, user}) => {
                         ))}
                     </ul>
                 </div>
-                <div className='dash-piechart'>
+                <div className='budget-piechart'>
                     <ExpensesPieChart expenses={expenses} />
                 </div>
             </div>
+            </div> : 
+            <div>
+                <div className='mobile-title'>Monthly Details</div>
+                <div className='mobile-column'>
+                    <div className='mobile-row'>
+                        <div className='mobile-tile'>Salary</div>
+                        <div className='mobile-tile'>Aside</div>
+                        <div className='mobile-tile'>Expenses</div>
+                        <div className='mobile-tile'>Remaining</div>
+                    </div>
+                    <div className='mobile-row'>
+                        <div className='mobile-tile'>${parseFloat(user.salary).toFixed(2)}</div>
+                        <div className='mobile-tile'>${parseFloat(user.aside).toFixed(2)}</div>
+                        <div className='mobile-tile'>${total.toFixed(2)}</div>
+                        <div className='mobile-tile'>${(user.salary - user.aside - total).toFixed(2)}</div>
+                    </div>
+                </div>
+                <div className='budget-piechart'>
+                    <ExpensesPieChart expenses={expenses} />
+                </div>
+            </div> }
             <Routes>
                 <Route path='salary' element={<InputSalary user={user} />}></Route>
                 <Route path='aside' element={<InputAside user={user} />}></Route>

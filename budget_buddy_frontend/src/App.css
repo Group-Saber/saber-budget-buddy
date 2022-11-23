@@ -415,6 +415,14 @@ body {
   padding: 10px;
 }
 
+.budget-piechart {
+  width: 50%;
+  height: 100%;
+  border-radius: 4px;
+  background-color: var(--fg-color);
+  text-align: center;
+}
+
 .small-table {
   width: 22.5%;
   border-radius: 4px;
@@ -683,8 +691,122 @@ body {
   cursor: pointer;
 }
 
+@media only screen and (max-width: 768px) {
+  .top-panel {width: 85vw; height: 5vh;}
+
+  .side-panel {width: 15vw;}
+
+  .tab-body {
+    left: 15vw; 
+    top: 5vh;
+    padding: 5px;
+  }
+
+  .panel-title {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+    top: 5px;
+  }
+
+  .links {
+    display: flex;
+    flex-direction: column;
+    padding-left: 5px;
+    padding-top: 5px;
+    margin-top: 50px;
+  }
+  
+  .links a {
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+  }
+  
+  .links .current {
+    background-color: var(--blue);
+    margin-right: 5px;
+    border-radius: 4px;
+    box-shadow: 0 3px 10px rgba(7, 141, 250, 0.2);
+  }
+
+  .panel-icon {
+    position: relative;
+    top: 5px;
+    right: 5px;
+  }
+
+  .dash-top {height: 100%; flex-direction: column;}
+
+  .dash-bottom {height: 100%; flex-direction: column; margin-top: 50px;}
+
+  .dash-chart {width: 93%; height: 50%; margin-bottom: 5px;}
+
+  .dash-piechart {width: 100%; margin-bottom: 5px;}
+
+  .mobile-title {
+    width: 100%;
+    height: 10vh; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--fg-color);
+    border-radius: 4px;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .mobile-column {width: 100%; display: flex;}
+
+  .mobile-row {width: 50%;}
+
+  .mobile-row:first-of-type {margin-right: 5px;}
+
+  .mobile-tile {
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--fg-color);
+    border-radius: 4px;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .mobile-tile:last-of-type {margin-bottom: 0;}
+
+  .budget-piechart {
+    height: 50vh;
+    width: 100%;
+  }
+
+  .mobile-total {
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--fg-color);
+    border-radius: 4px;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .mobile-total i {font-size: 56px;}
+
+  .mobile-total h2 {color: var(--blue); margin-right: 15px;}
+
+  .debt-chart {height: 50vh; width: 93%;}
+
+  .chart-bottom {margin-top: 5px;}
+}
+
 /* laptops */
-@media only screen and (max-width: 1800px)  {
+@media only screen and (min-width: 769px) and (max-width: 1800px)  {
   .top-panel {width: 85vw; height: 8vh;}
 
   .side-panel {width: 15vw;}
