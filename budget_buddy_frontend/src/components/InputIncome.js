@@ -10,8 +10,8 @@ const InputIncome = ({user}) => {
          * gets the current user income
          */
         let getIncome = () => {
-            setIncome(user.salary)
-            document.getElementById('income').value = user.salary
+            setIncome(user.income)
+            document.getElementById('income').value = user.income
         }
 
         getIncome()
@@ -22,9 +22,9 @@ const InputIncome = ({user}) => {
      */
     let inputIncome = async () => {
         if(income !== '') {
-            user.salary = parseFloat(income)
+            user.income = parseFloat(income)
 
-            await fetch(`http://127.0.0.1:8000/app/salary/input/${user.uid}`, {
+            await fetch(`http://127.0.0.1:8000/app/income/input/${user.uid}`, {
                 method: "POST",
                 headers: {
                     'Content-type': 'application/json'

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const InputSalary = ({user}) => {
+const InputAside = ({user}) => {
     let [aside, setAside] = useState('')
     let navigate = useNavigate()
 
@@ -74,4 +74,4 @@ const InputSalary = ({user}) => {
     )
 }
 
-export default InputSalary
+export default InputAside

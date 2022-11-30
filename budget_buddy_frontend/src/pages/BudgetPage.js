@@ -136,10 +136,10 @@ const BudgetPage = ({uid, user}) => {
                             <div className='budget-tile'>Remaining</div>
                         </div>
                         <div className='budget-row'>
-                            <div className='budget-tile click-tile' onClick={inputIncome}>${parseFloat(user.salary).toFixed(2)}</div>
+                            <div className='budget-tile click-tile' onClick={inputIncome}>${parseFloat(user.income).toFixed(2)}</div>
                             <div className='budget-tile click-tile' onClick={inputAside}>${parseFloat(user.aside).toFixed(2)}</div>
                             <div className='budget-tile click-tile' onClick={inputExpense}>${total.toFixed(2)}</div>
-                            <div className='budget-tile'>${(user.salary - user.aside - total).toFixed(2)}</div>
+                            <div className='budget-tile'>${(user.income - user.aside - total).toFixed(2)}</div>
                         </div>
                     </div>
                     <div className='budget-chart'>
@@ -197,10 +197,10 @@ const BudgetPage = ({uid, user}) => {
                         <div className='mobile-tile'>Remaining</div>
                     </div>
                     <div className='mobile-row'>
-                        <div className='mobile-tile'>${parseFloat(user.salary).toFixed(2)}</div>
+                        <div className='mobile-tile'>${parseFloat(user.income).toFixed(2)}</div>
                         <div className='mobile-tile'>${parseFloat(user.aside).toFixed(2)}</div>
                         <div className='mobile-tile'>${total.toFixed(2)}</div>
-                        <div className='mobile-tile'>${(user.salary - user.aside - total).toFixed(2)}</div>
+                        <div className='mobile-tile'>${(user.income - user.aside - total).toFixed(2)}</div>
                     </div>
                 </div>
                 <div className='budget-piechart'>
