@@ -5,7 +5,7 @@ import ExpensesLineChart from '../components/ExpensesLineChart'
 import ExpensesPieChart from '../components/ExpensesPieChart'
 import InputAside from '../components/InputAside'
 import InputExpense from '../components/InputExpense'
-import InputSalary from '../components/InputSalary'
+import InputIncome from '../components/InputIncome'
 
 const BudgetPage = ({uid, user}) => {
     let [expenses, setExpenses] = useState([])
@@ -72,8 +72,8 @@ const BudgetPage = ({uid, user}) => {
         setMonths(prevMonths)
     }
 
-    let inputSalary = () => {
-        navigate('/main/budget/salary')
+    let inputIncome = () => {
+        navigate('/main/budget/income')
     }
 
     let inputAside = () => {
@@ -130,16 +130,16 @@ const BudgetPage = ({uid, user}) => {
                     <div className='budget-column'>
                         <div className='budget-title'>Monthly Details</div>
                         <div className='budget-row'>
-                            <div className='budget-tile'>Salary</div>
+                            <div className='budget-tile'>Income</div>
                             <div className='budget-tile'>Aside</div>
                             <div className='budget-tile'>Expenses</div>
                             <div className='budget-tile'>Remaining</div>
                         </div>
                         <div className='budget-row'>
-                            <div className='budget-tile click-tile' onClick={inputSalary}>${parseFloat(user.salary).toFixed(2)}</div>
+                            <div className='budget-tile click-tile' onClick={inputIncome}>${parseFloat(user.income).toFixed(2)}</div>
                             <div className='budget-tile click-tile' onClick={inputAside}>${parseFloat(user.aside).toFixed(2)}</div>
                             <div className='budget-tile click-tile' onClick={inputExpense}>${total.toFixed(2)}</div>
-                            <div className='budget-tile'>${(user.salary - user.aside - total).toFixed(2)}</div>
+                            <div className='budget-tile'>${(user.income - user.aside - total).toFixed(2)}</div>
                         </div>
                     </div>
                     <div className='budget-chart'>
@@ -191,16 +191,16 @@ const BudgetPage = ({uid, user}) => {
                 <div className='mobile-title'>Monthly Details</div>
                 <div className='mobile-column'>
                     <div className='mobile-row'>
-                        <div className='mobile-tile'>Salary</div>
+                        <div className='mobile-tile'>Income</div>
                         <div className='mobile-tile'>Aside</div>
                         <div className='mobile-tile'>Expenses</div>
                         <div className='mobile-tile'>Remaining</div>
                     </div>
                     <div className='mobile-row'>
-                        <div className='mobile-tile'>${parseFloat(user.salary).toFixed(2)}</div>
+                        <div className='mobile-tile'>${parseFloat(user.income).toFixed(2)}</div>
                         <div className='mobile-tile'>${parseFloat(user.aside).toFixed(2)}</div>
                         <div className='mobile-tile'>${total.toFixed(2)}</div>
-                        <div className='mobile-tile'>${(user.salary - user.aside - total).toFixed(2)}</div>
+                        <div className='mobile-tile'>${(user.income - user.aside - total).toFixed(2)}</div>
                     </div>
                 </div>
                 <div className='budget-piechart'>
@@ -208,7 +208,7 @@ const BudgetPage = ({uid, user}) => {
                 </div>
             </div> }
             <Routes>
-                <Route path='salary' element={<InputSalary user={user} />}></Route>
+                <Route path='income' element={<InputIncome user={user} />}></Route>
                 <Route path='aside' element={<InputAside user={user} />}></Route>
                 <Route path='expense' element={<InputExpense user={user} expenses={expenses} setExpenses={setExpenses} total={total} setTotal={setTotal} />}></Route>
                 <Route path='e:index' element={<EditExpense user={user} uid={uid} total={total} setTotal={setTotal} expenses={expenses} setExpenses={setExpenses} />}></Route>

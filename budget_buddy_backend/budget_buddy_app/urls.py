@@ -4,7 +4,7 @@ from . import views
 # URLConf
 urlpatterns = [
     path('hello/', views.say_hello),
-    path('salary/input/<str:uid>', views.input_salary),
+    path('income/input/<str:uid>', views.input_income),
     path('aside/input/<str:uid>', views.input_aside),
     path('budget/input/<str:uid>', views.input_expense),
     path('budget/delete/<str:uid>', views.delete_expense),

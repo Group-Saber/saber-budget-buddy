@@ -1,35 +1,35 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const InputSalary = ({user}) => {
-    let [salary, setSalary] = useState('')
+const InputIncome = ({user}) => {
+    let [income, setIncome] = useState('')
     let navigate = useNavigate()
 
     useEffect(() => {
         /**
-         * gets the current user salary
+         * gets the current user income
          */
-        let getSalary = () => {
-            setSalary(user.salary)
-            document.getElementById('salary').value = user.salary
+        let getIncome = () => {
+            setIncome(user.income)
+            document.getElementById('income').value = user.income
         }
 
-        getSalary()
+        getIncome()
     }, [user])
     
     /**
-     * inputs the new salary into the database through backend api call
+     * inputs the new income into the database through backend api call
      */
-    let inputSalary = async () => {
-        if(salary !== '') {
-            user.salary = parseFloat(salary)
+    let inputIncome = async () => {
+        if(income !== '') {
+            user.income = parseFloat(income)
 
-            await fetch(`http://127.0.0.1:8000/app/salary/input/${user.uid}`, {
+            await fetch(`http://127.0.0.1:8000/app/income/input/${user.uid}`, {
                 method: "POST",
                 headers: {
                     'Content-type': 'application/json'
                 },
-                body: JSON.stringify(parseFloat(salary))
+                body: JSON.stringify(parseFloat(income))
             })
     
             back()
@@ -37,8 +37,8 @@ const InputSalary = ({user}) => {
     }
 
     let clear = () => {
-        setSalary('')
-        document.getElementById('salary').value = ''
+        setIncome('')
+        document.getElementById('income').value = ''
     }
 
     let back = () => {
@@ -51,22 +51,22 @@ const InputSalary = ({user}) => {
      * @param {*} e 
      */
     let handleChange = (e) => {
-        setSalary(e.target.value)
+        setIncome(e.target.value)
     }
 
     return (
         <div className='input-body'>
             <div className='input-box'>
                 <div className='create-input'>
-                    <div className='input-title'>Input Monthly Salary</div>
+                    <div className='input-title'>Input Monthly Income</div>
                     <div className='budget-input label-input'>
-                        <label>Salary:</label>
-                        <input id='salary' type='number' min='0' onChange={handleChange}></input>
+                        <label>Income:</label>
+                        <input id='income' type='number' min='0' onChange={handleChange}></input>
                     </div>
                     <div>
                         <button className='budget-button button' onClick={back}>Back</button>
                         <button className='budget-button button' onClick={clear}>Clear</button>
-                        <button className='budget-button button' onClick={inputSalary}>Enter</button>
+                        <button className='budget-button button' onClick={inputIncome}>Enter</button>
                     </div>
                 </div>
             </div>
@@ -74,4 +74,4 @@ const InputSalary = ({user}) => {
     )
 }
 
-export default InputSalary
+export default InputIncome
