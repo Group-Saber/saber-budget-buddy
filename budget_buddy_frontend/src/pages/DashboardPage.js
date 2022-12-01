@@ -14,7 +14,7 @@ const DashboardPage = ({uid, user}) => {
          * Gets all the debts the user has
          */
         let getDebts = async () => {
-            if(uid !== '' && Object.keys(user).length !== 0) {
+            if(uid !== '' && Object.keys(user).length !== 0 && 'debts' in user) {
                 let data = Object.values(user.debts)
                 setDebts(data.reverse())
             }
@@ -24,7 +24,7 @@ const DashboardPage = ({uid, user}) => {
          * Gets all the expenses the user has
          */
         let getExpenses = async () => {
-            if(uid !== '' && Object.keys(user).length !== 0) {
+            if(uid !== '' && Object.keys(user).length !== 0 && 'expenses' in user) {
                 let data = Object.values(user.expenses)
                 getMonthlyExpenses(data.reverse())
             }
