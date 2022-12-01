@@ -20,7 +20,7 @@ const DebtPage = ({uid, user}) => {
         let getDebts = async () => {
             if(uid !== '' && Object.keys(user).length !== 0 && 'debts' in user) { 
                 let data = Object.values(user.debts)
-                getMonthlyDebts(data)
+                getTotals(data)
             }
         }
 
@@ -39,26 +39,20 @@ const DebtPage = ({uid, user}) => {
     }, [uid, user])
 
     /**
-     * Calculates the debts for the current month
+     * Calculates all outstanding debts that are positive and negative
      * 
      * @param {*} data 
      */
-    let getMonthlyDebts = (data) => {
+    let getTotals = (data) => {
         let p = 0
         let n = 0
-        // get current date and set it to the first of the month
-        let today = new Date()
-        today.setDate(1)
-        today.setHours(0,0,0,0)
 
-        // iterate through data and add only data that matches the month
+        // iterate through data and add to the correct total
         for(let i in data) {
-            if(data[i].date >= today.getTime()) {
-                if(data[i].amount >= 0) {
-                    p += data[i].amount
-                } else {
-                    n += data[i].amount
-                }
+            if(data[i].amount >= 0) {
+                p += data[i].amount
+            } else {
+                n += data[i].amount
             }
         }
 
