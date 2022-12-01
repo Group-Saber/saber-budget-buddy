@@ -18,7 +18,7 @@ const BudgetPage = ({uid, user}) => {
          * Gets all the expenses the user has
          */
         let getExpenses = () => {
-            if(uid !== '' && Object.keys(user).length !== 0) {
+            if(uid !== '' && Object.keys(user).length !== 0 && 'expenses' in user) {
                 let data = Object.values(user.expenses)
                 getMonthlyExpenses(data.reverse())
             }
@@ -177,7 +177,7 @@ const BudgetPage = ({uid, user}) => {
                                     <div className='col col-1' data-label='Type'>{expense.type.charAt(0).toUpperCase() + expense.type.slice(1)}</div>
                                     <div className='col col-2' data-label='Amount'>{expense.amount.toFixed(2)}</div>
                                     <div className='col col-4' data-label='Date'>{formatDate(new Date(expense.date))}</div>
-                                    <div className='col col-5' data-label='Button'><i className='material-icons debt-icon' onClick={() => editExpense(index)}>more_vert</i></div>
+                                    <div className='col col-5' data-label='Button'><i className='material-icons debt-icon' onClick={() => editExpense(index)}>edit</i></div>
                                 </li>
                             ))}
                         </ul>

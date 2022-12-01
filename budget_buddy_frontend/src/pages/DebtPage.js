@@ -18,7 +18,7 @@ const DebtPage = ({uid, user}) => {
          * Gets all debts the user has
          */
         let getDebts = async () => {
-            if(uid !== '' && Object.keys(user).length !== 0) { 
+            if(uid !== '' && Object.keys(user).length !== 0 && 'debts' in user) { 
                 let data = Object.values(user.debts)
                 getMonthlyDebts(data)
             }
@@ -28,7 +28,7 @@ const DebtPage = ({uid, user}) => {
          * Gets all debt payments the user has
          */
         let getPaid = async () => {
-            if(uid !== '' && Object.keys(user).length !== 0) { 
+            if(uid !== '' && Object.keys(user).length !== 0 && 'paid' in user) { 
                 let data = Object.values(user.paid)
                 setPaid(data.reverse())
             }
@@ -141,7 +141,7 @@ const DebtPage = ({uid, user}) => {
                                     <div className='col col-2' data-label='Amount'>{debt.amount.toFixed(2)}</div>
                                     <div className='col col-3' data-label='Note'>{debt.note.length > noteLength ? debt.note.substring(0, noteLength) + '...' : debt.note}</div>
                                     <div className='col col-4' data-label='Date'>{formatDate(new Date(debt.date))}</div>
-                                    <div className='col col-5' data-label='Button'><i className='material-icons debt-icon' onClick={() => editDebt(index)}>more_vert</i></div>
+                                    <div className='col col-5' data-label='Button'><i className='material-icons debt-icon' onClick={() => editDebt(index)}>edit</i></div>
                                 </li>
                             ))}
                         </ul>
@@ -154,7 +154,7 @@ const DebtPage = ({uid, user}) => {
                                 <div className='col col-2'>Amount</div>
                                 <div className='col col-3'>Note</div>
                                 <div className='col col-4'>Date</div>
-                                <div className='col col-5'><i className='material-icons debt-icon'>add</i></div>
+                                <div className='col col-5'><i className='material-icons debt-icon' style={{color: '#ff6a06', cursor: 'default'}}>add</i></div>
                             </li>
                             {paid.map((pay, index) => (
                                 <li className='table-row' key={index}>
@@ -162,7 +162,7 @@ const DebtPage = ({uid, user}) => {
                                     <div className='col col-2' data-label='Amount'>{pay.amount.toFixed(2)}</div>
                                     <div className='col col-3' data-label='Note'>{pay.note.length > noteLength ? pay.note.substring(0, noteLength) + '...' : pay.note}</div>
                                     <div className='col col-4' data-label='Date'>{formatDate(new Date(pay.paid))}</div>
-                                    <div className='col col-5' data-label='Button'><i className='material-icons debt-icon' onClick={() => editPayment(index)}>more_vert</i></div>
+                                    <div className='col col-5' data-label='Button'><i className='material-icons debt-icon' onClick={() => editPayment(index)}>edit</i></div>
                                 </li>
                             ))}
                         </ul>
