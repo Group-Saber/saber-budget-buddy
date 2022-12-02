@@ -1,6 +1,6 @@
 # Budget Buddy
 
-[Website](http://ec2-18-144-27-81.us-west-1.compute.amazonaws.com/)
+<ec2-18-144-27-81.us-west-1.compute.amazonaws.com/>
 ## What it is?
 Budget buddy is a web application that helps users keep track of their budgeting.
 ## Why use it?
