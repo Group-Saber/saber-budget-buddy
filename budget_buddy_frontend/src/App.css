@@ -3,6 +3,7 @@
   --gray: #444444;
   --white: white;
   --blue: #25537b;
+  --dark-blue: #153d60;
   --orange: #ff6a06;
   --red: #e40b00;
   --green: #437241;
@@ -144,11 +145,16 @@ body {
   z-index: 1;
 }
 
+.panel-info {
+  position: absolute;
+  right: 25px;
+}
+
 .top-icon {
   color: white;
   position: relative;
-  right: 25px;
-  top: 33px;
+  top: 30px;
+  margin-right: 10px;
 }
 
 .top-icon:hover {
@@ -156,10 +162,9 @@ body {
 }
 
 .panel-name {
-  position: absolute;
+  position: relative;
   display: inline-block;
-  right: 50px;
-  bottom: 5px;
+  top: 25px;
 }
 
 .name-btn {
@@ -253,6 +258,13 @@ body {
   color: white;
   text-decoration: none;
   padding: 15px;
+}
+
+.links a:hover {
+  background-color: var(--dark-blue);
+  margin-right: 25px;
+  border-radius: 5px;
+  box-shadow: 0 3px 10px rgba(7, 141, 250, 0.2);
 }
 
 .links .current {

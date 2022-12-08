@@ -79,11 +79,13 @@ const Panel = ({uid, updateUID}) => {
             {window.innerWidth > 768 ? 
             <div>
                 <div className='top-panel'>
-                    <div className='panel-name'>
+                    <div className='panel-info'>
                         <i className='material-icons top-icon' onClick={switchTheme}>light_mode</i>
-                        <button className='name-btn'>{name}<div className='dropdown-arrow'></div></button>
-                        <div className='dropdown-content'>
-                            <button onClick={logout}>Logout</button>
+                        <div className='panel-name'>
+                            <button className='name-btn'>{name}<div className='dropdown-arrow'></div></button>
+                            <div className='dropdown-content'>
+                                <button onClick={logout}>Logout</button>
+                            </div>
                         </div>
                     </div>
                 </div>
