@@ -9,6 +9,7 @@ const Panel = ({uid, updateUID}) => {
     let [user, setUser] = useState({})
     let [name, setName] = useState('You')
     let [color, setColor] = useState('#ffffff')
+    let [theme, setTheme] = useState(document.body.className)
     let locate = useLocation()
     let navigate = useNavigate()
 
@@ -23,6 +24,7 @@ const Panel = ({uid, updateUID}) => {
                 let data = await response.json()
                 setUser(data)
                 setName(`${data.first} ${data.last}`)
+                setTheme(document.body.className)
             }
         }
 
@@ -56,6 +58,7 @@ const Panel = ({uid, updateUID}) => {
 
         const mode = document.body.className;
         console.log('current class name: ' + mode);
+        setTheme(mode)
     }
 
     /**
@@ -80,7 +83,9 @@ const Panel = ({uid, updateUID}) => {
             <div>
                 <div className='top-panel'>
                     <div className='panel-info'>
-                        <i className='material-icons top-icon' onClick={switchTheme}>light_mode</i>
+                        {theme === 'dark-theme' ? 
+                        <i className='material-icons top-icon' onClick={switchTheme}>light_mode</i> :
+                        <i className='material-icons top-icon' onClick={switchTheme}>dark_mode</i>}
                         <div className='panel-name'>
                             <button className='name-btn'>{name}<div className='dropdown-arrow'></div></button>
                             <div className='dropdown-content'>

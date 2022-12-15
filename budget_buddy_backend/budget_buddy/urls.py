@@ -25,9 +25,10 @@ router.register('groups', views.GroupViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('app/', include('budget_buddy_app.urls')),
-    path('', include(router.urls)),
+    path('rest/', include(router.urls)),
     path('api/', include('rest_framework.urls', namespace='rest_framework')),
     path('accounts/', include('allauth.urls')),
     path('auth/', TemplateView.as_view(template_name="index.html")),
+    path('', TemplateView.as_view(template_name='build/index.html'))
 ]
 
