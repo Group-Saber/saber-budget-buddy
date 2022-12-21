@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
 from budget_buddy_app import views
@@ -29,6 +29,7 @@ urlpatterns = [
     path('api/', include('rest_framework.urls', namespace='rest_framework')),
     path('accounts/', include('allauth.urls')),
     path('auth/', TemplateView.as_view(template_name="index.html")),
-    path('', TemplateView.as_view(template_name='build/index.html'))
+    path('', TemplateView.as_view(template_name='build/index.html')),
+    re_path(r'.*', TemplateView.as_view(template_name='build/index.html'))
 ]
 
