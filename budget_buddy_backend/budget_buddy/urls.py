@@ -28,7 +28,7 @@ urlpatterns = [
     path('rest/', include(router.urls)),
     path('api/', include('rest_framework.urls', namespace='rest_framework')),
     path('accounts/', include('allauth.urls')),
-    path('auth/', TemplateView.as_view(template_name="index.html")),
+    # path('auth/', TemplateView.as_view(template_name="index.html")),
     path('', TemplateView.as_view(template_name='build/index.html')),
     re_path(r'.*', TemplateView.as_view(template_name='build/index.html'))
 ]
