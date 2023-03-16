@@ -53,12 +53,15 @@ const Panel = ({uid, updateUID}) => {
      * toggles the theme between light and dark mode
      */
     let switchTheme = async () => {
-        document.body.classList.toggle('light-theme')
-        document.body.classList.toggle('dark-theme')
-
-        const mode = document.body.className;
-        console.log('current class name: ' + mode);
-        setTheme(mode)
+        if(document.body.className === 'dark-theme') {
+            document.body.className = 'light-theme'
+            setTheme('light-theme')
+            window.localStorage.setItem('theme', 'light-theme')
+        } else {
+            document.body.className = 'dark-theme'
+            setTheme('dark-theme')
+            window.localStorage.setItem('theme', 'dark-theme')
+        }
     }
 
     /**

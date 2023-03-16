@@ -25,12 +25,18 @@ function App() {
      * checks the systems theme preferences to apply dark or light theme
      */
     let detectTheme = () => {
-      const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)")
+      const theme = window.localStorage.getItem('theme')
 
-      if (darkThemeMq.matches) {
-        document.body.className = 'dark-theme'
+      if(theme) {
+        document.body.className = theme
       } else {
-        document.body.className = 'light-theme'
+        const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)")
+  
+        if (darkThemeMq.matches) {
+          document.body.className = 'dark-theme'
+        } else {
+          document.body.className = 'light-theme'
+        }
       }
     }
 
